@@ -19,12 +19,12 @@ module.exports = {
 };
 
 /*
-	googleClientID: 			UPDATED - UNTESTED
-	googleClientSecret: 	UPDATED - UNTESTED
-	mongoURI:							NOT UPDATED - UNTESTED
-	cookieKey: 						NOT UPDATED - UNTESTED
-	stripePublishableKey: NOT UPDATED - UNTESTED
-	stripeSecretKey: 			NOT UPDATED - UNTESTED
-	sendGridKey: 					NOT UPDATED - UNTESTED
-	redirectDomain: 			NOT UPDATED - UNTESTED
+	googleClientID: 			UPDATED - TESTED
+	googleClientSecret: 	UPDATED - TESTED
+	mongoURI:							EMAILY DEV CREDS - TESTED
+	cookieKey: 						EMAILY DEV CREDS - TESTED
+	stripePublishableKey: EMAILY DEV CREDS - TESTED
+	stripeSecretKey: 			EMAILY DEV CREDS - TESTED
+	sendGridKey: 					EMAILY DEV CREDS - UNTESTED
+	redirectDomain: 			UPDATED - UNTESTED
 */
