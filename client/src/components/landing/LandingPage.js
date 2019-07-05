@@ -9,7 +9,11 @@ const Landing = () => {
 				style={{
 					alignItems: "center",
 					display: "flex",
-					height: "100%"
+					height: "100%",
+					paddingTop: "20px",
+					paddingRight: "20px",
+					paddingBottom: "20px",
+					paddingLeft: "20px"
 				}}
 			>
 				<Demo />
