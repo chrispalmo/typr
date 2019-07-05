@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./Payments";
+import logo from "./typr-logo-white.png";
 
 class Header extends Component {
   renderContent() {
@@ -38,7 +39,14 @@ class Header extends Component {
             to={this.props.auth ? "/surveys" : "/"}
             className="left brand-logo"
           >
-            Logo-white-header
+            <img
+              src={logo}
+              alt="Logo"
+              style={{
+                width: "60%",
+                height: "60%"
+              }}
+            />
           </Link>
           <ul className="right">{this.renderContent()}</ul>
         </div>
