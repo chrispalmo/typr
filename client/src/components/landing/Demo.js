@@ -11,7 +11,7 @@ const Demo = () => {
 		>
 			<ul>
 				<li>
-					<h1>Demo</h1>
+					<h5>Demo</h5>
 				</li>
 				<li style={{ textAlign: "justify" }}>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
