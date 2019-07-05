@@ -1,11 +1,20 @@
 import React from "react";
 import Register from "./Register";
+import Demo from "./Demo";
 
 const Landing = () => {
 	return (
-		<div style={{ textAlign: "center" }}>
-			<h1>LandingPage</h1>
-			<Register />
+		<div style={{ alignItems: "right" }}>
+			<div
+				style={{
+					alignItems: "center",
+					display: "flex",
+					height: "100%"
+				}}
+			>
+				<Demo />
+				<Register />
+			</div>
 		</div>
 	);
 };

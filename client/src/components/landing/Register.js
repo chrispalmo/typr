@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
 	return (
-		<div style={{ textAlign: "center" }}>
+		<div
+			style={{
+				justifyContent: "center",
+				display: "flex",
+				flex: 1
+			}}
+		>
 			<h5>
 				<div>
 					<h2>Register</h2>
