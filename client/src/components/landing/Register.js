@@ -11,15 +11,30 @@ const Register = () => {
 			}}
 		>
 			<div>
-				<a class="btn waves-effect waves-light yellow">Sign in with Google</a>
-				<div>email-input</div>
-				<div>password-input</div>
-				<div>register-button</div>
-				<div>Have an account?</div>
-				<div>
-					<Link to="/login">Log in</Link>
+				<button className="btn amber lighten-1">Sign in with Google</button>
+				<div style={{ display: "flex", paddingTop: "10px" }}>
+					<div style={{ flex: 1 }}>
+						<hr />
+					</div>
+					<div
+						style={{
+							display: "flex",
+							paddingRight: "10px",
+							paddingLeft: "10px"
+						}}
+					>
+						or
+					</div>
+					<div style={{ flex: 1 }}>
+						<hr />
+					</div>
 				</div>
-				<div>Logo-bottom-right</div>
+				<div>[email-input]</div>
+				<div>[password-input]</div>
+				<div>[register-button]</div>
+				<div>
+					Have an account? <Link to="/login">Log in</Link>
+				</div>
 			</div>
 		</div>
 	);
