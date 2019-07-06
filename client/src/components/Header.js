@@ -44,7 +44,8 @@ class Header extends Component {
               alt="Logo"
               style={{
                 width: "60%",
-                height: "60%"
+                height: "60%",
+                paddingLeft: "10px"
               }}
             />
           </Link>
