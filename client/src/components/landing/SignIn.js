@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-class Register extends Component {
+class SignIn extends Component {
 	render() {
 		return (
 			<div
@@ -37,7 +37,7 @@ class Register extends Component {
 					</div>
 					<div>[email-input]</div>
 					<div>[password-input]</div>
-					<div>[register-button]</div>
+					<div>[SignIn-button]</div>
 					<div>
 						Have an account? <Link to="/login">Log in</Link>
 					</div>
@@ -51,4 +51,4 @@ function mapStateToProps({ auth }) {
 	return { auth };
 }
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(SignIn);

@@ -1,8 +1,8 @@
 import React from "react";
-import SignIn from "./SignIn";
-import Demo from "./Demo";
+import Playlist from "./Playlist";
+import ContentSelector from "./ContentSelector";
 
-const Landing = () => {
+const Dashboard = () => {
 	return (
 		<div style={{ alignItems: "right" }}>
 			<div
@@ -16,11 +16,11 @@ const Landing = () => {
 					paddingLeft: "20px"
 				}}
 			>
-				<Demo />
-				<SignIn />
+				<Playlist />
+				<ContentSelector />
 			</div>
 		</div>
 	);
 };
 
-export default Landing;
+export default Dashboard;
