@@ -1,9 +1,9 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
-const keys = require('../config/keys');
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const mongoose = require("mongoose");
+const keys = require("../config/keys");
 
-const User = mongoose.model('users');
+const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: "/auth/google/callback",
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -30,7 +30,21 @@ passport.use(
         return done(null, existingUser);
       }
 
-      const user = await new User({ googleId: profile.id }).save();
+      console.log({
+        googleId: profile.id,
+        displayName: profile.displayName,
+        givenName: profile.name.givenName,
+        familyName: profile.name.familyName,
+        email: profile.emails[0].value
+      });
+
+      const user = await new User({
+        googleId: profile.id,
+        displayName: profile.displayName,
+        givenName: profile.name.givenName,
+        familyName: profile.name.familyName,
+        email: profile.emails[0].value
+      }).save();
       done(null, user);
     }
   )
