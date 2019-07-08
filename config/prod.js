@@ -15,6 +15,7 @@ module.exports = {
 	stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
 	stripeSecretKey: process.env.STRIPE_SECRET_KEY,
 	sendGridKey: process.env.SEND_GRID_KEY,
+	newsApiKey: process.env.NEWS_API_KEY,
 	redirectDomain: process.env.REDIRECT_DOMAIN
 };
 
@@ -26,5 +27,6 @@ module.exports = {
 	stripePublishableKey: EMAILY DEV CREDS - TESTED
 	stripeSecretKey: 			EMAILY DEV CREDS - TESTED
 	sendGridKey: 					EMAILY DEV CREDS - UNTESTED
+	newsApiKey:  					TYPR DEV CREDS - UNTESTED
 	redirectDomain: 			UPDATED - UNTESTED
 */
