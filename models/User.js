@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const NewsDigestSchema = require("./NewsDigest");
 
 const userSchema = new Schema({
 	googleId: String,
@@ -7,7 +8,8 @@ const userSchema = new Schema({
 	displayName: String,
 	givenName: String,
 	familyName: String,
-	email: String
+	email: String,
+	playlist: [NewsDigestSchema]
 });
 
 mongoose.model("users", userSchema);
