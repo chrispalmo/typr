@@ -14,26 +14,12 @@ const Demo = () => {
 					<h5>Demo</h5>
 				</li>
 				<li style={{ textAlign: "justify" }}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat. Duis aute irure dolor in in
-					voluptatevelit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-					sint occaecat cupidatat non proident, sunt in culpa qui officia
-					deserunt mollit anim id est laborumLorem ipsum dolor sit amet,
-					consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-					exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-					Duis aute irure dolor in in voluptatevelit esse cillum dolore eu
-					fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-					sunt in culpa qui officia deserunt mollit anim id est laborumLorem
-					ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-					veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-					ea commodo consequat. Duis aute irure dolor in in voluptatevelit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-					cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-					id est laborum
+					Welcome to typr! Register for free to practice typing your favourite
+					books, breaking news articles and unique, algorithmically-generated
+					exercises that target your identified weaknesses. Customize your
+					content feed using the library-builder, track progress with detailed
+					analytics, and 10x your learning efficiency while reading the things
+					you want to be reading.
 				</li>
 			</ul>
 		</div>
