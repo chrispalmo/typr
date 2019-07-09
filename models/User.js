@@ -1,15 +1,20 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const NewsDigestSchema = require("./NewsDigest");
 
 const userSchema = new Schema({
 	googleId: String,
-	credits: { type: Number, default: 0 },
 	displayName: String,
 	givenName: String,
 	familyName: String,
 	email: String,
-	playlist: [NewsDigestSchema]
+	newsDigest: {
+		sources: { type: [String], default: [] },
+		lastFetched: Number,
+		content: [String]
+	}
 });
 
-mongoose.model("users", userSchema);
+//If we weren't using Mocha for testing, below line registering the schema with mongoose would suffice:
+// mongoose.model("users", userSchema);
+const User = mongoose.model("users", userSchema);
+module.exports = User;
