@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 mongoose.set("useFindAndModify", false);
 
 before(done => {
-	mongoose.connect("mongodb://localhost/users_test", { useNewUrlParser: true });
+	mongoose.connect("mongodb://localhost/typr_test", { useNewUrlParser: true });
 	mongoose.connection
 		.once("open", () => done())
 		.on("error", error => {
