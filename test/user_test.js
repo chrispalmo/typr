@@ -10,12 +10,7 @@ describe("User tests", () => {
 			displayName: "Joe Smith 0",
 			givenName: "Joseph 0",
 			familyName: "Smith 0",
-			email: "joe.smith@gmail.com",
-			newsDigest: {
-				sources: ["news-source-A", "news-source-B"],
-				lastFetched: timeFetched,
-				content: ["Headline1", "Headline2", "Headline3"]
-			}
+			email: "joe.smith@gmail.com"
 		});
 		testUser0.save().then(res => {
 			assert(!testUser0.isNew);
@@ -30,12 +25,7 @@ describe("User tests", () => {
 			displayName: "Joe Smith 1",
 			givenName: "Joseph 1",
 			familyName: "Smith 1",
-			email: "joe.smith@gmail.com",
-			newsDigest: {
-				sources: ["news-source-A", "news-source-B"],
-				lastFetched: timeFetched,
-				content: ["Headline1", "Headline2", "Headline3"]
-			}
+			email: "joe.smith@gmail.com"
 		});
 		testUser1.save().then(res => {
 			assert(!testUser1.isNew);
