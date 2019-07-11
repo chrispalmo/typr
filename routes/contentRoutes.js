@@ -1,26 +1,15 @@
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 const User = require("../models/User");
-const newsAPI = require("../services/NewsAPI");
+const newsApi = require("../services/NewsApi");
+
+//TODO -- IMPLETEMENT ERROR HANDLING MIDDLEWARE
 
 module.exports = app => {
-	app.post("/api/content/news", async (req, res) => {
-		console.log("***req.user***");
-		console.log(req.user);
-		console.log("***/req.user***");
-
-		newsAPI(req.body).then(apiRes => {
-			const articles = [];
-			apiRes.articles.map(article => {
-				//console.log(article);
-				articles.push(article.title + " (" + article.source.name + ")");
-			});
-			res.send(articles);
-		});
-		//res.send(NewsAPI(req.body));
-		// res.send(req.body);
-
-		// res.send(req.user);
+	//TODO -- ADD requireLogin MIDDLEWARE !!! !!! !!!
+	app.get("/api/content/news", async (req, res) => {
+		const headlines = await newsApi.topHeadlines(req.body);
+		res.send(headlines);
 
 		//expected client implementation:
 		/*
@@ -37,6 +26,11 @@ module.exports = app => {
 
 			THANKS:https://kapeli.com/cheat_sheets/Axios.docset/Contents/Resources/Documents/index
 		*/
+	});
+	//
+	app.get("/api/content/news/sources", async (req, res) => {
+		const sources = await newsApi.sources(req.body);
+		res.send(sources);
 	});
 	//
 };

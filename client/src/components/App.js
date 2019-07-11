@@ -6,7 +6,8 @@ import * as actions from "../actions";
 import Header from "./Header";
 import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
-import SurveyNew from "./surveys/SurveyNew";
+import NewsSources from "./news/NewsSources";
+import NewsSourcesForm from "./news/NewsSourcesForm";
 
 class App extends Component {
   componentDidMount() {
@@ -20,8 +21,12 @@ class App extends Component {
           <div>
             <Header />
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/Dashboard" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route path="/content/news-sources" component={NewsSources} />
+            <Route
+              path="/content/news-sources-form"
+              component={NewsSourcesForm}
+            />
           </div>
         </BrowserRouter>
       </div>

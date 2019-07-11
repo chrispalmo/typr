@@ -8,9 +8,10 @@ const userSchema = new Schema({
 	familyName: String,
 	email: String,
 	newsDigest: {
-		sources: { type: [String], default: [] },
-		lastFetched: Number,
-		content: [String]
+		query: {
+			sources: String,
+			pageSize: Number
+		}
 	}
 });
 
