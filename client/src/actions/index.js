@@ -8,8 +8,9 @@ import { FETCH_USER, FETCH_NEWS_SOURCES } from "./types";
 // !!!
 
 export const fetchNewsSources = queryObject => async dispatch => {
+	console.log("Action: fetchNewsSources. queryObject: ");
 	console.log(queryObject);
-	const res = await axios.get("/api/content/news/sources", queryObject);
+	const res = await axios.post("/api/content/news/sources", queryObject);
 
 	dispatch({ type: FETCH_NEWS_SOURCES, payload: res.data });
 };
