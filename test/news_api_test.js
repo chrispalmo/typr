@@ -5,9 +5,9 @@ const app = require("../app");
 
 describe("NewsApi tests", () => {
 	//
-	xit("GET to /api/content/news returns an array of strings", done => {
+	it("post to /api/content/news returns an array of strings", done => {
 		request(app)
-			.get("/api/content/news")
+			.post("/api/content/news")
 			.send({
 				sources: "hacker-news,national-geographic,time",
 				pageSize: 30
@@ -20,9 +20,9 @@ describe("NewsApi tests", () => {
 			});
 	});
 	//
-	it("GET to /api/content/news/sources returns an object containing all english news sources", done => {
+	it("post to /api/content/news/sources returns an object containing all english news sources", done => {
 		request(app)
-			.get("/api/content/news/sources")
+			.post("/api/content/news/sources")
 			.send({ language: "en" })
 			.end((err, res) => {
 				// console.log(res.body.sources);

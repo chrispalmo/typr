@@ -7,28 +7,16 @@ const newsApi = require("../services/NewsApi");
 
 module.exports = app => {
 	//TODO -- ADD requireLogin MIDDLEWARE !!! !!! !!!
-	app.get("/api/content/news", async (req, res) => {
+	app.post("/api/content/news", async (req, res) => {
+		console.log("contentRoutes: incoming request to /api/content/news/sources");
+		console.log(req.body);
 		const headlines = await newsApi.topHeadlines(req.body);
 		res.send(headlines);
-
-		//expected client implementation:
-		/*
-			axios.post('/user', {
-		    firstName: 'Fred',
-		    lastName: 'Flintstone'
-		  })
-		  .then(function (response) {
-		    console.log(response);
-		  })
-		  .catch(function (error) {
-		    console.log(error);
-		  });
-
-			THANKS:https://kapeli.com/cheat_sheets/Axios.docset/Contents/Resources/Documents/index
-		*/
 	});
 	//
-	app.get("/api/content/news/sources", async (req, res) => {
+	app.post("/api/content/news/sources", async (req, res) => {
+		console.log("contentRoutes: incoming request to /api/content/news/sources");
+		console.log(req.body);
 		const sources = await newsApi.sources(req.body);
 		res.send(sources);
 	});
