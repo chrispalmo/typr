@@ -1,6 +1,5 @@
 import React from "react";
-import Playlist from "./Playlist";
-import ContentSelector from "./ContentSelector";
+import NewsSources from "../news/NewsSources";
 
 const Dashboard = () => {
 	return (
@@ -16,8 +15,8 @@ const Dashboard = () => {
 					paddingLeft: "20px"
 				}}
 			>
-				<Playlist />
-				<ContentSelector />
+				<h5>Dashboard</h5>
+				<NewsSources />
 			</div>
 		</div>
 	);

@@ -1,39 +1,25 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchNewsSources } from "../../actions";
+import React from "react";
+import { Link } from "react-router-dom";
 
-//TODO -- connect component to redux
-
-class NewsSources extends Component {
-	componentDidMount() {
-		this.props.fetchNewsSources({ language: "en" });
-	}
-
-	render() {
-		return (
-			<div
-				style={{
-					alignItems: "left",
-					display: "flex",
-					paddingTop: "20px",
-					paddingRight: "20px",
-					paddingBottom: "20px",
-					paddingLeft: "20px"
-				}}
-			>
-				<h5>NewsSources</h5>
-				{console.log("rendering news sources")}
-				{console.log(this.props.sources)}
-			</div>
-		);
-	}
-}
-
-const mapStateToProps = state => {
-	return { sources: state.news };
+const NewsSources = () => {
+	return (
+		<div
+			style={{
+				justifyContent: "center",
+				display: "flex",
+				flex: 1
+			}}
+		>
+			<h5>NewsSources</h5>
+			<p>
+				<button className="btn amber lighten-1">
+					<Link to="/content/news-select" style={{ color: "black" }}>
+						Select News Sources
+					</Link>
+				</button>
+			</p>
+		</div>
+	);
 };
 
-export default connect(
-	mapStateToProps,
-	{ fetchNewsSources }
-)(NewsSources);
+export default NewsSources;
