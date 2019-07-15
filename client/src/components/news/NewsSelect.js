@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { connect, reduxForm, Field } from "react-redux";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { fetchNewsSources } from "../../actions";
 
 class NewsSelect extends Component {
 	componentDidMount() {
-		this.props.fetchNewsSources({ language: "zh" });
+		this.props.fetchNewsSources({ language: "en" });
 	}
 
 	render() {
@@ -21,6 +22,44 @@ class NewsSelect extends Component {
 					paddingLeft: "20px"
 				}}
 			>
+				<form action="#">
+					<p>
+						<label>
+							<input type="checkbox" />
+							<span>Red</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input type="checkbox" checked="checked" />
+							<span>Yellow</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input type="checkbox" class="filled-in" checked="checked" />
+							<span>Filled in</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input id="indeterminate-checkbox" type="checkbox" />
+							<span>Indeterminate Style</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input type="checkbox" checked="checked" disabled="disabled" />
+							<span>Green</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input type="checkbox" disabled="disabled" />
+							<span>Brown</span>
+						</label>
+					</p>
+				</form>
 				<ul>{this.renderList()}</ul>
 			</div>
 		);
@@ -34,15 +73,30 @@ class NewsSelect extends Component {
 		const sources = [];
 		_.toPairs(this.props.newsSources.sources).forEach(source => {
 			sources.push(
-				<li>
-					<div className="item" key={source[1].id}>
+				<div className="item" key={source[1].id}>
+					<li>
 						<div className="divider" />
-						<div class="section">
-							<h5>{source[1].name}</h5>
+						<div className="section">
+							<h5>
+								<form action="#">
+									<p>
+										<label>
+											<input
+												type="checkbox"
+												id="check"
+												class="filled-in"
+												checked="checked"
+											/>
+											<span>Filled in</span>
+										</label>
+									</p>
+								</form>
+								{source[1].name}
+							</h5>
 							<p>{source[1].description}</p>
 						</div>
-					</div>
-				</li>
+					</li>
+				</div>
 			);
 		});
 		return sources;

@@ -1,0 +1,33 @@
+html {
+}
+
+body,
+html {
+}
+
+.headerBox {
+	color: white;
+	background: linear-gradient(105deg, SeaGreen, LightSeaGreen);
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.logoTopLeft {
+	max-width: 25px;
+	margin: 5px;
+}
+
+.button {
+	text-align: right;
+	margin: 5px;
+}
+
+.icon {
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.iconButton {
+	padding: 8px !important;
+	margin: 3px !important;
+}

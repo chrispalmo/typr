@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "materialize-css": "^0.99.0",
     "react": "^16.0.0-alpha.13",
     "react-dom": "^16.0.0-alpha.13",
     "react-redux": "^5.0.5",
@@ -22,7 +21,8 @@
     "redux": "^3.7.1",
     "redux-devtools": "^3.5.0",
     "redux-form": "^7.0.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-css": "^2.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
