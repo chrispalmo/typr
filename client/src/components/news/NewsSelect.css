@@ -1,0 +1,17 @@
+.newsSelectButtonHeader {
+	color: white;
+	background: white;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	z-index: 8888;
+	padding: 7px;
+	padding-top: 50px;
+}
+
+.newsSelectListWrapper {
+	padding: 10px;
+	padding-top: 8em;
+}

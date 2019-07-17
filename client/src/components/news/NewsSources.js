@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchNewsSources } from "../../actions";
+import { fetchNewsSources, fetchUser } from "../../actions";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
 		this.props.fetchNewsSources({ language: "en" });
+		this.props.fetchUser();
 	}
 
 	render() {
@@ -32,10 +33,10 @@ class NewsSources extends Component {
 }
 
 const mapStateToProps = state => {
-	return { newsSources: state.news };
+	return { newsSources: state.newsSources, auth: state.auth };
 };
 
 export default connect(
 	mapStateToProps,
-	{ fetchNewsSources }
+	{ fetchNewsSources, fetchUser }
 )(NewsSources);

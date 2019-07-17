@@ -6,7 +6,6 @@ import * as actions from "../actions";
 import Header from "./header/Header";
 import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
-import NewsSources from "./news/NewsSources";
 import NewsSelect from "./news/NewsSelect";
 
 class App extends Component {
@@ -18,7 +17,11 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <div>
+          <div
+            style={{
+              paddingTop: "2em"
+            }}
+          >
             <Header />
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/dashboard" component={Dashboard} />

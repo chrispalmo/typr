@@ -10,6 +10,11 @@ html {
 	background: linear-gradient(105deg, SeaGreen, LightSeaGreen);
 	margin-left: 0px;
 	margin-right: 0px;
+	margin-bottom: 100px;
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	z-index: 9999;
 }
 
 .logoTopLeft {
@@ -18,16 +23,12 @@ html {
 }
 
 .button {
-	text-align: right;
-	margin: 5px;
+	text-align: right !important;
+	margin: 3px !important;
+	padding: 10px !important;
 }
 
 .icon {
 	padding: 0px !important;
 	margin: 0px !important;
-}
-
-.iconButton {
-	padding: 8px !important;
-	margin: 3px !important;
 }

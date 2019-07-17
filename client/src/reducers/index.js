@@ -5,6 +5,6 @@ import newsReducer from "./newsReducer";
 
 export default combineReducers({
 	auth: authReducer,
-	news: newsReducer,
+	newsSources: newsReducer,
 	form: reduxForm
 });

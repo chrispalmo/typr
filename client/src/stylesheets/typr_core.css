@@ -1,0 +1,73 @@
+html {
+}
+
+body,html {
+}
+
+.headerBox {
+  display: flex;
+  flex: 1;
+  min-height: 7vh;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  background: linear-gradient(105deg, SeaGreen, LightSeaGreen);
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.sessionContainer {
+    font-size: 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+  
+}
+
+.wpmText {
+}
+
+.statsDisplay {
+    font-size: 10px;
+    background-color: rgb(200, 200, 200);
+    width:auto;
+    float: bottom;
+}
+
+.textDisplay {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    line-height: 50px;
+    white-space: pre; /*prevents spaces from disappearing*/
+    
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.word {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.charActive {
+  background-color: LightSeaGreen;
+  border-radius: 3px 3px 3px 3px;
+  color: #FFFFFF;
+}
+
+.charCorrect {
+  color: #a9abad;
+}
+
+.charIncorrect {
+  background-color: FireBrick;
+  border-radius: 3px 3px 3px 3px;
+  color: #FFFFFF
+}
+
+.endFill {
+  display: flex;
+  flex-grow: 1;
+}
