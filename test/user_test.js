@@ -10,7 +10,10 @@ describe("User tests", () => {
 			displayName: "Joe Smith 0",
 			givenName: "Joseph 0",
 			familyName: "Smith 0",
-			email: "joe.smith@gmail.com"
+			email: "joe.smith@gmail.com",
+			newsDigest: {
+				selectedSources: ["abc-news", "abc-news-au"]
+			}
 		});
 		testUser0.save().then(res => {
 			assert(!testUser0.isNew);
@@ -40,6 +43,25 @@ describe("User tests", () => {
 				assert(user === null);
 				done();
 			});
+	});
+	//
+	it("finds and updates a user", done => {
+		//ref: https://mongoosejs.com/docs/tutorials/findoneandupdate.html
+		const filter = { googleId: "test_google_id_0" };
+		const update = { email: "updated_email@gmail.com" };
+		//You should set the new option to true to return the document after update was applied.
+		const returnDocAfterUpdate = { new: true };
+		User.findOneAndUpdate(filter, update, returnDocAfterUpdate).then(res => {
+			assert(res.email === "updated_email@gmail.com");
+			done();
+		});
+
+		// Alternative test
+		// .then(() => User.findOne({ displayName: "Joe Smith 0" }))
+		// .then(user => {
+		// 	assert(user.email === "updated_email@gmail.com");
+		// 	done();
+		// });
 	});
 	//
 });

@@ -8,10 +8,7 @@ const userSchema = new Schema({
 	familyName: String,
 	email: String,
 	newsDigest: {
-		query: {
-			sources: String,
-			pageSize: Number
-		}
+		selectedSources: { type: [String], default: ["abc-news", "abc-news-au"] }
 	}
 });
 

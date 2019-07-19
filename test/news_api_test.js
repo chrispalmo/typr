@@ -14,7 +14,7 @@ describe("NewsApi tests", () => {
 			})
 			.end(async (err, res) => {
 				// res.body.articles.map(i => console.log(i));
-				console.log(res.body.articles.length + " articles returned.");
+				// console.log(res.body.articles.length + " articles returned.");
 				assert(res.body.articles.length !== 0);
 				done();
 			});
@@ -26,7 +26,7 @@ describe("NewsApi tests", () => {
 			.send({ language: "en" })
 			.end((err, res) => {
 				// console.log(res.body.sources);
-				console.log(res.body.sources.length + " sources available.");
+				//console.log(res.body.sources.length + " sources available.");
 				// assert(res.body.length !== 0);
 				done();
 			});
