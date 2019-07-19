@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
@@ -7,6 +7,7 @@ import Header from "./header/Header";
 import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
+import history from "../history";
 
 class App extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Router history={history}>
           <div
             style={{
               paddingTop: "2em"
@@ -27,7 +28,7 @@ class App extends Component {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route path="/content/news-select" component={NewsSelect} />
           </div>
-        </BrowserRouter>
+        </Router>
       </div>
     );
   }

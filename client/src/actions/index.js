@@ -1,4 +1,5 @@
 import axios from "axios";
+import history from "../history";
 import {
 	FETCH_USER,
 	FETCH_NEWS_SOURCES,
@@ -32,25 +33,7 @@ export const saveUser = user => async dispatch => {
 	const res = await axios.post("/api/current_user/", user);
 
 	dispatch({ type: SAVE_USER, payload: res.data });
+
+	//programmatically navigate back to root route "/" page after successfully saving the user
+	history.push("/");
 };
-/*
-
-export const handleToken = token => async dispatch => {
-	const res = await axios.post("/api/stripe", token);
-
-	dispatch({ type: FETCH_USER, payload: res.data });
-};
-
-export const submitSurvey = (values, history) => async dispatch => {
-	const res = await axios.post("/api/surveys", values);
-
-	history.push("/dashboard");
-	dispatch({ type: FETCH_USER, payload: res.data });
-};
-
-export const fetchSurveys = () => async dispatch => {
-	const res = await axios.get("/api/surveys");
-
-	dispatch({ type: FETCH_SURVEYS, payload: res.data });
-};
-*/
