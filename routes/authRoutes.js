@@ -32,7 +32,14 @@ module.exports = app => {
     console.log(req.user);
     console.log(req.body);
     const filter = { googleId: req.user.googleId };
-    const update = req.body;
+    //directly letting update=req.body would be fine; the below code just additionally sorts the selectedSources array
+    const update = {
+      ...req.body,
+      newsDigest: {
+        ...req.body.newsDigest,
+        selectedSources: req.body.newsDigest.selectedSources.sort()
+      }
+    };
     //You should set the new option to true to return the document after update was applied.
     const returnDocAfterUpdate = { new: true };
     User.findOneAndUpdate(filter, update, returnDocAfterUpdate).then(
