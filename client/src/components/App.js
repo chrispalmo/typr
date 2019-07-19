@@ -8,6 +8,9 @@ import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
 import history from "../history";
+/*
+BrowserRouter> creates its own history instance, and listens for changes on that. So we use Router and nominate our own history object that can be manipulated.
+*/
 
 class App extends Component {
   componentDidMount() {
@@ -24,17 +27,32 @@ class App extends Component {
             }}
           >
             <Header />
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route path="/content/news-select" component={NewsSelect} />
+            {this.renderProtectedRoutes()}
           </div>
         </Router>
       </div>
     );
   }
+
+  renderProtectedRoutes() {
+    if (this.props.auth) {
+      return (
+        <div>
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/content/news-select" component={NewsSelect} />
+        </div>
+      );
+    }
+    return <Route exact path="/" component={LandingPage} />;
+  }
+}
+
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(App);
