@@ -102,7 +102,7 @@ class NewsSources extends Component {
 		return (
 			<div className="ui center aligned secondary segment">
 				<button className="ui button">
-					<Link to="/..." style={{ color: "#5A5A5A" }}>
+					<Link to="/app" style={{ color: "#5A5A5A" }}>
 						<i className="keyboard icon large" /> Start Typing
 					</Link>
 				</button>

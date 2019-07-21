@@ -7,7 +7,10 @@ import Header from "./header/Header";
 import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
+import TyprCore from "./typrcore/TyprCore";
+
 import history from "../history";
+
 /*
 BrowserRouter> creates its own history instance, and listens for changes on that. So we use Router and nominate our own history object that can be manipulated.
 */
@@ -41,6 +44,7 @@ class App extends Component {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/content/news-select" component={NewsSelect} />
+          <Route path="/app" component={TyprCore} />
         </div>
       );
     }
