@@ -36,17 +36,23 @@ class NewsSelect extends Component {
 					<i className="chevron circle left icon" />
 					{"	 "}Save and return
 				</button>
-				<hr />
-				{this.renderSelectedList()}
-				<hr style={{ margin: "0px" }} />
+				{this.renderSelectedNewsSources()}
 			</div>
 		);
 	}
 
-	renderSelectedList() {
+	renderSelectedNewsSources() {
 		if (!this.props.auth) {
 			return <div> Loading user settings...</div>;
 		}
+
+		const noSelectedSources =
+			this.props.auth.newsDigest.selectedSources.length === 0;
+
+		if (noSelectedSources) {
+			return <div className="ui segment">Select news sources below</div>;
+		}
+
 		const selectedSources = [];
 		this.props.auth.newsDigest.selectedSources.forEach(source => {
 			selectedSources.push(
@@ -59,12 +65,30 @@ class NewsSelect extends Component {
 				</div>
 			);
 		});
-		return <div className="ui yellow labels">{selectedSources}</div>;
+		return (
+			<div className="ui secondary segment">
+				<div className="ui yellow labels">{selectedSources}</div>
+			</div>
+		);
 	}
 
 	renderSourceList() {
 		if (!this.props.newsSources || !this.props.auth) {
-			return <div> Loading news sources...</div>;
+			const loadingLines = [];
+			var i;
+			for (i = 0; i < 20; i++) {
+				loadingLines.push(
+					<div className="ui placeholder">
+						<div className="image header">
+							<div className="line" />
+							<div className="line" />
+						</div>
+						<div className="line" />
+						<div className="line" />
+					</div>
+				);
+			}
+			return <div>{loadingLines}</div>;
 		}
 		const sources = [];
 		_.toPairs(this.props.newsSources.sources).forEach(source => {

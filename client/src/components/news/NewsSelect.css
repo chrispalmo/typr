@@ -1,13 +1,9 @@
 .newsSelectButtonHeader {
 	background: white;
-	margin-left: 0px;
-	margin-right: 0px;
 	width: 100%;
 	position: fixed;
 	top: 0px;
 	z-index: 8888;
-	padding-left: 7px;
-	padding-right: 7px;
 	padding-bottom: 0px;
 	padding-top: 50px;
 }
@@ -23,7 +19,6 @@
 
 .newsSelect .source {
 	border-radius: 5px;
-	margin: 5px;
 }
 
 .newsSelect .checked {
@@ -31,6 +26,5 @@
 }
 
 .newsSelectListWrapper {
-	padding: 10px;
-	padding-top: 9em;
+	padding-top: 7em;
 }

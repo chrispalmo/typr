@@ -23,11 +23,11 @@ class App extends Component {
         <Router history={history}>
           <div
             style={{
-              paddingTop: "2em"
+              paddingTop: "4em"
             }}
           >
             <Header />
-            {this.renderProtectedRoutes()}
+            <div style={{ margin: "10px" }}>{this.renderProtectedRoutes()}</div>
           </div>
         </Router>
       </div>
