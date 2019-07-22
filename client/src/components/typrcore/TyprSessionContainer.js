@@ -70,6 +70,9 @@ export class TyprSessionContainer extends React.Component {
             "resize",
             this.updateWindowDimensions.bind(this)
         );
+        //TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
+        //Trigger regular renders to keep WPM bar moving
+        //this.interval = setInterval(() => this.forceUpdate(), 250);
     }
 
     componentWillUnmount() {
@@ -77,6 +80,9 @@ export class TyprSessionContainer extends React.Component {
             "resize",
             this.updateWindowDimensions.bind(this)
         );
+        //TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
+        //Clear regular renders required to keep WPM bar moving
+        //clearInterval(this.interval);
     }
 
     updateWindowDimensions() {
