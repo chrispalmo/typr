@@ -16,7 +16,15 @@ class NewsSources extends Component {
 			<div className="ui compact segments">
 				<div className="ui center aligned secondary segment">
 					<span>
-						<div className="ui icon header grey">Daily Headlines</div>
+						<div className="ui icon header grey">
+							Daily Headlines
+							<p style={{ fontSize: "0.75em" }}>
+								Powered by{" "}
+								<a href="https://newsapi.org/" target="_blank">
+									NewsAPI.org
+								</a>
+							</p>
+						</div>
 					</span>
 					<button className="ui right floated icon button huge">
 						<Link to="/content/news-select" style={{ color: "#5A5A5A" }}>
