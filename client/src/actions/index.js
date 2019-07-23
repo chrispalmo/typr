@@ -2,9 +2,10 @@ import axios from "axios";
 import history from "../history";
 import {
 	FETCH_USER,
+	SAVE_USER,
+	FETCH_NEWS,
 	FETCH_NEWS_SOURCES,
-	TOGGLE_NEWS_SOURCE,
-	SAVE_USER
+	TOGGLE_NEWS_SOURCE
 } from "./types";
 
 // !!!
@@ -13,20 +14,10 @@ import {
 //more info in OneNote under "udemy-node-react-fullstack: 05 Dev vs Prod Environments"
 // !!!
 
-export const fetchNewsSources = queryObject => async dispatch => {
-	const res = await axios.post("/api/content/news/sources", queryObject);
-
-	dispatch({ type: FETCH_NEWS_SOURCES, payload: res.data });
-};
-
 export const fetchUser = () => async dispatch => {
 	const res = await axios.get("/api/current_user");
 
 	dispatch({ type: FETCH_USER, payload: res.data });
-};
-
-export const toggleNewsSource = source => dispatch => {
-	dispatch({ type: TOGGLE_NEWS_SOURCE, payload: source });
 };
 
 export const saveUser = user => async dispatch => {
@@ -36,4 +27,19 @@ export const saveUser = user => async dispatch => {
 
 	//programmatically navigate back to root route "/" page after successfully saving the user
 	history.push("/");
+};
+
+export const fetchNewsSources = queryObject => async dispatch => {
+	const res = await axios.post("/api/content/news/sources", queryObject);
+
+	dispatch({ type: FETCH_NEWS_SOURCES, payload: res.data });
+};
+
+export const fetchNews = queryObject => async dispatch => {
+	const res = await axios.get("/api/content/news/", queryObject);
+	dispatch({ type: FETCH_NEWS, payload: res.data });
+};
+
+export const toggleNewsSource = source => dispatch => {
+	dispatch({ type: TOGGLE_NEWS_SOURCE, payload: source });
 };

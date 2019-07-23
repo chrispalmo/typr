@@ -14,7 +14,8 @@ describe("NewsApi tests", () => {
 			})
 			.end(async (err, res) => {
 				// res.body.articles.map(i => console.log(i));
-				// console.log(res.body.articles.length + " articles returned.");
+				console.log(res.body.articles.length + " articles returned.");
+				console.log(res.body.articles[0]);
 				assert(res.body.articles.length !== 0);
 				done();
 			});
