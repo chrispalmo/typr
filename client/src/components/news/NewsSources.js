@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchNewsSources, fetchUser } from "../../actions";
+import { fetchUser, fetchNewsSources, fetchNews } from "../../actions";
 import history from "../../history";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
-		this.props.fetchNewsSources({ language: "en" });
 		this.props.fetchUser();
+		this.props.fetchNewsSources({ language: "en" });
+		this.props.fetchNews();
 	}
 
 	render() {
@@ -120,10 +121,10 @@ class NewsSources extends Component {
 }
 
 const mapStateToProps = state => {
-	return { newsSources: state.newsSources, auth: state.auth };
+	return { newsSources: state.newsSources, auth: state.auth, news: state.news };
 };
 
 export default connect(
 	mapStateToProps,
-	{ fetchNewsSources, fetchUser }
+	{ fetchUser, fetchNewsSources, fetchNews }
 )(NewsSources);

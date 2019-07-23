@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+//TODO: make a unique Id separate from googleId
+//TODO: update of contentRoutes.js will need to follow
 const userSchema = new Schema({
 	googleId: String,
 	displayName: String,
@@ -8,7 +10,8 @@ const userSchema = new Schema({
 	familyName: String,
 	email: String,
 	newsDigest: {
-		selectedSources: { type: [String], default: ["abc-news", "abc-news-au"] }
+		selectedSources: { type: [String], default: [] },
+		numberOfArticles: { type: Number, default: 20 }
 	}
 });
 
