@@ -15,7 +15,10 @@ import TyprProgressBar from "./TyprProgressBar";
 import charKeys from "./charKeys";
 
 const debug = false;
+
 //TODO: add warning when Caps Lock is engaged
+
+//TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
 
 class TyprCore extends React.Component {
     constructor(props) {
@@ -110,9 +113,10 @@ class TyprCore extends React.Component {
 
         if (!this.state.charKeys.includes(e.key)) {
             //Check if the actions corresponds to a list of trackable keys
-            //TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
             return;
         }
+
+        //Key actions handled above here will not be logged
 
         const timestamp = Date.now();
         this.logKey(e, timestamp);
