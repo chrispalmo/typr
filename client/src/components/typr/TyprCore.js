@@ -15,14 +15,12 @@ import TyprProgressBar from "./TyprProgressBar";
 import charKeys from "./charKeys";
 
 const debug = false;
+//TODO: add warning when Caps Lock is engaged
 
 class TyprCore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            startedSession: false,
-            startDateTime: -1,
-            activeSession: false,
             keyPressLog: [],
             text: this.props.text,
             textArray: textToArrayOfWords(this.props.text),
@@ -59,13 +57,13 @@ class TyprCore extends React.Component {
                     height={17}
                     rounded={false}
                 />
+                <TyprSessionStats
+                    ref={this.statsDisplay}
+                    keyPressLog={this.state.keyPressLog}
+                />
                 <div className="wpmText">WPM: {wpm}</div>
             </div>
         );
-        // <TyprSessionStats
-        //  ref={this.statsDisplay}
-        //  keyPressLog={this.state.keyPressLog}
-        // />
     }
 
     componentWillMount() {
@@ -98,32 +96,25 @@ class TyprCore extends React.Component {
     }
 
     handleKeyPressWrapper(e) {
-        console.log("KEYPRESS: e.key===" + e.key);
-        //Limit component updates to one per key event
-        //this.setState(prevState => ({ shouldComponentUpdate: false }));
+        debug ? console.log("KEYPRESS: e.key===" + e.key) : null;
         this.handleKeyPress(e);
         this.forceUpdate();
         this.setState(prevState => ({ shouldComponentUpdate: true }));
     }
 
     handleKeyPress(e) {
-        //Mo's stat tracking code
-        const timestamp = Date.now();
-        if (this.startedSession === false) {
-            this.startDateTime = timestamp;
-            this.startedSession = true;
-            this.activeSession = true;
-        }
-
         if (e.key === "ArrowRight") {
             this.props.nextParagraph(this.props.news.length);
             return;
         }
 
         if (!this.state.charKeys.includes(e.key)) {
+            //Check if the actions corresponds to a list of trackable keys
+            //TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
             return;
         }
 
+        const timestamp = Date.now();
         this.logKey(e, timestamp);
 
         if (e.key === "Backspace") {
