@@ -18,8 +18,7 @@ module.exports = app => {
 			pageSize: user.newsDigest.numberOfArticles
 		});
 		const headlines = _.toPairs(news)[2][1].map(article => {
-			console.log(article);
-			return article.source.name + ": " + article.title;
+			return { source: article.source.name, title: article.title };
 		});
 
 		res.send(headlines);

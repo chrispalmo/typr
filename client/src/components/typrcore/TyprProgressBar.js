@@ -13,7 +13,7 @@ var TyprProgressBar = function(props) {
 
   var r = rounded ? Math.ceil(height / 2) : 0;
   var w = percent ? Math.max(height, width * Math.min(percent, 1)) : 0;
-  var style = animate ? { transition: "width 500ms, fill 250ms" } : null;
+  var style = animate ? { transition: "width 1000ms, fill 500ms" } : null;
 
   return (
     <svg width={width} height={height} aria-label={label} data-tooltip={label}>

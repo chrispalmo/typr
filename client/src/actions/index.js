@@ -5,7 +5,10 @@ import {
 	SAVE_USER,
 	FETCH_NEWS,
 	FETCH_NEWS_SOURCES,
-	TOGGLE_NEWS_SOURCE
+	TOGGLE_NEWS_SOURCE,
+	FIRST_PARAGRAPH,
+	NEXT_PARAGRAPH,
+	PREV_PARAGRAPH
 } from "./types";
 
 // !!!
@@ -42,4 +45,17 @@ export const fetchNews = queryObject => async dispatch => {
 
 export const toggleNewsSource = source => dispatch => {
 	dispatch({ type: TOGGLE_NEWS_SOURCE, payload: source });
+};
+
+//Navigation throughout newsfeed or book chapter
+export const firstParagraph = () => dispatch => {
+	dispatch({ type: FIRST_PARAGRAPH });
+};
+
+export const prevParagraph = () => dispatch => {
+	dispatch({ type: PREV_PARAGRAPH });
+};
+
+export const nextParagraph = numberOfParagraphs => dispatch => {
+	dispatch({ type: NEXT_PARAGRAPH, payload: numberOfParagraphs });
 };

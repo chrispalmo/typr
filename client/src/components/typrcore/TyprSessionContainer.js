@@ -1,11 +1,23 @@
 import React from "react";
+
+import { connect } from "react-redux";
+import {
+    fetchNews,
+    fetchUser,
+    firstParagraph,
+    prevParagraph,
+    nextParagraph
+} from "../../actions";
+
 import { TyprTextDisplay } from "./TyprTextDisplay";
 import { TyprSessionStats } from "./TyprSessionStats";
 import { textToArrayOfWords } from "./textConversions";
 import TyprProgressBar from "./TyprProgressBar";
 import charKeys from "./charKeys";
 
-export class TyprSessionContainer extends React.Component {
+const debug = false;
+
+class TyprSessionContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +25,7 @@ export class TyprSessionContainer extends React.Component {
             startDateTime: -1,
             activeSession: false,
             keyPressLog: [],
+            text: this.props.text,
             textArray: textToArrayOfWords(this.props.text),
             key: 0,
             isCapital: 0,
@@ -24,10 +37,14 @@ export class TyprSessionContainer extends React.Component {
             windowWidth: 500,
             windowHeight: 0
         };
+
+        //Arrow functions cannot be passed to event listeners, otherwise a new function is created which cannot be referred to when the event listener needs to be removed. Using a normal function instead of an arrow function afects the context within the funciton (.this) is affected, so the context needs to be bound to the class instance:
+        this.handleKeyPressWrapper = this.handleKeyPressWrapper.bind(this);
+        this.handleKeyPressWrapper = this.handleKeyPressWrapper.bind(this);
     }
 
     render() {
-        console.log("TyprSessionContainer.render() called");
+        debug ? console.log("TyprSessionContainer.render() called") : null;
         const wpm = this.instantaneousWPM();
         return (
             <div>
@@ -59,30 +76,19 @@ export class TyprSessionContainer extends React.Component {
     componentDidMount() {
         //Initialize cursor
         this.renderCurrentChar("charActive");
-        document.addEventListener("keydown", e => {
-            //Limit component updates to one per key event
-            this.setState(prevState => ({ shouldComponentUpdate: false }));
-            this.handleKeyPress(e);
-            this.forceUpdate();
-            this.setState(prevState => ({ shouldComponentUpdate: true }));
-        });
-        window.addEventListener(
-            "resize",
-            this.updateWindowDimensions.bind(this)
-        );
+        document.addEventListener("keydown", this.handleKeyPressWrapper);
+        window.addEventListener("resize", this.updateWindowDimensions);
         //TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
         //Trigger regular renders to keep WPM bar moving
-        //this.interval = setInterval(() => this.forceUpdate(), 250);
+        this.interval = setInterval(() => this.forceUpdate(), 250);
     }
 
     componentWillUnmount() {
-        window.removeEventListener(
-            "resize",
-            this.updateWindowDimensions.bind(this)
-        );
+        document.removeEventListener("keydown", this.handleKeyPressWrapper);
+        window.removeEventListener("resize", this.updateWindowDimensions);
         //TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
         //Clear regular renders required to keep WPM bar moving
-        //clearInterval(this.interval);
+        clearInterval(this.interval);
     }
 
     updateWindowDimensions() {
@@ -90,6 +96,15 @@ export class TyprSessionContainer extends React.Component {
             windowWidth: window.innerWidth,
             windowHeight: window.innerHeight
         });
+    }
+
+    handleKeyPressWrapper(e) {
+        console.log("KEYPRESS: e.key===" + e.key);
+        //Limit component updates to one per key event
+        //this.setState(prevState => ({ shouldComponentUpdate: false }));
+        this.handleKeyPress(e);
+        this.forceUpdate();
+        this.setState(prevState => ({ shouldComponentUpdate: true }));
     }
 
     handleKeyPress(e) {
@@ -107,8 +122,14 @@ export class TyprSessionContainer extends React.Component {
 
         this.logKey(e, timestamp);
 
+        if (e.key === "ArrowRight") {
+            this.props.nextParagraph(this.props.news.length);
+            return;
+        }
+
         if (e.key === "Backspace") {
             if (e.ctrlKey) {
+                //Backspace entire word
                 if (this.state.charPos === 0) {
                     this.moveLeft(e);
                 }
@@ -120,6 +141,7 @@ export class TyprSessionContainer extends React.Component {
                 }
                 return;
             } else {
+                //Backspace single character
                 this.moveLeft(e);
                 return;
             }
@@ -131,7 +153,7 @@ export class TyprSessionContainer extends React.Component {
             this.state.charPos + 1 === currentWordLength &&
             this.state.wordPos + 1 === wordCount
         ) {
-            console.log("nextPara() to be implemented...");
+            this.props.nextParagraph(this.props.news.length);
             return;
         }
 
@@ -281,7 +303,9 @@ export class TyprSessionContainer extends React.Component {
     }
 
     instantaneousWPM() {
-        console.log("TyprSessionStats.instantaneousWPM() called");
+        debug
+            ? console.log("TyprSessionStats.instantaneousWPM() called")
+            : null;
         if (this.state.keyPressLog.length < 2) {
             return 0;
         }
@@ -310,3 +334,12 @@ export class TyprSessionContainer extends React.Component {
         return this.state.shouldComponentUpdate;
     }
 }
+
+const mapStateToProps = state => {
+    return { news: state.news, auth: state.auth };
+};
+
+export default connect(
+    mapStateToProps,
+    { fetchNews, fetchUser, prevParagraph, nextParagraph }
+)(TyprSessionContainer);

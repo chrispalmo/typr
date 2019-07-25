@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import {
-	fetchNewsSources,
 	fetchUser,
+	fetchNewsSources,
 	toggleNewsSource,
-	saveUser
+	saveUser,
+	fetchNews
 } from "../../actions";
 
 import "./NewsSelect.css";
@@ -31,7 +32,10 @@ class NewsSelect extends Component {
 				<button
 					className="ui button"
 					style={{ marginLeft: "0px!important" }}
-					onClick={() => this.props.saveUser(this.props.auth)}
+					onClick={() => {
+						this.props.saveUser(this.props.auth);
+						this.props.fetchNews();
+					}}
 				>
 					<i className="chevron circle left icon" />
 					{"	 "}Save and return
@@ -132,5 +136,11 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ fetchNewsSources, fetchUser, toggleNewsSource, saveUser }
+	{
+		fetchUser,
+		fetchNewsSources,
+		toggleNewsSource,
+		saveUser,
+		fetchNews
+	}
 )(NewsSelect);

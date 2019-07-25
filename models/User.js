@@ -11,7 +11,8 @@ const userSchema = new Schema({
 	email: String,
 	newsDigest: {
 		selectedSources: { type: [String], default: [] },
-		numberOfArticles: { type: Number, default: 20 }
+		numberOfArticles: { type: Number, default: 20 },
+		currentPosition: { type: Number, default: 0 }
 	}
 });
 

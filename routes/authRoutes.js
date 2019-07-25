@@ -28,9 +28,9 @@ module.exports = app => {
 
   //TODO: Require login
   app.post("/api/current_user", (req, res) => {
-    console.log("***post to /api/current_user***");
-    console.log(req.user);
-    console.log(req.body);
+    // console.log("***post to /api/current_user***");
+    // console.log(req.user);
+    // console.log(req.body);
     const filter = { googleId: req.user.googleId };
     //directly letting update=req.body would be fine; the below code just additionally sorts the selectedSources array
     const update = {

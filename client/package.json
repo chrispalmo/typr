@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "react": "^16.0.0-alpha.13",
+    "react": "^16.8.6",
     "react-dom": "^16.0.0-alpha.13",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",

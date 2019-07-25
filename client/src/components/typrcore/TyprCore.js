@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import history from "../../history";
 
 import { connect } from "react-redux";
-import { fetchNews, fetchUser } from "../../actions";
+import { fetchNews, fetchUser, firstParagraph } from "../../actions";
 
-import { TyprSessionContainer } from "./TyprSessionContainer";
+import TyprSessionContainer from "./TyprSessionContainer";
 import "./TyprCore.css";
 
 const welcomeText =
@@ -14,6 +14,7 @@ class TyprCore extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
 		this.props.fetchNews();
+		this.props.firstParagraph();
 	}
 
 	render() {
@@ -21,7 +22,14 @@ class TyprCore extends Component {
 			return <div>Loading news headlines...</div>;
 		}
 		//TODO: implement bookmark in user model to track paragraph position instead of news[0]
-		return <TyprSessionContainer text={this.props.news[0]} />;
+		const currentPosition = this.props.auth.newsDigest.currentPosition;
+		const text = this.props.news[currentPosition].title;
+		const source = this.props.news[currentPosition].source;
+
+		// When a key changes, React will create a new component instance rather than update the current one
+		return (
+			<TyprSessionContainer key={currentPosition} text={text} source={source} />
+		);
 	}
 }
 
@@ -31,5 +39,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ fetchNews, fetchUser }
+	{ fetchNews, fetchUser, firstParagraph }
 )(TyprCore);
