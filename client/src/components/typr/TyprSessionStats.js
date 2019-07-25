@@ -2,7 +2,6 @@ import React from "react";
 
 export class TyprSessionStats extends React.Component {
     render() {
-        console.log("TyprSessionStats.render() called");
         const statsList = this.props.keyPressLog.map((i, j) => {
             return (
                 <li className="keyPressLog" key={j}>

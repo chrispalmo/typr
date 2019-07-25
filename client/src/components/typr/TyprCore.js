@@ -19,6 +19,7 @@ const debug = false;
 //TODO: add warning when Caps Lock is engaged
 
 //TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
+//i.e in "Einstein’s general relativity" -- key: "Quote" should work for "’"
 
 class TyprCore extends React.Component {
     constructor(props) {
@@ -118,8 +119,7 @@ class TyprCore extends React.Component {
 
         //Key actions handled above here will not be logged
 
-        const timestamp = Date.now();
-        this.logKey(e, timestamp);
+        this.logKey(e, Date.now());
 
         if (e.key === "Backspace") {
             if (e.ctrlKey) {
@@ -254,7 +254,8 @@ class TyprCore extends React.Component {
             .map(i => {
                 return i.char;
             })
-            .join("");
+            .join("")
+            .trim();
         const className = this.state.textArray[this.state.wordPos][
             this.state.charPos
         ].className;
@@ -291,6 +292,7 @@ class TyprCore extends React.Component {
             className: className,
             wpmCounter: wpmCounter
         };
+        console.log(logData);
         this.setState(prevState => ({
             keyPressLog: [...prevState.keyPressLog, logData]
         }));
