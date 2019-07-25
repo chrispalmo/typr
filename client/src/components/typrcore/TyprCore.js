@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import history from "../../history";
 
 import { connect } from "react-redux";
 import { fetchNews, fetchUser, firstParagraph } from "../../actions";
@@ -7,8 +6,8 @@ import { fetchNews, fetchUser, firstParagraph } from "../../actions";
 import TyprSessionContainer from "./TyprSessionContainer";
 import "./TyprCore.css";
 
-const welcomeText =
-	"Welcome to typr! Register for free to practice typing your favourite books, breaking news articles and unique, algorithmically-generated exercises that target your identified weaknesses. Customize your content feed using the library-builder, track progress with detailed analytics, and 10x your learning efficiency while reading the things you want to be reading.";
+// const welcomeText =
+// 	"Welcome to typr! Register for free to practice typing your favourite books, breaking news articles and unique, algorithmically-generated exercises that target your identified weaknesses. Customize your content feed using the library-builder, track progress with detailed analytics, and 10x your learning efficiency while reading the things you want to be reading.";
 
 class TyprCore extends Component {
 	componentDidMount() {
