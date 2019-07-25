@@ -7,7 +7,7 @@ import Header from "./header/Header";
 import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
-import TyprCore from "./typrcore/TyprCore";
+import TyprSessionContainer from "./typrcore/TyprSessionContainer";
 
 import history from "../history";
 
@@ -44,7 +44,7 @@ class App extends Component {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/content/news-select" component={NewsSelect} />
-          <Route path="/app" component={TyprCore} />
+          <Route path="/app" component={TyprSessionContainer} />
         </div>
       );
     }
