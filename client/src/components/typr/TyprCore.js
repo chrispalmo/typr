@@ -115,16 +115,16 @@ class TyprCore extends React.Component {
             this.activeSession = true;
         }
 
+        if (e.key === "ArrowRight") {
+            this.props.nextParagraph(this.props.news.length);
+            return;
+        }
+
         if (!this.state.charKeys.includes(e.key)) {
             return;
         }
 
         this.logKey(e, timestamp);
-
-        if (e.key === "ArrowRight") {
-            this.props.nextParagraph(this.props.news.length);
-            return;
-        }
 
         if (e.key === "Backspace") {
             if (e.ctrlKey) {
