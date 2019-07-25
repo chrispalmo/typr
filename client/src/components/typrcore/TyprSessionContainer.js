@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import {
     fetchNews,
     fetchUser,
-    firstParagraph,
     prevParagraph,
     nextParagraph
 } from "../../actions";
@@ -40,7 +39,7 @@ class TyprSessionContainer extends React.Component {
 
         //Arrow functions cannot be passed to event listeners, otherwise a new function is created which cannot be referred to when the event listener needs to be removed. Using a normal function instead of an arrow function afects the context within the funciton (.this) is affected, so the context needs to be bound to the class instance:
         this.handleKeyPressWrapper = this.handleKeyPressWrapper.bind(this);
-        this.handleKeyPressWrapper = this.handleKeyPressWrapper.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     render() {
