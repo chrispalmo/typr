@@ -7,7 +7,7 @@ import Header from "./header/Header";
 import LandingPage from "./landing/LandingPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
-import TyprSessionContainer from "./typrcore/TyprSessionContainer";
+import TyprSessionContainer from "./typr/TyprSessionContainer";
 
 import history from "../history";
 
