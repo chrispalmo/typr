@@ -286,7 +286,16 @@ class TyprCore extends React.Component {
 
         var logData = {
             timestamp: timestamp,
-            event: e,
+            event: {
+                altKey: e.altKey,
+                charCode: e.charCode,
+                code: e.code,
+                ctrlKey: e.ctrlKey,
+                key: e.key,
+                keyCode: e.keyCode,
+                shiftKey: e.shiftKey,
+                which: e.which
+            },
             char: char,
             word: word,
             className: className,
