@@ -8,7 +8,10 @@ import {
 	TOGGLE_NEWS_SOURCE,
 	FIRST_PARAGRAPH,
 	NEXT_PARAGRAPH,
-	PREV_PARAGRAPH
+	PREV_PARAGRAPH,
+	FETCH_DAILY_KEYLOG,
+	SAVE_REMOTE_DAILY_KEYLOG,
+	ADD_LOCAL_ENTRY_DAILY_KEYLOG
 } from "./types";
 
 // !!!
@@ -58,4 +61,20 @@ export const prevParagraph = () => dispatch => {
 
 export const nextParagraph = numberOfParagraphs => dispatch => {
 	dispatch({ type: NEXT_PARAGRAPH, payload: numberOfParagraphs });
+};
+
+export const fetchDailyKeylog = () => async dispatch => {
+	const res = await axios.get("/api/daily_keylog");
+
+	dispatch({ type: FETCH_DAILY_KEYLOG, payload: res.data });
+};
+
+export const saveRemoteDailyKeylog = dailyKeylog => async dispatch => {
+	const res = await axios.post("/api/daily_keylog", dailyKeylog);
+
+	dispatch({ type: SAVE_REMOTE_DAILY_KEYLOG, payload: res.data });
+};
+
+export const addLocalEntryDailyKeylog = keyDataEntry => dispatch => {
+	dispatch({ type: ADD_LOCAL_ENTRY_DAILY_KEYLOG, payload: keyDataEntry });
 };

@@ -5,7 +5,8 @@ import {
     fetchNews,
     fetchUser,
     prevParagraph,
-    nextParagraph
+    nextParagraph,
+    addLocalEntryDailyKeylog
 } from "../../actions";
 
 import { TyprTextDisplay } from "./TyprTextDisplay";
@@ -25,7 +26,6 @@ class TyprCore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            keyPressLog: [],
             text: this.props.text,
             textArray: textToArrayOfWords(this.props.text),
             key: 0,
@@ -57,13 +57,13 @@ class TyprCore extends React.Component {
                 <TyprProgressBar
                     ref={this.WPMMeter}
                     percent={wpm / 150}
-                    width={this.state.windowWidth - 50}
+                    width={this.state.windowWidth}
                     height={17}
-                    rounded={false}
+                    rounded={true}
                 />
                 <TyprSessionStats
                     ref={this.statsDisplay}
-                    keyPressLog={this.state.keyPressLog}
+                    keyPressLog={this.props.keylog}
                 />
                 <div className="wpmText">WPM: {wpm}</div>
             </div>
@@ -284,7 +284,7 @@ class TyprCore extends React.Component {
             }
         }
 
-        var logData = {
+        var keyDataEntry = {
             timestamp: timestamp,
             event: {
                 altKey: e.altKey,
@@ -301,31 +301,28 @@ class TyprCore extends React.Component {
             className: className,
             wpmCounter: wpmCounter
         };
-        console.log(logData);
-        this.setState(prevState => ({
-            keyPressLog: [...prevState.keyPressLog, logData]
-        }));
+        this.props.addLocalEntryDailyKeylog(keyDataEntry);
     }
 
     instantaneousWPM() {
         debug
             ? console.log("TyprSessionStats.instantaneousWPM() called")
             : null;
-        if (this.state.keyPressLog.length < 2) {
+        if (!this.props.keylog) return 0;
+        const length = this.props.keylog.length;
+        if (length < 2) {
             return 0;
         }
         var sampleSize = 30;
-        if (sampleSize > this.state.keyPressLog.length) {
-            sampleSize = this.state.keyPressLog.length;
+        if (sampleSize > length) {
+            sampleSize = length;
         }
-        const totalCorrectChars = this.state.keyPressLog
+        const totalCorrectChars = this.props.keylog
             .slice(-sampleSize)
             .reduce((total, dataLine) => {
                 return total + dataLine.wpmCounter;
             }, 0);
-        const time1 = this.state.keyPressLog[
-            this.state.keyPressLog.length - sampleSize
-        ].timestamp;
+        const time1 = this.props.keylog[length - sampleSize].timestamp;
         const wpm = Math.round(
             totalCorrectChars / 5 / ((Date.now() - time1) / 60000)
         );
@@ -341,10 +338,16 @@ class TyprCore extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { news: state.news, auth: state.auth };
+    return { news: state.news, auth: state.auth, keylog: state.keylog };
 };
 
 export default connect(
     mapStateToProps,
-    { fetchNews, fetchUser, prevParagraph, nextParagraph }
+    {
+        fetchNews,
+        fetchUser,
+        prevParagraph,
+        nextParagraph,
+        addLocalEntryDailyKeylog
+    }
 )(TyprCore);
