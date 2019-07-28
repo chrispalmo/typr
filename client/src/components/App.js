@@ -15,6 +15,8 @@ import history from "../history";
 BrowserRouter> creates its own history instance, and listens for changes on that. So we use Router and nominate our own history object that can be manipulated.
 */
 
+//TODO: create separate folder "/components/pages" for all "page-level components"
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
