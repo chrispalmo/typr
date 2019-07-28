@@ -2,8 +2,6 @@ import React from "react";
 
 import { connect } from "react-redux";
 import {
-    fetchNews,
-    fetchUser,
     prevParagraph,
     nextParagraph,
     addLocalEntryDailyKeylog
@@ -21,6 +19,7 @@ const debug = false;
 
 //TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
 //i.e in "Einstein’s general relativity" -- key: "Quote" should work for "’"
+//i.e "-" should register as correct for "—"
 
 class TyprCore extends React.Component {
     constructor(props) {
@@ -41,12 +40,11 @@ class TyprCore extends React.Component {
 
         //Arrow functions cannot be passed to event listeners, otherwise a new function is created which cannot be referred to when the event listener needs to be removed. Using a normal function instead of an arrow function afects the context within the funciton (.this) is affected, so the context needs to be bound to the class instance:
         this.handleKeyPressWrapper = this.handleKeyPressWrapper.bind(this);
-        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     render() {
         debug ? console.log("TyprCore.render() called") : null;
-        const wpm = this.instantaneousWPM();
+
         return (
             <div>
                 <TyprTextDisplay
@@ -54,49 +52,22 @@ class TyprCore extends React.Component {
                     ref={this.textDisplay}
                     textArray={this.state.textArray}
                 />
-                <TyprProgressBar
-                    ref={this.WPMMeter}
-                    percent={wpm / 150}
-                    width={this.state.windowWidth}
-                    height={17}
-                    rounded={true}
-                />
                 <TyprSessionStats
                     ref={this.statsDisplay}
                     keyPressLog={this.props.keylog}
                 />
-                <div className="wpmText">WPM: {wpm}</div>
             </div>
         );
-    }
-
-    componentWillMount() {
-        this.updateWindowDimensions();
     }
 
     componentDidMount() {
         //Initialize cursor
         this.renderCurrentChar("charActive");
         document.addEventListener("keydown", this.handleKeyPressWrapper);
-        window.addEventListener("resize", this.updateWindowDimensions);
-        //TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
-        //Trigger regular renders to keep WPM bar moving
-        this.interval = setInterval(() => this.forceUpdate(), 250);
     }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyPressWrapper);
-        window.removeEventListener("resize", this.updateWindowDimensions);
-        //TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
-        //Clear regular renders required to keep WPM bar moving
-        clearInterval(this.interval);
-    }
-
-    updateWindowDimensions() {
-        this.setState({
-            windowWidth: window.innerWidth,
-            windowHeight: window.innerHeight
-        });
     }
 
     handleKeyPressWrapper(e) {
@@ -304,34 +275,6 @@ class TyprCore extends React.Component {
         this.props.addLocalEntryDailyKeylog(keyDataEntry);
     }
 
-    instantaneousWPM() {
-        debug
-            ? console.log("TyprSessionStats.instantaneousWPM() called")
-            : null;
-        if (!this.props.keylog) return 0;
-        const length = this.props.keylog.length;
-        if (length < 2) {
-            return 0;
-        }
-        var sampleSize = 30;
-        if (sampleSize > length) {
-            sampleSize = length;
-        }
-        const totalCorrectChars = this.props.keylog
-            .slice(-sampleSize)
-            .reduce((total, dataLine) => {
-                return total + dataLine.wpmCounter;
-            }, 0);
-        const time1 = this.props.keylog[length - sampleSize].timestamp;
-        const wpm = Math.round(
-            totalCorrectChars / 5 / ((Date.now() - time1) / 60000)
-        );
-        if (wpm < 0) {
-            return 0;
-        }
-        return wpm;
-    }
-
     shouldComponentUpdate() {
         return this.state.shouldComponentUpdate;
     }
@@ -344,8 +287,6 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     {
-        fetchNews,
-        fetchUser,
         prevParagraph,
         nextParagraph,
         addLocalEntryDailyKeylog
