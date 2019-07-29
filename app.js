@@ -8,7 +8,6 @@ const keys = require("./config/keys");
 require("./models/User");
 
 require("./services/passport");
-require("./services/NewsApi");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
