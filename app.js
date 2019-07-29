@@ -2,11 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const newsApi = require("./services/NewsApi");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
+
 require("./models/User");
+
 require("./services/passport");
+require("./services/NewsApi");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
