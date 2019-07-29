@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const requireLogin = require("../middlewares/requireLogin");
 const User = require("../models/User");
-const newsApi = require("../services/NewsApi");
+const newsApi = require("../services/newsApi");
 
 //TODO -- IMPLETEMENT ERROR HANDLING MIDDLEWARE
 
