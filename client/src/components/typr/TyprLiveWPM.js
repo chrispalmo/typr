@@ -14,7 +14,7 @@ const debug = false;
 class TyprLiveWPM extends Component {
 	constructor(props) {
 		super(props);
-		const maxGraphDataSize = 200;
+		const maxGraphDataSize = 100;
 		const graphData = [];
 		var i;
 		for (i = 0; i < maxGraphDataSize; i++) {
@@ -81,7 +81,7 @@ class TyprLiveWPM extends Component {
 		window.addEventListener("resize", this.updateWindowDimensions);
 		//TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
 		//Trigger regular renders to keep WPM bar moving
-		this.interval = setInterval(() => this.updateWPM(), 50);
+		this.interval = setInterval(() => this.updateWPM(), 100);
 	}
 
 	componentWillUnmount() {
