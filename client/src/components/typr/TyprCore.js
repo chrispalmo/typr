@@ -52,13 +52,13 @@ class TyprCore extends React.Component {
                     ref={this.textDisplay}
                     textArray={this.state.textArray}
                 />
-                <TyprSessionStats
-                    ref={this.statsDisplay}
-                    keyPressLog={this.props.keylog}
-                />
             </div>
         );
     }
+    // <TyprSessionStats
+    //     ref={this.statsDisplay}
+    //     keyPressLog={this.props.keylog}
+    // />
 
     componentDidMount() {
         //Initialize cursor
@@ -86,6 +86,10 @@ class TyprCore extends React.Component {
         if (!this.state.charKeys.includes(e.key)) {
             //Check if the actions corresponds to a list of trackable keys
             return;
+        }
+        // prevent space bar scrolling
+        if (e.keyCode == 32 && e.target == document.body) {
+            e.preventDefault();
         }
 
         //Key actions handled above here will not be logged
