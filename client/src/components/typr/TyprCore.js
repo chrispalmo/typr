@@ -8,9 +8,8 @@ import {
 } from "../../actions";
 
 import { TyprTextDisplay } from "./TyprTextDisplay";
-import { TyprSessionStats } from "./TyprSessionStats";
+// import { TyprSessionStats } from "./TyprSessionStats";
 import { textToArrayOfWords } from "./textConversions";
-import TyprProgressBar from "./TyprProgressBar";
 import charKeys from "./charKeys";
 
 const debug = false;
@@ -88,7 +87,7 @@ class TyprCore extends React.Component {
             return;
         }
         // prevent space bar scrolling
-        if (e.keyCode == 32 && e.target == document.body) {
+        if (e.keyCode === 32 && e.target === document.body) {
             e.preventDefault();
         }
 
