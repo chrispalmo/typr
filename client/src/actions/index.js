@@ -35,6 +35,7 @@ export const saveUser = user => async dispatch => {
 	history.push("/");
 };
 
+//News Actions
 export const fetchNewsSources = queryObject => async dispatch => {
 	const res = await axios.post("/api/content/news/sources", queryObject);
 
@@ -63,6 +64,7 @@ export const nextParagraph = numberOfParagraphs => dispatch => {
 	dispatch({ type: NEXT_PARAGRAPH, payload: numberOfParagraphs });
 };
 
+//Keylog Actions
 export const fetchDailyKeylog = () => async dispatch => {
 	const res = await axios.get("/api/daily_keylog");
 
