@@ -36,9 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/authRoutes")(app);
-// require("./routes/contentRoutes")(app);
-const NewsAPI = require("newsapi");
-app.get("/newsapi", (req, res) => res.send({ NewsAPI: NewsAPI.toString() }));
+require("./routes/contentRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets

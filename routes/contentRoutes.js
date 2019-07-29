@@ -2,7 +2,21 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const requireLogin = require("../middlewares/requireLogin");
 const User = require("../models/User");
-const newsApi = require("../services/newsApi");
+//const newsApi = require("../services/newsApi");
+
+///
+
+const NewsAPI = require("newsapi");
+const key = require("../config/keys").newsApiKey;
+const newsApi = new NewsAPI(key).v2;
+
+// //NOTE: You cannot mix the sources parameter with the country or category parameters.
+// module.exports = {
+// 	// return newsApi.v2.topHeadlines(query);
+// 	topHeadlines: newsApi.v2.topHeadlines,
+// 	sources: newsApi.v2.sources
+// };
+///
 
 //TODO -- IMPLETEMENT ERROR HANDLING MIDDLEWARE
 
