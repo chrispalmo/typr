@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import TyprProgressBar from "./TyprProgressBar";
+import ChartistGraph from "react-chartist";
 // import TyprLiveChart from "./TyprLiveChart";
 
 // TODO: WpmContainer/WpmLiveChart
@@ -13,25 +14,54 @@ const debug = false;
 class TyprLiveWPM extends Component {
 	constructor(props) {
 		super(props);
+		const maxGraphDataSize = 200;
+		const graphData = [];
+		var i;
+		for (i = 0; i < maxGraphDataSize; i++) {
+			graphData.push(0);
+		}
 		this.state = {
 			windowWidth: 500,
-			windowHeight: 0
+			windowHeight: 0,
+			wpm: 0,
+			graphData: graphData
 		};
 
 		this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+		this.updateWPM = this.updateWPM.bind(this);
 	}
 	render() {
-		const wpm = this.instantaneousWPM();
+		var graphData = {
+			series: [this.state.graphData]
+		};
+		var graphOptions = {
+			high: 150,
+			low: 0,
+			showArea: false,
+			showLine: true,
+			showPoint: false,
+			axisX: {
+				showLabel: false,
+				showGrid: true
+			},
+			axisY: {
+				showLabel: true,
+				showGrid: false
+			},
+			chartPadding: 0
+		};
+
 		return (
 			<div>
 				<TyprProgressBar
 					ref={this.WPMMeter}
-					percent={wpm / 150}
-					width={this.state.windowWidth - 100}
+					percent={this.state.wpm / 150}
+					width={this.state.windowWidth - 20}
 					height={17}
 					rounded={true}
 				/>
-				<div className="wpmText">WPM: {wpm}</div>
+				<div className="wpmText">WPM: {this.state.wpm}</div>
+				<ChartistGraph data={graphData} options={graphOptions} type={"Line"} />
 			</div>
 		);
 	}
@@ -51,7 +81,7 @@ class TyprLiveWPM extends Component {
 		window.addEventListener("resize", this.updateWindowDimensions);
 		//TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
 		//Trigger regular renders to keep WPM bar moving
-		this.interval = setInterval(() => this.forceUpdate(), 250);
+		this.interval = setInterval(() => this.updateWPM(), 50);
 	}
 
 	componentWillUnmount() {
@@ -59,6 +89,20 @@ class TyprLiveWPM extends Component {
 		//TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
 		//Clear regular renders required to keep WPM bar moving
 		clearInterval(this.interval);
+	}
+
+	updateWPM() {
+		const newWPM = this.instantaneousWPM();
+		this.setState({
+			wpm: newWPM
+		});
+		//update graph data with new wpm
+		const newGraphData = this.state.graphData.slice(1);
+
+		newGraphData.push(newWPM);
+		this.setState(prevState => ({
+			graphData: newGraphData
+		}));
 	}
 
 	instantaneousWPM() {
