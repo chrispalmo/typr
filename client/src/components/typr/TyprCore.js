@@ -77,7 +77,7 @@ class TyprCore extends React.Component {
     }
 
     handleKeyPress(e) {
-        if (e.key === "ArrowRight") {
+        if (!this.props.demoMode && e.key === "ArrowRight") {
             this.props.nextParagraph(this.props.news.length);
             return;
         }
@@ -121,7 +121,9 @@ class TyprCore extends React.Component {
             this.state.charPos + 1 === currentWordLength &&
             this.state.wordPos + 1 === wordCount
         ) {
-            this.props.nextParagraph(this.props.news.length);
+            if (!this.props.demoMode) {
+                this.props.nextParagraph(this.props.news.length);
+            }
             return;
         }
 
