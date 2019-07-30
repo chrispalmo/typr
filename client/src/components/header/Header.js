@@ -12,10 +12,12 @@ class Header extends Component {
       case false:
         return (
           <div>
-            <a href="/auth/google">
+            <a href="/">
               <button className="ui button basic inverted">Sign In</button>
             </a>
-            <button className="ui button basic inverted">Register</button>
+            <a href="/">
+              <button className="ui button basic inverted">Register</button>
+            </a>
           </div>
         );
       default:

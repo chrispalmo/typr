@@ -9,7 +9,7 @@
 }
 
 .textDisplay {
-  font-size: 1.5em;
+  font-size: 1.2em;
   display: flex;
   flex: 1;
   flex-wrap: wrap;
@@ -17,7 +17,7 @@
 
   line-height: 2em;
   white-space: pre; /*prevents spaces from disappearing*/
-  padding-bottom: 2em;
+  padding-bottom: 1em;
   font-family: monospace;
 }
 
@@ -26,11 +26,11 @@
   flex-wrap: nowrap;
 }
 
-.charActive {
+/* .charActive {
   background-color: #24a691;
   border-radius: 3px 3px 3px 3px;
   color: #ffffff;
-}
+} */
 
 .charCorrect {
   color: #a9abad;
@@ -45,4 +45,31 @@
 .endFill {
   display: flex;
   flex-grow: 1;
+}
+
+@keyframes blinking {
+  0% {
+    background-color: #24a691;
+    border-radius: 3px 3px 3px 3px;
+  }
+  40% {
+    background-color: #24a691;
+    border-radius: 3px 3px 3px 3px;
+  }
+  50% {
+    background-color: white;
+    border-radius: 3px 3px 3px 3px;
+  }
+  90% {
+    background-color: white;
+    border-radius: 3px 3px 3px 3px;
+  }
+  100% {
+    background-color: #24a691;
+    border-radius: 3px 3px 3px 3px;
+  }
+}
+.charActive {
+  /* NAME | TIME | ITERATION */
+  animation: blinking 1s infinite;
 }

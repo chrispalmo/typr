@@ -1,54 +1,66 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 class SignIn extends Component {
 	render() {
 		return (
-			<div
-				style={{
-					justifyContent: "center",
-					display: "flex",
-					flex: 1
-				}}
-			>
-				<div>
-					<button className="btn amber lighten-1">
-						<a href="/auth/google" style={{ color: "black" }}>
-							Sign In With Google
-						</a>
-					</button>
-					<div style={{ display: "flex", paddingTop: "10px" }}>
-						<div style={{ flex: 1 }}>
-							<hr />
-						</div>
-						<div
-							style={{
-								display: "flex",
-								paddingRight: "10px",
-								paddingLeft: "10px"
-							}}
-						>
-							or
-						</div>
-						<div style={{ flex: 1 }}>
-							<hr />
-						</div>
-					</div>
-					<div>[email-input]</div>
-					<div>[password-input]</div>
-					<div>[SignIn-button]</div>
-					<div>
-						Have an account? <Link to="/login">Log in</Link>
-					</div>
+			<div>
+				{this.renderGoogleButton()}
+				{this.renderDivider()}
+				{this.renderInput()}
+			</div>
+		);
+	}
+
+	renderGoogleButton() {
+		return (
+			<div style={{ display: "flex", justifyContent: "center" }}>
+				<button className="ui google plus button">
+					<a href="/auth/google" style={{ color: "white" }}>
+						<i className="google plus g icon" />
+						{"   "}Sign in with Google
+					</a>
+				</button>
+			</div>
+		);
+	}
+
+	renderDivider() {
+		return (
+			<div style={{ display: "flex", paddingTop: "1em", paddingBottom: "1em" }}>
+				<div style={{ flex: 1 }}>
+					<hr />
 				</div>
+				<div
+					style={{
+						display: "flex",
+						paddingRight: "1em",
+						paddingLeft: "1em"
+					}}
+				>
+					or
+				</div>
+				<div style={{ flex: 1 }}>
+					<hr />
+				</div>
+			</div>
+		);
+	}
+
+	renderInput() {
+		return (
+			<div
+				className="ui input"
+				style={{ display: "flex", justifyContent: "center" }}
+			>
+				<input type="text" placeholder="Your email" />
+				<button className="ui primary button disabled">
+					<a href={null} style={{ color: "white" }}>
+						Register
+					</a>
+				</button>
 			</div>
 		);
 	}
 }
 
-function mapStateToProps({ auth }) {
-	return { auth };
-}
-
-export default connect(mapStateToProps)(SignIn);
+export default SignIn;

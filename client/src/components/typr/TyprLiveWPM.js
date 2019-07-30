@@ -14,7 +14,7 @@ const debug = false;
 class TyprLiveWPM extends Component {
 	constructor(props) {
 		super(props);
-		const maxGraphDataSize = 100;
+		const maxGraphDataSize = 200;
 		const graphData = [];
 		var i;
 		for (i = 0; i < maxGraphDataSize; i++) {
@@ -31,39 +31,69 @@ class TyprLiveWPM extends Component {
 		this.updateWPM = this.updateWPM.bind(this);
 	}
 	render() {
-		var graphData = {
-			series: [this.state.graphData]
-		};
-		var graphOptions = {
-			high: 150,
-			low: 0,
-			showArea: false,
-			showLine: true,
-			showPoint: false,
-			axisX: {
-				showLabel: false,
-				showGrid: true
-			},
-			axisY: {
-				showLabel: true,
-				showGrid: false
-			},
-			chartPadding: 0
-		};
-
 		return (
 			<div>
-				<TyprProgressBar
-					ref={this.WPMMeter}
-					percent={this.state.wpm / 150}
-					width={this.state.windowWidth - 20}
-					height={17}
-					rounded={true}
-				/>
-				<div className="wpmText">WPM: {this.state.wpm}</div>
-				<ChartistGraph data={graphData} options={graphOptions} type={"Line"} />
+				{this.renderWPMBar()}
+				{this.renderWPMGraph()}
 			</div>
 		);
+	}
+
+	renderWPMBar() {
+		if (this.props.showBar) {
+			return (
+				<div>
+					<TyprProgressBar
+						ref={this.WPMMeter}
+						percent={this.state.wpm / 150}
+						width={
+							this.props.barWidth
+								? this.props.barWidth
+								: this.state.windowHeightWidth - 20
+						}
+						height={17}
+						rounded={true}
+					/>
+					<div className="wpmText">WPM: {this.state.wpm}</div>
+				</div>
+			);
+		}
+		return null;
+	}
+
+	renderWPMGraph() {
+		if (this.props.showGraph) {
+			var graphData = {
+				series: [this.state.graphData]
+			};
+			var graphOptions = {
+				high: 150,
+				low: 0,
+				showArea: false,
+				showLine: true,
+				showPoint: false,
+				axisX: {
+					showLabel: false,
+					showGrid: true
+				},
+				axisY: {
+					showLabel: true,
+					showGrid: false
+				},
+				chartPadding: 0
+			};
+
+			return (
+				<div>
+					<ChartistGraph
+						data={graphData}
+						options={graphOptions}
+						type={"Line"}
+					/>
+				</div>
+			);
+		}
+		return null;
 	}
 
 	componentWillMount() {

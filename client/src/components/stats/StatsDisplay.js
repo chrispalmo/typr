@@ -37,7 +37,7 @@ class NewsSources extends Component {
 						<tr>
 							<td>Words:</td>
 							<td className="center aligned">2,546</td>
-							<td className="center aligned">3,2577</td>
+							<td className="center aligned">32,577</td>
 						</tr>
 						<tr>
 							<td>Characters:</td>

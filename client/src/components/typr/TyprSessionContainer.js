@@ -7,7 +7,6 @@ import TyprLiveWPM from "./TyprLiveWPM";
 import "./TyprSessionContainer.css";
 
 // const welcomeText =
-// 	"Welcome to typr! Register for free to practice typing your favourite books, breaking news articles and unique, algorithmically-generated exercises that target your identified weaknesses. Customize your content feed using the library-builder, track progress with detailed analytics, and 10x your learning efficiency while reading the things you want to be reading.";
 
 // TODO: WpmContainer/WpmLiveBar
 // TODO: WpmContainer/WpmLiveChart
@@ -38,7 +37,7 @@ class TyprSessionContainer extends Component {
 		return (
 			<div>
 				<TyprCore key={currentPosition} text={text} source={source} />
-				<TyprLiveWPM />
+				<TyprLiveWPM showBar={true} showGraph={true} />
 			</div>
 		);
 	}
