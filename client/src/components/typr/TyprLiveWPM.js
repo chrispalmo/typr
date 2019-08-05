@@ -5,10 +5,6 @@ import TyprProgressBar from "./TyprProgressBar";
 import ChartistGraph from "react-chartist";
 // import TyprLiveChart from "./TyprLiveChart";
 
-// TODO: WpmContainer/WpmLiveChart
-// https://gionkunz.github.io/chartist-js/examples.html
-// https://stackoverflow.com/questions/29523678/chartist-js-remove-labels
-
 const debug = false;
 
 class TyprLiveWPM extends Component {
@@ -46,11 +42,7 @@ class TyprLiveWPM extends Component {
 					<TyprProgressBar
 						ref={this.WPMMeter}
 						percent={this.state.wpm / 150}
-						width={
-							this.props.barWidth
-								? this.props.barWidth
-								: this.state.windowHeightWidth - 20
-						}
+						width={this.state.windowWidth - 20}
 						height={17}
 						rounded={true}
 					/>
