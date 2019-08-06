@@ -1,5 +1,5 @@
 import React from "react";
-
+import moment from "moment";
 import { connect } from "react-redux";
 import {
     prevParagraph,
@@ -93,7 +93,14 @@ class TyprCore extends React.Component {
 
         //Key actions handled above here will not be logged
 
-        this.logKey(e, Date.now());
+        const timestamp = Number(
+            String(
+                moment()
+                    .utc()
+                    .unix()
+            ) + String(moment().milliseconds())
+        );
+        this.logKey(e, timestamp);
 
         if (e.key === "Backspace") {
             if (e.ctrlKey) {
@@ -222,6 +229,7 @@ class TyprCore extends React.Component {
      * logKey accepts timestamp to ensure timestamp is only ever computed once for any key press event
      */
     logKey(e, timestamp) {
+        console.log(timestamp);
         const key = e.key; // could reduce this to e.key if performance becomes an issue
         const char = this.state.textArray[this.state.wordPos][
             this.state.charPos
