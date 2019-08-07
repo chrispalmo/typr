@@ -93,13 +93,9 @@ class TyprCore extends React.Component {
 
         //Key actions handled above here will not be logged
 
-        const timestamp = Number(
-            String(
-                moment()
-                    .utc()
-                    .unix()
-            ) + String(moment().milliseconds())
-        );
+        const timestamp = moment()
+            .utc()
+            .valueOf();
         this.logKey(e, timestamp);
 
         if (e.key === "Backspace") {
