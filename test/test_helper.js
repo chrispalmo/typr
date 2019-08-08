@@ -16,8 +16,12 @@ beforeEach(done => {
 	//BE CAREFUL:
 	//mongoose normalizes each collection name by lower-casing the entire collection name
 	//ensure new models are
-	const { users } = mongoose.connection.collections;
-	users.drop(() => done());
+	const { users, keyevents } = mongoose.connection.collections;
+	users.drop(() => {
+		keyevents.drop(() => {
+			done();
+		});
+	});
 });
 
 //As additional models are added to the colleciton (and subsequently dropped before each test), use the below pattern:
