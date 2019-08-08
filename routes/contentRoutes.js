@@ -15,6 +15,7 @@ module.exports = app => {
 		console.log("contentRoutes: incoming request to /api/content/news/sources");
 		//console.log(req.body);
 		// console.log(req.user.id);
+		//TODO: -- GENERALISE BELOW QUERY SO DOESNT RELY ON GOOGLE AUTH USERS
 		const user = await User.findOne({ googleId: req.user.googleId });
 		const news = await newsApi.topHeadlines({
 			sources: user.newsDigest.selectedSources,
