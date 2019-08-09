@@ -3,6 +3,7 @@ import history from "../history";
 import {
 	FETCH_USER,
 	SAVE_USER,
+	CLEAR_NEWS,
 	FETCH_NEWS,
 	FETCH_NEWS_SOURCES,
 	TOGGLE_NEWS_SOURCE,
@@ -40,6 +41,10 @@ export const fetchNewsSources = queryObject => async dispatch => {
 	const res = await axios.post("/api/content/news/sources", queryObject);
 
 	dispatch({ type: FETCH_NEWS_SOURCES, payload: res.data });
+};
+
+export const clearNews = () => dispatch => {
+	dispatch({ type: CLEAR_NEWS });
 };
 
 export const fetchNews = queryObject => async dispatch => {

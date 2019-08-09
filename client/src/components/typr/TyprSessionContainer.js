@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchNews, fetchUser, firstParagraph } from "../../actions";
+import { fetchNews, clearNews, fetchUser, firstParagraph } from "../../actions";
 
 import TyprCore from "./TyprCore";
 import TyprLiveWPM from "./TyprLiveWPM";
@@ -15,6 +15,7 @@ import "./TyprSessionContainer.css";
 
 class TyprSessionContainer extends Component {
 	componentDidMount() {
+		this.props.clearNews();
 		this.props.fetchUser();
 		this.props.fetchNews();
 		this.props.firstParagraph();
@@ -49,5 +50,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ fetchNews, fetchUser, firstParagraph }
+	{ fetchNews, clearNews, fetchUser, firstParagraph }
 )(TyprSessionContainer);

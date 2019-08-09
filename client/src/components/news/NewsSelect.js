@@ -6,7 +6,8 @@ import {
 	fetchNewsSources,
 	toggleNewsSource,
 	saveUser,
-	fetchNews
+	fetchNews,
+	clearNews
 } from "../../actions";
 
 import "./NewsSelect.css";
@@ -34,6 +35,7 @@ class NewsSelect extends Component {
 					style={{ marginLeft: "0px!important" }}
 					onClick={() => {
 						this.props.saveUser(this.props.auth);
+						this.props.clearNews();
 						this.props.fetchNews();
 					}}
 				>
@@ -141,6 +143,7 @@ export default connect(
 		fetchNewsSources,
 		toggleNewsSource,
 		saveUser,
-		fetchNews
+		fetchNews,
+		clearNews
 	}
 )(NewsSelect);
