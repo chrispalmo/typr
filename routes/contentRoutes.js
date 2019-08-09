@@ -7,16 +7,12 @@ const NewsAPI = require("newsapi");
 const key = require("../config/keys").newsApiKey;
 const newsApi = new NewsAPI(key).v2;
 
-//TODO -- IMPLETEMENT ERROR HANDLING MIDDLEWARE
+//TODO -- IMPLEMENT ERROR HANDLING MIDDLEWARE
 
 module.exports = app => {
 	//TODO -- ADD requireLogin MIDDLEWARE !!! !!! !!!
 	app.get("/api/content/news", async (req, res) => {
-		console.log("contentRoutes: incoming request to /api/content/news/sources");
-		//console.log(req.body);
-		// console.log(req.user.id);
-		//TODO: -- GENERALISE BELOW QUERY SO DOESNT RELY ON GOOGLE AUTH USERS
-		const user = await User.findOne({ googleId: req.user.googleId });
+		const user = await User.findOne({ _id: req.user._id });
 		const news = await newsApi.topHeadlines({
 			sources: user.newsDigest.selectedSources,
 			pageSize: user.newsDigest.numberOfArticles
@@ -29,8 +25,6 @@ module.exports = app => {
 	});
 	//
 	app.post("/api/content/news/sources", async (req, res) => {
-		// console.log("contentRoutes: incoming request to /api/content/news/sources");
-		// console.log(req.body);
 		const sources = await newsApi.sources(req.body);
 		res.send(sources);
 	});
