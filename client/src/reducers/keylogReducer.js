@@ -1,7 +1,7 @@
 import {
-	FETCH_DAILY_KEYLOG,
-	SAVE_REMOTE_DAILY_KEYLOG,
-	ADD_LOCAL_ENTRY_DAILY_KEYLOG
+	SAVE_KEYLOG,
+	FETCH_KEYLOG,
+	ADD_LOCAL_EVENT_KEYLOG
 } from "../actions/types";
 
 export default function(state = [], action) {
@@ -11,11 +11,12 @@ export default function(state = [], action) {
 	*/
 
 	switch (action.type) {
-		case FETCH_DAILY_KEYLOG:
-		//TODO
-		case SAVE_REMOTE_DAILY_KEYLOG:
-		//TODO
-		case ADD_LOCAL_ENTRY_DAILY_KEYLOG:
+		case FETCH_KEYLOG:
+			console.log("to be implemented");
+			return state;
+		case SAVE_KEYLOG:
+			return state;
+		case ADD_LOCAL_EVENT_KEYLOG:
 			return [...state, action.payload];
 		default:
 			return state;

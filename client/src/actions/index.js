@@ -10,13 +10,13 @@ import {
 	FIRST_PARAGRAPH,
 	NEXT_PARAGRAPH,
 	PREV_PARAGRAPH,
-	FETCH_DAILY_KEYLOG,
-	SAVE_REMOTE_DAILY_KEYLOG,
-	ADD_LOCAL_ENTRY_DAILY_KEYLOG
+	FETCH_KEYLOG,
+	SAVE_KEYLOG,
+	ADD_LOCAL_EVENT_KEYLOG
 } from "./types";
 
 // !!!
-// Ensure for all paths below, client/package.json is updated to include a proxy that forwards the requests to the backend server so the app still works in development when there are actually 2x different servers running at different domains.
+// Ensure for all paths below, client/package.json is updated to include a proxy that forwards the rlquests to the backend server so the app still works in development when there are actually 2x different servers running at different domains.
 //
 //more info in OneNote under "udemy-node-react-fullstack: 05 Dev vs Prod Environments"
 // !!!
@@ -70,18 +70,19 @@ export const nextParagraph = numberOfParagraphs => dispatch => {
 };
 
 //Keylog Actions
-export const fetchDailyKeylog = () => async dispatch => {
-	const res = await axios.get("/api/daily_keylog");
-
-	dispatch({ type: FETCH_DAILY_KEYLOG, payload: res.data });
+export const addLocalEventKeylog = keyDataEntry => dispatch => {
+	dispatch({ type: ADD_LOCAL_EVENT_KEYLOG, payload: keyDataEntry });
 };
 
-export const saveRemoteDailyKeylog = dailyKeylog => async dispatch => {
-	const res = await axios.post("/api/daily_keylog", dailyKeylog);
-
-	dispatch({ type: SAVE_REMOTE_DAILY_KEYLOG, payload: res.data });
+export const saveKeylog = keylog => async dispatch => {
+	console.log("save_keylog called");
+	const res = await axios.post("/api/keylog", keylog);
+	// dispatch({ type: SAVE_KEYLOG, payload: res.data });
+	dispatch({ type: SAVE_KEYLOG });
 };
 
-export const addLocalEntryDailyKeylog = keyDataEntry => dispatch => {
-	dispatch({ type: ADD_LOCAL_ENTRY_DAILY_KEYLOG, payload: keyDataEntry });
+export const fetchKeylog = () => async dispatch => {
+	const res = await axios.GET("/api/keylog");
+
+	dispatch({ type: FETCH_KEYLOG, payload: res.data });
 };
