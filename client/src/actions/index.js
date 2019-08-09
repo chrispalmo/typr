@@ -75,7 +75,6 @@ export const addLocalEventKeylog = keyDataEntry => dispatch => {
 };
 
 export const saveKeylog = keylog => async dispatch => {
-	console.log("save_keylog called");
 	const res = await axios.post("/api/keylog", keylog);
 	// dispatch({ type: SAVE_KEYLOG, payload: res.data });
 	dispatch({ type: SAVE_KEYLOG });

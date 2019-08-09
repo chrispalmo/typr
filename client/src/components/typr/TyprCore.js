@@ -228,7 +228,6 @@ class TyprCore extends React.Component {
      * logKey accepts timestamp to ensure timestamp is only ever computed once for any key press event
      */
     logKey(e, timestamp) {
-        console.log(timestamp);
         const key = e.key; // could reduce this to e.key if performance becomes an issue
         const char = this.state.textArray[this.state.wordPos][
             this.state.charPos
