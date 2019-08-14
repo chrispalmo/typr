@@ -19,7 +19,8 @@ const debug = false;
 
 //TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
 //i.e in "Einstein’s general relativity" -- key: "Quote" should work for "’"
-//i.e "-" should register as correct for "—"
+//i.e "-" should register as correct for "—",
+//i.e standard non-directional double-quote should work for "“" and "”"
 
 class TyprCore extends React.Component {
     constructor(props) {
@@ -224,9 +225,6 @@ class TyprCore extends React.Component {
         }
     }
 
-    /**
-     * logKey accepts timestamp to ensure timestamp is only ever computed once for any key press event
-     */
     logKey(e, timestamp) {
         const key = e.key; // could reduce this to e.key if performance becomes an issue
         const char = this.state.textArray[this.state.wordPos][
@@ -284,6 +282,7 @@ class TyprCore extends React.Component {
             wpmCounter: wpmCounter
         };
         this.props.addLocalEventKeylog(keyDataEntry);
+        console.log(keyDataEntry);
     }
 
     shouldComponentUpdate() {
