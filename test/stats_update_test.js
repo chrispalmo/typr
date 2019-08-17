@@ -18,15 +18,14 @@ describe("Statistics tests", () => {
 	});
 	//
 	beforeEach(done => {
-		//creat a set of key events associated with the above test user
-		User.findOne({ googleId: "test_google_id_0" }).then(user => {
-			const new_keyEvents_to_add = testKeyEvents.test4;
-			new_keyEvents_to_add.forEach(keyEvent => (keyEvent._user = user._id));
-			//save new keyEvents
-			KeyEvent.insertMany(new_keyEvents_to_add).then(keyEvents => {
-				assert(keyEvents.length === 2313);
-				done();
-			});
+		const new_keyEvents_to_add = testKeyEvents.test4;
+		new_keyEvents_to_add.forEach(
+			keyEvent => (keyEvent._user = this.testUser0._id)
+		);
+		//save new keyEvents
+		KeyEvent.insertMany(new_keyEvents_to_add).then(keyEvents => {
+			assert(keyEvents.length === 2313);
+			done();
 		});
 	});
 	//
