@@ -40,4 +40,5 @@ const analyze = (keyEvents, auto_pause_delay) => {
 	};
 };
 
+exports.auto_pause_delay = 1000;
 exports.analyze = analyze;

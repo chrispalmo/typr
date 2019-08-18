@@ -34,7 +34,7 @@ describe("Statistics tests", () => {
 			timestamp: 1
 		});
 
-		const stats = statistics.analyze(keyEvents, 1000);
+		const stats = statistics.analyze(keyEvents, statistics.auto_pause_delay);
 
 		assert(stats.wordsTyped === 137);
 		assert(stats.charsTyped === 2172);
