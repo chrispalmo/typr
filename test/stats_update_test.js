@@ -34,10 +34,11 @@ describe("Statistics tests", () => {
 			timestamp: 1
 		});
 
-		console.log(statistics.analyze(keyEvents, 1000));
+		const stats = statistics.analyze(keyEvents, 1000);
 
-		//Assertion TBC
-		assert(false);
+		assert(stats.wordsTyped === 137);
+		assert(stats.charsTyped === 2172);
+		assert(stats.totalTime === 135412);
 	});
 	//
 });
