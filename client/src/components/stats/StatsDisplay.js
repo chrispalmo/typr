@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser, fetchNewsSources, fetchNews } from "../../actions";
+import {
+	fetchUser,
+	fetchNewsSources,
+	fetchNews,
+	fetchStatsAlltime
+} from "../../actions";
 import history from "../../history";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
 		this.props.fetchUser();
+		this.props.fetchStatsAlltime();
 	}
 
 	render() {
@@ -23,6 +29,25 @@ class NewsSources extends Component {
 	}
 
 	renderStatOverview() {
+		console.log(this.props.stats.allTime);
+		if (!this.props.stats.allTime) {
+			return (
+				<div className="ui center aligned secondary segment">
+					<p>Loading Stats...</p>
+				</div>
+			);
+		}
+
+		const wordsTyped = this.props.stats.allTime.wordsTyped;
+		const charsTyped = this.props.stats.allTime.charsTyped;
+		const wpm = Math.round(
+			1000 *
+				60 *
+				(this.props.stats.allTime.wordsTyped /
+					this.props.stats.allTime.totalTime)
+		);
+		const accuracy = Math.round(100 * this.props.stats.allTime.accuracy);
+
 		return (
 			<div>
 				<table className="ui very basic table" style={{ padding: "1em" }}>
@@ -36,23 +61,23 @@ class NewsSources extends Component {
 					<tbody>
 						<tr>
 							<td>Words:</td>
-							<td className="center aligned">2,546</td>
-							<td className="center aligned">32,577</td>
+							<td className="center aligned">TBC</td>
+							<td className="center aligned">{wordsTyped}</td>
 						</tr>
 						<tr>
 							<td>Characters:</td>
-							<td className="center aligned">345,765</td>
-							<td className="center aligned">435,7876</td>
+							<td className="center aligned">TBC</td>
+							<td className="center aligned">{charsTyped}</td>
 						</tr>
 						<tr>
 							<td>WPM:</td>
-							<td className="center aligned">85</td>
-							<td className="center aligned">92</td>
+							<td className="center aligned">TBC</td>
+							<td className="center aligned">{wpm}</td>
 						</tr>
 						<tr>
 							<td>Accuracy:</td>
-							<td className="center aligned">77%</td>
-							<td className="center aligned">85%</td>
+							<td className="center aligned">TBC</td>
+							<td className="center aligned">{accuracy}%</td>
 						</tr>
 					</tbody>
 				</table>
@@ -107,10 +132,15 @@ class NewsSources extends Component {
 }
 
 const mapStateToProps = state => {
-	return { newsSources: state.newsSources, auth: state.auth, news: state.news };
+	return {
+		newsSources: state.newsSources,
+		auth: state.auth,
+		news: state.news,
+		stats: state.stats
+	};
 };
 
 export default connect(
 	mapStateToProps,
-	{ fetchUser, fetchNewsSources, fetchNews }
+	{ fetchUser, fetchNewsSources, fetchNews, fetchStatsAlltime }
 )(NewsSources);

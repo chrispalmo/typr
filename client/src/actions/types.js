@@ -13,3 +13,5 @@ export const PREV_PARAGRAPH = "prev_paragraph";
 export const SAVE_KEYLOG = "save_keylog";
 export const FETCH_KEYLOG = "fetch_keylog";
 export const ADD_LOCAL_EVENT_KEYLOG = "add_local_event_keylog";
+
+export const FETCH_STATS_ALLTIME = "fetch_stats_alltime";

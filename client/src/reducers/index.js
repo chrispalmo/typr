@@ -4,11 +4,13 @@ import authReducer from "./authReducer";
 import newsSourcesReducer from "./newsSourcesReducer";
 import newsReducer from "./newsReducer";
 import keylogReducer from "./keylogReducer";
+import statsReducer from "./statsReducer";
 
 export default combineReducers({
 	auth: authReducer,
 	newsSources: newsSourcesReducer,
 	news: newsReducer,
 	form: reduxForm,
-	keylog: keylogReducer
+	keylog: keylogReducer,
+	stats: statsReducer
 });
