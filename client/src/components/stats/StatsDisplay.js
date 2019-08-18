@@ -30,7 +30,6 @@ class NewsSources extends Component {
 	}
 
 	renderStatOverview() {
-		console.log(this.props.stats.allTime);
 		if (!this.props.stats.allTime) {
 			return (
 				<div className="ui center aligned secondary segment">

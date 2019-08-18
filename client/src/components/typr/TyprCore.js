@@ -282,7 +282,7 @@ class TyprCore extends React.Component {
             wpmCounter: wpmCounter
         };
         this.props.addLocalEventKeylog(keyDataEntry);
-        console.log(keyDataEntry);
+        // console.log(keyDataEntry);
     }
 
     shouldComponentUpdate() {

@@ -33,7 +33,6 @@ module.exports = app => {
 	});
 	//
 	app.get("/api/keylog/stats/alltime", async (req, res) => {
-		console.log("Incoming GET request to /api/keylog/stats/alltime");
 		const keyEvents = await KeyEvent.find({ _user: req.user._id }).sort({
 			timestamp: 1
 		});
