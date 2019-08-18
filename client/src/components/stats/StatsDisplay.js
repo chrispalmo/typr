@@ -7,6 +7,7 @@ import {
 	fetchStatsAlltime
 } from "../../actions";
 import history from "../../history";
+import timeBreakdown from "../../helpers/timeBreakdown";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
@@ -47,6 +48,9 @@ class NewsSources extends Component {
 					this.props.stats.allTime.totalTime)
 		);
 		const accuracy = Math.round(100 * this.props.stats.allTime.accuracy);
+		const typingTime = timeBreakdown.timeBreakdownToString(
+			this.props.stats.allTime.totalTime
+		);
 
 		return (
 			<div>
@@ -78,6 +82,11 @@ class NewsSources extends Component {
 							<td>Accuracy:</td>
 							<td className="center aligned">TBC</td>
 							<td className="center aligned">{accuracy}%</td>
+						</tr>
+						<tr>
+							<td>Typing Time:</td>
+							<td className="center aligned">TBC</td>
+							<td className="center aligned">{typingTime}</td>
 						</tr>
 					</tbody>
 				</table>

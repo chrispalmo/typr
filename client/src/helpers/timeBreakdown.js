@@ -1,9 +1,11 @@
 const timeBreakdown = ms => {
-	ms_out = ms % 1000;
-	sec = Math.floor((ms % (1000 * 60)) / 1000);
-	min = Math.floor((ms % (1000 * 60 * 60)) / 1000 / 60);
-	hr = Math.floor((ms % (1000 * 60 * 60 * 24)) / 1000 / 60 / 60);
-	day = Math.floor((ms % (1000 * 60 * 60 * 24 * 365)) / 1000 / 60 / 60 / 24);
+	const ms_out = ms % 1000;
+	const sec = Math.floor((ms % (1000 * 60)) / 1000);
+	const min = Math.floor((ms % (1000 * 60 * 60)) / 1000 / 60);
+	const hr = Math.floor((ms % (1000 * 60 * 60 * 24)) / 1000 / 60 / 60);
+	const day = Math.floor(
+		(ms % (1000 * 60 * 60 * 24 * 365)) / 1000 / 60 / 60 / 24
+	);
 
 	return {
 		day: day,
@@ -15,27 +17,27 @@ const timeBreakdown = ms => {
 };
 
 const timeBreakdownToString = ms => {
-	time = timeBreakdown(ms);
+	const time = timeBreakdown(ms);
 	var timeString = "";
 	if (!!time.day) {
-		if (day === 1) {
-			timeString += day + " day";
+		if (time.day === 1) {
+			timeString += time.day + " day ";
 		} else {
-			timeString += day + " days";
+			timeString += time.day + " days ";
 		}
 	}
 	if (!!time.hr) {
-		if (hr === 1) {
-			timeString += ", " + hr + " hr";
+		if (time.hr === 1) {
+			timeString += time.hr + " hr ";
 		} else {
-			timeString += ", " + hr + " hrs";
+			timeString += time.hr + " hrs ";
 		}
 	}
 	if (!!time.min) {
-		if (min === 1) {
-			timeString += ", " + min + " min";
+		if (time.min === 1) {
+			timeString += time.min + " min ";
 		} else {
-			timeString += ", " + min + " mins";
+			timeString += time.min + " mins ";
 		}
 	}
 	if (!timeString.length) {
