@@ -14,7 +14,7 @@ class NewsSources extends Component {
 
 	render() {
 		return (
-			<div className="ui compact segments">
+			<div className="ui compact segments" style={{ minWidth: "40em" }}>
 				<div className="ui center aligned secondary segment">
 					<span>
 						<div className="ui icon header grey">
@@ -60,7 +60,7 @@ class NewsSources extends Component {
 
 		if (noSelectedSources) {
 			return (
-				<div className="ui centre aligned secondary segment">
+				<div className="ui center aligned secondary segment">
 					<div className="ui icon header grey">
 						<i className="newspaper outline icon" />
 						No news sources selected
