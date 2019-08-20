@@ -4,7 +4,10 @@ import StatsDisplay from "../stats/StatsDisplay";
 
 const Dashboard = () => {
 	return (
-		<div style={{ alignItems: "right" }}>
+		<div
+			className="ui one column centered grid middle aligned"
+			style={{ height: "70vh" }}
+		>
 			<div>
 				<NewsSources />
 				<div> </div>
