@@ -79,6 +79,11 @@ class TyprCore extends React.Component {
     }
 
     handleKeyPress(e) {
+        //ignore keypresses in demo mode
+        if (this.props.demoMode) {
+            return;
+        }
+
         if (!this.props.demoMode && e.key === "ArrowRight") {
             this.props.saveKeylog(this.props.keylog);
             this.props.nextParagraph(this.props.news.length);
