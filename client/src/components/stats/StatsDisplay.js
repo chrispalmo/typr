@@ -7,8 +7,11 @@ import {
 	fetchStatsAlltime
 } from "../../actions";
 import history from "../../history";
+import { Link } from "react-router-dom";
 import timeBreakdown from "../../helpers/timeBreakdown";
 
+//TODO: ONLY UPDATE WHEN REPRESH BUTTON PRESSED
+//TODO: ADD "LAST UPDATED XXXXXXXX AGO" LABEL
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
@@ -18,11 +21,21 @@ class NewsSources extends Component {
 
 	render() {
 		return (
-			<div className="ui compact segments">
+			<div className="ui compact segments" style={{ minWidth: "40em" }}>
 				<div className="ui center aligned secondary segment">
 					<span>
-						<div className="ui icon header grey">Stats Overview</div>
+						<div className="ui icon header grey">
+							Typing Statistics Overview
+						</div>
 					</span>
+					<button
+						onClick={() => {
+							this.props.fetchStatsAllTime;
+						}}
+						className="ui right floated icon button huge"
+					>
+						<i className="refresh icon" />
+					</button>
 				</div>
 				{this.renderStatOverview()}
 			</div>
@@ -33,7 +46,7 @@ class NewsSources extends Component {
 		if (!this.props.stats.allTime) {
 			return (
 				<div className="ui center aligned secondary segment">
-					<p>Loading Stats...</p>
+					<p>Loading Typing Statistics...</p>
 				</div>
 			);
 		}
@@ -57,8 +70,8 @@ class NewsSources extends Component {
 					<thead>
 						<tr>
 							<th />
-							<th>Today</th>
-							<th>All Time</th>
+							<th className="center aligned">Today</th>
+							<th className="center aligned">All Time</th>
 						</tr>
 					</thead>
 					<tbody>
