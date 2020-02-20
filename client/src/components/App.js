@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
 import Header from "./header/Header";
-import LandingPage from "./landing/LandingPage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
 import TyprSessionContainer from "./typr/TyprSessionContainer";
@@ -42,15 +43,21 @@ class App extends Component {
   renderProtectedRoutes() {
     if (this.props.auth) {
       return (
-        <div>
-          <Route exact path="/" component={Dashboard} />
+        <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/content/news-select" component={NewsSelect} />
           <Route path="/app" component={TyprSessionContainer} />
-        </div>
+          <Route component={Dashboard} />;
+        </Switch>
       );
     }
-    return <Route exact path="/" component={LandingPage} />;
+    return (
+    <Switch>
+      <Route path="/register" component={RegisterPage} />
+      <Route path="/login" component={LoginPage} />
+      <Route component={RegisterPage} />
+    </Switch>
+    )
   }
 }
 
