@@ -1,11 +1,21 @@
-import "./Header.css";
-import logo from "./typr-logo-white-200x200.png";
-import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import "./Header.css";
+import logo from "./typr-logo-white-200x200.png";
+import { logoutUser } from "../../actions"
+
+import React, { Component } from "react";
+
 class Header extends Component {
+  
+  onLogoutClick = event => {
+    event.preventDefault();
+    this.props.logoutUser()
+  };
+
   renderContent() {
+    console.log(this.props.auth);
     switch (this.props.auth) {
       case null:
         return;

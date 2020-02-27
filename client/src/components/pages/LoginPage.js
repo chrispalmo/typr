@@ -4,7 +4,7 @@ import Demo from "./Demo";
 import TyprCore from "../typr/TyprCore";
 import TyprLiveWPM from "../typr/TyprLiveWPM";
 
-const demoText = "Welcome back.";
+const demoText = "Welcome to typr.";
 
 const Landing = () => {
 	return (

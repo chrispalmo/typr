@@ -12,12 +12,6 @@ import TyprSessionContainer from "./typr/TyprSessionContainer";
 
 import history from "../history";
 
-/*
-BrowserRouter> creates its own history instance, and listens for changes on that. So we use Router and nominate our own history object that can be manipulated.
-*/
-
-//TODO: create separate folder "/components/pages" for all "page-level components"
-
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -41,6 +35,7 @@ class App extends Component {
   }
 
   renderProtectedRoutes() {
+/*
     if (this.props.auth) {
       return (
         <Switch>
@@ -58,6 +53,18 @@ class App extends Component {
       <Route component={RegisterPage} />
     </Switch>
     )
+*/
+    if (true) {
+      return (
+        <Switch>
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/content/news-select" component={NewsSelect} />
+          <Route path="/app" component={TyprSessionContainer} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/login" component={LoginPage} />
+        </Switch>
+      )
+    }
   }
 }
 

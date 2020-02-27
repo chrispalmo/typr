@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import { reducer as reduxForm } from "redux-form";
 import authReducer from "./authReducer";
-import newsSourcesReducer from "./newsSourcesReducer";
-import newsReducer from "./newsReducer";
+import errorsReducer from "./errorsReducer"
 import keylogReducer from "./keylogReducer";
+import newsReducer from "./newsReducer";
+import newsSourcesReducer from "./newsSourcesReducer";
 import statsReducer from "./statsReducer";
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
 	news: newsReducer,
 	form: reduxForm,
 	keylog: keylogReducer,
-	stats: statsReducer
+	stats: statsReducer,
+	errors: errorsReducer
 });

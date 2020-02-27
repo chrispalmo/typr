@@ -55,8 +55,10 @@ class NewsSources extends Component {
 			);
 		}
 
-		const noSelectedSources =
+		/*const noSelectedSources =
 			this.props.auth.newsDigest.selectedSources.length === 0;
+		*/
+		const noSelectedSources = true;
 
 		if (noSelectedSources) {
 			return (
@@ -96,9 +98,11 @@ class NewsSources extends Component {
 				</div>
 			);
 		}
-
+		/*
 		const noSelectedSources =
 			this.props.auth.newsDigest.selectedSources.length === 0;
+		*/
+		const noSelectedSources = true;
 
 		if (noSelectedSources) {
 			return (

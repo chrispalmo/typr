@@ -1,4 +1,10 @@
-import {Link} from "react-router-dom";
+import { connect } from "react-redux";
+import classnames from "classnames"
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types"
+
+import { registerUser } from "../../actions";
+
 import React, { Component } from "react";
 
 class RegisterForm extends Component {
@@ -6,47 +12,87 @@ class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-    	username: '',
+    	name: '',
     	email: '',
-    	password: '' 
+    	password: '',
+    	password2: '',
+    	errors: {}
   	}	
+  };
+
+	componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
   }
 
-  changeHandler = (event) => {
+  static propTypes = {
+  	registerUser: PropTypes.func.isRequired,
+	  auth: PropTypes.object.isRequired,
+	  errors: PropTypes.object.isRequired
+  }
+
+  changeHandler = event => {
   	const value = event.target.value;
   	// [event.target.name] is a dynamic key name (refers to the <input> prop "name")
   	this.setState({
   		...this.state,
   		[event.target.name]: value
   	});
-    console.log(this.state)
-
   }
 
-  submitHandler = (event) => {
+  submitHandler = event => {
     event.preventDefault();
-    alert("You are submitting " + this.state);
+	  const newUser = {
+	    name: this.state.name,
+	    email: this.state.email,
+	    password: this.state.password,
+	    password2: this.state.password2
+	  };
+	  this.props.registerUser(newUser, this.props.history);
+  }
+
+  renderErrors() {
+  	const errors = [];
+  	if (this.state.errors) {
+			Object.keys(this.state.errors).forEach(key => {
+				const error = this.state.errors[key];
+				errors.push(<li>{error}</li>);
+			});
+  	}
+  	return errors
   }
 	
 	render() {
+		const errors = this.state.errors;
+		const hasErrors = (Object.entries(errors).length != 0)
 		return (
 			<div style={{ textAlign: "center"}}>
 				<form
-					autocomplete="on"
+					noValidate
+					autoComplete="on"
 					className="ui form"
 					onSubmit={this.submitHandler}
 				>
-					<h4 class="ui dividing header">Register for Free</h4>
-				  <div className="field">
+					<h4>Register for Free</h4>
+				  <div className={classnames(
+				  	"field", 
+				  	{error: errors.name}
+				  )}>
 				    <input 
 				    	type="text" 
-				    	name="username" 
-				    	placeholder="username" 
+				    	name="name" 
+				    	placeholder="name" 
 				    	required="required"
 				    	onChange={this.changeHandler}
 				    />
 			  	</div>
-				  <div className="field">
+				  <div className={classnames(
+				  	"field", 
+				  	{error: errors.email}
+				  )}>
 				    <input
 				    	type="email"
 				    	name="email"
@@ -55,7 +101,10 @@ class RegisterForm extends Component {
 				    	onChange={this.changeHandler}
 				    />
 				  </div>
-				  <div className="field">
+				  <div className={classnames(
+				  	"field", 
+				  	{error: errors.password}
+				  )}>
 				    <input
 				    	type="password"
 				    	name="password"
@@ -64,6 +113,29 @@ class RegisterForm extends Component {
 				    	onChange={this.changeHandler}
 				    />
 				  </div>	
+				  <div className={classnames(
+				  	"field", 
+				  	{error: errors.password2}
+				  )}>
+				    <input
+				    	type="password"
+				    	name="password2"
+				    	placeholder="confirm password"
+				    	required="required"
+				    	onChange={this.changeHandler}
+				    />
+				  </div>	
+					<div 
+						style={{ textAlign: "left"}}
+						className={classnames(
+							"ui negative message",
+							{hidden: !hasErrors}
+						)}
+					>
+						<ul>
+							{this.renderErrors()}
+						</ul>
+					</div>
 				  <button
 				  	type="submit"
 				  	className="ui yellow button"
@@ -79,4 +151,14 @@ class RegisterForm extends Component {
 	}
 }
 
-export default RegisterForm;
+const mapStateToProps = state => {
+	return {
+	  auth: state.auth,
+	  errors: state.errors
+	}
+};
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(RegisterForm));

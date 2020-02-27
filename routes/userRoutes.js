@@ -13,7 +13,7 @@ module.exports = app => {
   // @route POST api/users/register
   // @desc Register user
   // @access Public
-  app.post("/register", (req, res) => {
+  app.post("/api/user/register", (req, res) => {
     console.log(req.body)
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -47,7 +47,7 @@ module.exports = app => {
   // @route POST api/users/login
   // @desc Login user and return JWT token
   // @access Public
-  app.post("/login", (req, res) => {
+  app.post("/api/user/login", (req, res) => {
     // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
     	// Check validation
