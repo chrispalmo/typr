@@ -88,9 +88,29 @@ export const logoutUser = () => dispatch => {
 };
 
 export const fetchUser = () => async dispatch => {
+/*
 	const res = await axios.get("/api/current_user");
-
 	dispatch({ type: FETCH_USER, payload: res.data });
+*/
+	// Check for existing token
+	const token = localStorage.getItem("jwtToken")
+  if (token) {
+	  try {
+	  // Set token to Auth header
+	  setAuthToken(token);
+		// Decode token to get user data
+		const decoded = jwt_decode(token);
+		// Set current user
+		dispatch(setCurrentUser(decoded));
+		history.push("/dashboard")
+		} 
+		catch(error) {
+  		console.log(error) 
+		}
+  } 
+  else {
+  	history.push("/register")
+  }
 };
 
 export const saveUser = user => async dispatch => {

@@ -35,8 +35,7 @@ class App extends Component {
   }
 
   renderProtectedRoutes() {
-/*
-    if (this.props.auth) {
+    if (this.props.auth.isAuthenticated) {
       return (
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
@@ -53,18 +52,7 @@ class App extends Component {
       <Route component={RegisterPage} />
     </Switch>
     )
-*/
-    if (true) {
-      return (
-        <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route path="/content/news-select" component={NewsSelect} />
-          <Route path="/app" component={TyprSessionContainer} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/login" component={LoginPage} />
-        </Switch>
-      )
-    }
+
   }
 }
 

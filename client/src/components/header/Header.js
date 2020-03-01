@@ -3,31 +3,68 @@ import { Link } from "react-router-dom";
 
 import "./Header.css";
 import logo from "./typr-logo-white-200x200.png";
-import { logoutUser } from "../../actions"
+import { fetchUser, logoutUser } from "../../actions"
 
 import React, { Component } from "react";
 
 class Header extends Component {
+
+  componentDidMount() {
+    this.props.fetchUser();
+  }
   
   onLogoutClick = event => {
     event.preventDefault();
     this.props.logoutUser()
-  };
+  }
 
+  renderLoginButton() {
+    return (
+      <Link to="/login">
+        <button className="ui button basic inverted"
+        onClick={this.removeFocus}>
+          Log In
+        </button>
+      </Link>
+    )
+  }
+  
+  renderRegisterButton() {
+    return (
+      <Link to="/register">
+        <button className="ui button basic inverted">
+          Register
+        </button>
+      </Link>
+    )
+  }
+
+  renderLogoutButton() {
+    return (
+      <button 
+        className="ui button basic inverted"
+        onClick={this.props.logoutUser}
+      >
+        Log Out
+      </button>
+    )
+  }
+  
   renderContent() {
-    console.log(this.props.auth);
-    switch (this.props.auth) {
+    switch (this.props.auth.isAuthenticated) {
       case null:
+        console.log("*** NO AUTH OBJECT ***")
         return;
       case false:
+        console.log("*** NOT LOGGED IN ***")
         return (
           <div>
-            <a href="/login">
-              <button className="ui button basic inverted">Log In</button>
-            </a>
+            {this.renderRegisterButton()}
+            {this.renderLoginButton()}
           </div>
         );
       default:
+        console.log("*** LOGGED IN ***")
         return (
           <div>
             <div
@@ -36,20 +73,19 @@ class Header extends Component {
                 verticalAlign: "middle"
               }}
             >
-              <span>Logged in as {this.props.auth.displayName + " "}</span>
-              <a href="/api/logout">
-                <button className="ui button basic inverted">Log Out</button>
-              </a>
+              <span>Logged in as {this.props.auth.user.name} </span>
+                {this.renderLogoutButton()}
             </div>
           </div>
         );
     }
   }
-
+  
   render() {
+
     return (
       <div className="headerBox">
-        <Link to={this.props.auth ? "/dashboard" : "/"}>
+        <Link to={"/"}>
           <img src={logo} alt="logo" className="logoTopLeft" />
         </Link>
         <div style={{ float: "right" }}>{this.renderContent()}</div>
@@ -57,48 +93,15 @@ class Header extends Component {
     );
   }
 
-  renderContent1() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return (
-          <div style={{ textAlign: "right" }}>
-            <a href="/auth/google">
-              <button className="small ui inverted basic button">
-                Sign In
-              </button>
-            </a>
-          </div>
-        );
-      default:
-        //return an array of elements
-        return (
-          <div>
-            <div>
-              <div>Logged in as {this.props.auth.displayName}</div>
-            </div>
-          </div>
-        );
-    }
-  }
-
-  render1() {
-    return (
-      <div>
-        <div className="headerBox">
-          <Link to={this.props.auth ? "/dashboard" : "/"} className="item">
-            <img src={logo} alt="Logo" className="logoTopLeft" />
-          </Link>
-          {this.renderContent()}
-        </div>
-      </div>
-    );
-  }
 }
-
 function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(
+  mapStateToProps,
+  {
+     logoutUser,
+     fetchUser
+  }
+)(Header);
