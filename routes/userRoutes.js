@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+const requireLogin = require("../middlewares/requireLogin")
 // Load input validation
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
@@ -54,7 +55,7 @@ module.exports = app => {
       if (!isValid) {
         return res.status(400).json(errors);
       }
-    const email = req.body.email;
+      const email = req.body.email;
       const password = req.body.password;
     	// Find user by email
       User.findOne({ email }).then(user => {
@@ -76,7 +77,7 @@ module.exports = app => {
               payload,
               keys.secretOrKey,
               {
-                expiresIn: 31556926 // 1 year in seconds
+                expiresIn: 60*60*8 // 8 hours in seconds
               },
               (err, token) => {
                 res.json({
@@ -92,6 +93,15 @@ module.exports = app => {
           }
         });
       });
+  });
+  // @route GET api/user/current_user
+  // @desc Check header for JWT token and return current user
+  // @access Private
+  app.get("/api/user/current_user", requireLogin, async (req, res) => {
+    const user = await User.findOne({ _id: req.decoded.id });
+    user.password = null
+    res.send(user)
+ 
   });
   //
 };

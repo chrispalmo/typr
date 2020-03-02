@@ -35,6 +35,9 @@ class App extends Component {
   }
 
   renderProtectedRoutes() {
+    if(this.props.auth.loading) {
+      return null
+    }
     if (this.props.auth.isAuthenticated) {
       return (
         <Switch>

@@ -53,10 +53,8 @@ class Header extends Component {
   renderContent() {
     switch (this.props.auth.isAuthenticated) {
       case null:
-        console.log("*** NO AUTH OBJECT ***")
         return;
       case false:
-        console.log("*** NOT LOGGED IN ***")
         return (
           <div>
             {this.renderRegisterButton()}
@@ -64,7 +62,6 @@ class Header extends Component {
           </div>
         );
       default:
-        console.log("*** LOGGED IN ***")
         return (
           <div>
             <div

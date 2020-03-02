@@ -56,11 +56,12 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
+    }
     );
 };
 
@@ -88,29 +89,30 @@ export const logoutUser = () => dispatch => {
 };
 
 export const fetchUser = () => async dispatch => {
-/*
-	const res = await axios.get("/api/current_user");
-	dispatch({ type: FETCH_USER, payload: res.data });
-*/
 	// Check for existing token
 	const token = localStorage.getItem("jwtToken")
+	console.log(token)
   if (token) {
 	  try {
-	  // Set token to Auth header
-	  setAuthToken(token);
-		// Decode token to get user data
-		const decoded = jwt_decode(token);
-		// Set current user
-		dispatch(setCurrentUser(decoded));
-		history.push("/dashboard")
-		} 
-		catch(error) {
+		  // Set token to Auth header
+		  setAuthToken(token);
+			const res = await axios.get("/api/user/current_user");
+			if (res.message) {
+				// An error will occur if the token is invalid.
+	      // If this happens, you may want to remove the invalid token.
+	      localStorage.removeItem("token")
+	      history.push("/login")
+			} else {
+				dispatch(setCurrentUser(res.data))
+			}
+		} catch (error) {
   		console.log(error) 
 		}
-  } 
+  }	 
   else {
   	history.push("/register")
   }
+
 };
 
 export const saveUser = user => async dispatch => {
