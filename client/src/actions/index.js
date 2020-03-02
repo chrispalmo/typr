@@ -109,10 +109,6 @@ export const fetchUser = () => async dispatch => {
   		console.log(error) 
 		}
   }	 
-  else {
-  	history.push("/register")
-  }
-
 };
 
 export const saveUser = user => async dispatch => {
