@@ -3,6 +3,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
+import FlashMessage from "./flashmessage/FlashMessage"
 import Header from "./header/Header";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
@@ -27,6 +28,9 @@ class App extends Component {
             }}
           >
             <Header />
+            <div style={{ margin: "10px" }}>
+              <FlashMessage />
+            </div>
             <div style={{ margin: "10px" }}>{this.renderProtectedRoutes()}</div>
           </div>
         </Router>
