@@ -1,5 +1,4 @@
 // User
-export const FETCH_USER = "FETCH_USER";
 export const SAVE_USER = "SAVE_USER";
 
 // Auth

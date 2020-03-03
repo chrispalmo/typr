@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import history from "../history";
 
 import {
-	FETCH_USER,
 	SAVE_USER,
 	GET_ERRORS,
 	USER_LOADING,
@@ -91,7 +90,6 @@ export const logoutUser = () => dispatch => {
 export const fetchUser = () => async dispatch => {
 	// Check for existing token
 	const token = localStorage.getItem("jwtToken")
-	console.log(token)
   if (token) {
 	  try {
 		  // Set token to Auth header
@@ -159,8 +157,7 @@ export const addLocalEventKeylog = keyDataEntry => dispatch => {
 };
 
 export const saveKeylog = keylog => async dispatch => {
-	const res = await axios.post("/api/keylog", keylog);
-	// dispatch({ type: SAVE_KEYLOG, payload: res.data });
+	await axios.post("/api/keylog", keylog);
 	dispatch({ type: SAVE_KEYLOG });
 };
 

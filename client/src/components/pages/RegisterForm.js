@@ -67,7 +67,7 @@ class RegisterForm extends Component {
 	
 	render() {
 		const errors = this.state.errors;
-		const hasErrors = (Object.entries(errors).length != 0)
+		const hasErrors = (Object.entries(errors).length !== 0)
 		return (
 			<div style={{ textAlign: "center"}}>
 				<form
@@ -137,7 +137,6 @@ class RegisterForm extends Component {
 						</ul>
 					</div>
 				  <button
-				  	type="submit"
 				  	className="ui yellow button"
 				  	type="submit"
 				  >

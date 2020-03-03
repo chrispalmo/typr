@@ -1,7 +1,6 @@
 import {
 	SET_CURRENT_USER,
 	USER_LOADING,
-	FETCH_USER,
 	SAVE_USER,
 	TOGGLE_NEWS_SOURCE,
 	FIRST_PARAGRAPH,
@@ -34,9 +33,6 @@ export default function(state = initialState, action) {
 				...state,
 				loading: true
 			};
-		//
-		case FETCH_USER:
-			return action.payload || false;
 		//
 		case TOGGLE_NEWS_SOURCE:
 			const selectedSources = state.newsDigest.selectedSources;

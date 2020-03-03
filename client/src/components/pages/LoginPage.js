@@ -1,6 +1,5 @@
 import React from "react";
 import LoginForm from "./LoginForm";
-import Demo from "./Demo";
 import TyprCore from "../typr/TyprCore";
 import TyprLiveWPM from "../typr/TyprLiveWPM";
 

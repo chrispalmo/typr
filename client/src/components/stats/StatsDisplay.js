@@ -7,7 +7,6 @@ import {
 	fetchStatsAlltime
 } from "../../actions";
 import history from "../../history";
-import { Link } from "react-router-dom";
 import timeBreakdown from "../../helpers/timeBreakdown";
 
 //TODO: ONLY UPDATE WHEN REPRESH BUTTON PRESSED
@@ -29,9 +28,7 @@ class NewsSources extends Component {
 						</div>
 					</span>
 					<button
-						onClick={() => {
-							this.props.fetchStatsAllTime;
-						}}
+						onClick={() => this.props.fetchStatsAllTime}
 						className="ui right floated icon button huge"
 					>
 						<i className="refresh icon" />

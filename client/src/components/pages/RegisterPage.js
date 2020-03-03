@@ -1,6 +1,5 @@
 import React from "react";
 import RegisterForm from "./RegisterForm";
-import Demo from "./Demo";
 import TyprCore from "../typr/TyprCore";
 import TyprLiveWPM from "../typr/TyprLiveWPM";
 
