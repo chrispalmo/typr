@@ -44,8 +44,6 @@ class TyprCore extends React.Component {
     }
 
     render() {
-        debug ? console.log("TyprCore.render() called") : null;
-
         return (
             <div>
                 <TyprTextDisplay
@@ -72,13 +70,18 @@ class TyprCore extends React.Component {
     }
 
     handleKeyPressWrapper(e) {
-        debug ? console.log("KEYPRESS: e.key===" + e.key) : null;
+        if (debug) {console.log("KEYPRESS: e.key===" + e.key)};
         this.handleKeyPress(e);
         this.forceUpdate();
         this.setState(prevState => ({ shouldComponentUpdate: true }));
     }
 
     handleKeyPress(e) {
+        //ignore keypresses in demo mode
+        if (this.props.demoMode) {
+            return;
+        }
+
         if (!this.props.demoMode && e.key === "ArrowRight") {
             this.props.saveKeylog(this.props.keylog);
             this.props.nextParagraph(this.props.news.length);

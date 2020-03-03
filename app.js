@@ -1,19 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cookieSession = require("cookie-session");
-const passport = require("passport");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 const keys = require("./config/keys");
 
 require("./models/User");
 
-require("./services/passport");
+// const userRoutes = require("./routes/userRoutes");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 const app = express();
 
+// Bodyparser middleware
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //HTTP --> HTTPS redirect for Heroku
@@ -26,18 +27,18 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-  })
-);
+// Passport middleware
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
-require("./routes/authRoutes")(app);
+// Passport config
+require("./services/passport")(passport);
+
+// Routes
 require("./routes/contentRoutes")(app);
 require("./routes/keylogRoutes")(app);
+require("./routes/userRoutes")(app);
+
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets

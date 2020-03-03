@@ -1,17 +1,38 @@
 import {
-	FETCH_USER,
-	TOGGLE_NEWS_SOURCE,
+	SET_CURRENT_USER,
+	USER_LOADING,
 	SAVE_USER,
+	TOGGLE_NEWS_SOURCE,
 	FIRST_PARAGRAPH,
 	PREV_PARAGRAPH,
 	NEXT_PARAGRAPH
 } from "../actions/types";
 
-export default function(state = null, action) {
+const isEmpty = require("is-empty");
+
+const initialState = {
+	isAuthenticated: false,
+	user: {},
+	loading: false
+};
+
+export default function(state = initialState, action) {
 	switch (action.type) {
 		//
-		case FETCH_USER:
-			return action.payload || false;
+		case SET_CURRENT_USER:
+			console.log("SET_CURRENT_USER")
+			console.log(action.payload)
+			return {
+				...state,
+				isAuthenticated: !isEmpty(action.payload),
+				user: action.payload
+			};
+		//
+		case USER_LOADING:
+			return {
+				...state,
+				loading: true
+			};
 		//
 		case TOGGLE_NEWS_SOURCE:
 			const selectedSources = state.newsDigest.selectedSources;

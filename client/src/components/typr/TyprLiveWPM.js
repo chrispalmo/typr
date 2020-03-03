@@ -128,7 +128,7 @@ class TyprLiveWPM extends Component {
 	}
 
 	instantaneousWPM() {
-		debug ? console.log("TyprSessionStats.instantaneousWPM() called") : null;
+		if (debug) {console.log("TyprSessionStats.instantaneousWPM() called")};
 		if (!this.props.keylog) return 0;
 		const length = this.props.keylog.length;
 		if (length < 2) {

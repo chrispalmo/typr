@@ -14,7 +14,7 @@ class NewsSources extends Component {
 
 	render() {
 		return (
-			<div className="ui compact segments">
+			<div className="ui compact segments" style={{ minWidth: "40em" }}>
 				<div className="ui center aligned secondary segment">
 					<span>
 						<div className="ui icon header grey">
@@ -55,12 +55,14 @@ class NewsSources extends Component {
 			);
 		}
 
-		const noSelectedSources =
+		/*const noSelectedSources =
 			this.props.auth.newsDigest.selectedSources.length === 0;
+		*/
+		const noSelectedSources = true;
 
 		if (noSelectedSources) {
 			return (
-				<div className="ui centre aligned secondary segment">
+				<div className="ui center aligned secondary segment">
 					<div className="ui icon header grey">
 						<i className="newspaper outline icon" />
 						No news sources selected
@@ -96,9 +98,11 @@ class NewsSources extends Component {
 				</div>
 			);
 		}
-
+		/*
 		const noSelectedSources =
 			this.props.auth.newsDigest.selectedSources.length === 0;
+		*/
+		const noSelectedSources = true;
 
 		if (noSelectedSources) {
 			return (

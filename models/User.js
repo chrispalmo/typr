@@ -1,14 +1,23 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-//TODO: make a unique Id separate from googleId
-//TODO: update of contentRoutes.js will need to follow
 const userSchema = new Schema({
-	googleId: String,
-	displayName: String,
-	givenName: String,
-	familyName: String,
-	email: String,
+	name: {
+		type: String,
+		required: true
+	},
+	email: {
+		type: String,
+		required: true
+	},
+	password: {
+		type: String,
+		required: true
+	},
+	date: {
+	  type: String,
+	  default: Date.now	
+	},
 	newsDigest: {
 		selectedSources: { type: [String], default: [] },
 		numberOfArticles: { type: Number, default: 20 },
@@ -18,5 +27,4 @@ const userSchema = new Schema({
 
 //If we weren't using Mocha for testing, below line registering the schema with mongoose would suffice:
 // mongoose.model("users", userSchema);
-const User = mongoose.model("users", userSchema);
-module.exports = User;
+module.exports = User = mongoose.model("users", userSchema);

@@ -1,8 +1,13 @@
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
+import jwt_decode from "jwt-decode";
 import history from "../history";
+
 import {
-	FETCH_USER,
 	SAVE_USER,
+	GET_ERRORS,
+	USER_LOADING,
+	SET_CURRENT_USER,
 	CLEAR_NEWS,
 	FETCH_NEWS,
 	FETCH_NEWS_SOURCES,
@@ -16,16 +21,92 @@ import {
 	FETCH_STATS_ALLTIME
 } from "./types";
 
-// !!!
-// Ensure for all paths below, client/package.json is updated to include a proxy that forwards the rlquests to the backend server so the app still works in development when there are actually 2x different servers running at different domains.
-//
-//more info in OneNote under "udemy-node-react-fullstack: 05 Dev vs Prod Environments"
-// !!!
+/*
+Ensure for all paths below, client/package.json is updated to include a proxy that forwards the requests to the backend server so the app still works in development when there are actually 2x different servers running at different domains.
+
+more info in OneNote under "udemy-node-react-fullstack: 05 Dev vs Prod Environments"
+*/
+
+export const registerUser = (userData, history) => dispatch => {
+  axios
+    .post("/api/user/register", userData)
+    .then(res => history.push("/login")) // re-direct to login on successful register
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const loginUser = userData => dispatch => {
+	// Get user token
+  axios
+    .post("/api/user/login", userData)
+    .then(res => {
+      // Save to localStorage
+			// Set token to localStorage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    }
+    );
+};
+
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
+};
+
+export const setUserLoading = () => {
+  return {
+    type: USER_LOADING
+  };
+};
+
+
+export const logoutUser = () => dispatch => {
+  // Remove token from local storage
+  localStorage.removeItem("jwtToken");
+  // Remove auth header for future requests
+  setAuthToken(false);
+  // Set current user to empty object {} which will set isAuthenticated to false
+  dispatch(setCurrentUser({}));
+};
 
 export const fetchUser = () => async dispatch => {
-	const res = await axios.get("/api/current_user");
-
-	dispatch({ type: FETCH_USER, payload: res.data });
+	// Check for existing token
+	const token = localStorage.getItem("jwtToken")
+  if (token) {
+	  try {
+		  // Set token to Auth header
+		  setAuthToken(token);
+			const res = await axios.get("/api/user/current_user");
+			if (res.message) {
+				// An error will occur if the token is invalid.
+	      // If this happens, you may want to remove the invalid token.
+	      localStorage.removeItem("token")
+	      history.push("/login")
+			} else {
+				dispatch(setCurrentUser(res.data))
+			}
+		} catch (error) {
+  		console.log(error) 
+		}
+  }	 
 };
 
 export const saveUser = user => async dispatch => {
@@ -76,8 +157,7 @@ export const addLocalEventKeylog = keyDataEntry => dispatch => {
 };
 
 export const saveKeylog = keylog => async dispatch => {
-	const res = await axios.post("/api/keylog", keylog);
-	// dispatch({ type: SAVE_KEYLOG, payload: res.data });
+	await axios.post("/api/keylog", keylog);
 	dispatch({ type: SAVE_KEYLOG });
 };
 
