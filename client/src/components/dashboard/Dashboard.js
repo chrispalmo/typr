@@ -10,9 +10,6 @@ class Dashboard extends Component {
 	  if(this.props.auth.loading) {
 	    return null
 	  }
-	  if (!this.props.auth.isAuthenticated) {
-	  	history.push("/login")
-	  }
 	  return (
 			<div
 				className="ui one column centered grid middle aligned"

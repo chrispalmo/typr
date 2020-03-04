@@ -73,6 +73,7 @@ export const loginUser = userData => dispatch => {
       	header: "Hi "+decoded.name+"!",
       	text: "You are now logged in."
       }));
+      history.push("/dashboard")
     })
     .catch(err => {
     	dispatch(setFlashMessage({
@@ -114,6 +115,7 @@ export const logoutUser = () => dispatch => {
 		header: "You have successfully logged out.",
 		text: ""
 	}));
+	  history.push("/login")
 };
 
 export const fetchUser = () => async dispatch => {
