@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { clearFlashMessage } from "../../actions"
 import RegisterForm from "./RegisterForm";
 import TyprCore from "../typr/TyprCore";
 import TyprLiveWPM from "../typr/TyprLiveWPM";
@@ -8,10 +7,6 @@ import TyprLiveWPM from "../typr/TyprLiveWPM";
 const demoText = "Welcome to typr.";
 
 class Landing extends Component {
-	componentDidMount() {
-		this.props.clearFlashMessage()
-	}
-
 	render() {
 		return (
 			<div
@@ -39,8 +34,4 @@ const mapStateToProps = state => {
 }
 
 export default connect(
-  mapStateToProps,
-  {
-    clearFlashMessage
-  }
-)(Landing);
+  mapStateToProps)(Landing);

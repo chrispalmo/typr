@@ -18,6 +18,16 @@ class App extends Component {
     this.props.fetchUser();
   }
 
+  componentDidMount() {
+      document.addEventListener("keydown", this.props.clearFlashMessage);
+      document.addEventListener("mousedown", this.props.clearFlashMessage);
+  }
+
+  componentWillUnmount() {
+      document.removeEventListener("keydown", this.props.clearFlashMessage);
+      document.removeEventListener("mousedown", this.props.clearFlashMessage);
+  }
+
   render() {
     return (
       <div>
