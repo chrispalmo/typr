@@ -1,4 +1,3 @@
-import classnames from "classnames"
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { setFlashMessage, clearFlashMessage } from "../../actions";
