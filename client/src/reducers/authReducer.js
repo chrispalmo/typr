@@ -12,7 +12,16 @@ const isEmpty = require("is-empty");
 
 const initialState = {
 	isAuthenticated: false,
-	user: {},
+	user: {
+		name: "",
+		email: "",
+		date: "",
+		newsDigest: {
+			selectedSources: [],
+			numberOfArticles: null,
+			currentPosition: 0
+		}
+	},
 	loading: false
 };
 
@@ -20,10 +29,18 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		//
 		case SET_CURRENT_USER:
+			if (!action.payload) {
+				return {...state, isAuthenticated: false}
+			}
 			return {
 				...state,
 				isAuthenticated: !isEmpty(action.payload),
-				user: action.payload
+				user: {
+					...state.user,
+					name: action.payload.name,
+					email: action.payload.email,
+					date: action.payload.date
+				}
 			};
 		//
 		case USER_LOADING:

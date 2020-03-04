@@ -9,7 +9,7 @@ const newsApi = new NewsAPI(key).v2;
 
 module.exports = app => {
 	app.get("/api/content/news", requireLogin, async (req, res) => {
-		const user = await User.findOne({ _id: req.user._id });
+		const user = await User.findOne({ _id: req.decoded.id });
 		const news = await newsApi.topHeadlines({
 			sources: user.newsDigest.selectedSources,
 			pageSize: user.newsDigest.numberOfArticles

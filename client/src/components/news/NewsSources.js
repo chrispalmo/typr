@@ -89,7 +89,7 @@ class NewsSources extends Component {
 	}
 
 	renderButton() {
-		if (!this.props.auth) {
+		if (this.props.auth.loading) {
 			return (
 				<div className="ui center aligned secondary segment">
 					<p>Loading...</p>
@@ -99,7 +99,6 @@ class NewsSources extends Component {
 
 		const noSelectedSources =
 			this.props.auth.user.newsDigest.selectedSources.length === 0;
-
 		if (noSelectedSources) {
 			return (
 				<div className="ui center aligned secondary segment">

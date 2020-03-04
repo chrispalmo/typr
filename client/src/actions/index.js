@@ -108,7 +108,7 @@ export const logoutUser = () => dispatch => {
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  dispatch(setCurrentUser(null));
 	  dispatch(setFlashMessage({
 		type: "success", // "success" or "negative"
 		header: "You have successfully logged out.",
