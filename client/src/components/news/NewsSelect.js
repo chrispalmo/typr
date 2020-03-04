@@ -79,7 +79,6 @@ class NewsSelect extends Component {
 	}
 
 	renderSourceList() {
-		console.log()
 		if (!this.props.newsSources || this.props.auth.loading) {
 			const loadingLines = [];
 			var i;

@@ -4,10 +4,7 @@ const User = require("../models/User");
 const KeyEvent = require("../models/KeyEvent");
 const statistics = require("../helpers/statistics.js");
 
-//TODO -- IMPLETEMENT ERROR HANDLING MIDDLEWARE
-
 module.exports = app => {
-	//TODO -- ADD requireLogin MIDDLEWARE !!! !!! !!!
 	app.post("/api/keylog", async (req, res) => {
 		const first_new_key_event_ts = req.body[0].timestamp;
 		const user = await User.findOne({ _id: req.user._id });
