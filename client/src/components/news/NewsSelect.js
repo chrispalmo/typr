@@ -5,7 +5,7 @@ import {
 	fetchUser,
 	fetchNewsSources,
 	toggleNewsSource,
-	saveUser,
+	saveSelectedSources,
 	fetchNews,
 	clearNews
 } from "../../actions";
@@ -34,7 +34,7 @@ class NewsSelect extends Component {
 					className="ui button"
 					style={{ marginLeft: "0px!important" }}
 					onClick={() => {
-						this.props.saveUser(this.props.auth);
+						this.props.saveSelectedSources(this.props.auth.user.newsDigest.selectedSources);
 						this.props.clearNews();
 						this.props.fetchNews();
 					}}
@@ -48,19 +48,19 @@ class NewsSelect extends Component {
 	}
 
 	renderSelectedNewsSources() {
-		if (!this.props.auth) {
+		if (!this.props.auth.user) {
 			return <div> Loading user settings...</div>;
 		}
 
 		const noSelectedSources =
-			this.props.auth.newsDigest.selectedSources.length === 0;
+			this.props.auth.user.newsDigest.selectedSources.length === 0;
 
 		if (noSelectedSources) {
-			return <div className="ui segment">Select news sources below</div>;
+			return <div className="ui block header">Select news sources below</div>;
 		}
 
 		const selectedSources = [];
-		this.props.auth.newsDigest.selectedSources.forEach(source => {
+		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
 			selectedSources.push(
 				<div
 					key={source}
@@ -72,14 +72,15 @@ class NewsSelect extends Component {
 			);
 		});
 		return (
-			<div className="ui secondary segment">
+			<div className="ui block header">
 				<div className="ui yellow labels">{selectedSources}</div>
 			</div>
 		);
 	}
 
 	renderSourceList() {
-		if (!this.props.newsSources || !this.props.auth) {
+		console.log()
+		if (!this.props.newsSources || this.props.auth.loading) {
 			const loadingLines = [];
 			var i;
 			for (i = 0; i < 20; i++) {
@@ -101,7 +102,7 @@ class NewsSelect extends Component {
 			sources.push(
 				<div
 					className={
-						this.props.auth.newsDigest.selectedSources.includes(source[1].id)
+						this.props.auth.user.newsDigest.selectedSources.includes(source[1].id)
 							? "source checked"
 							: "source"
 					}
@@ -114,7 +115,7 @@ class NewsSelect extends Component {
 							<input
 								type="checkbox"
 								checked={
-									this.props.auth.newsDigest.selectedSources.includes(
+									this.props.auth.user.newsDigest.selectedSources.includes(
 										source[1].id
 									)
 										? "checked"
@@ -142,7 +143,7 @@ export default connect(
 		fetchUser,
 		fetchNewsSources,
 		toggleNewsSource,
-		saveUser,
+		saveSelectedSources,
 		fetchNews,
 		clearNews
 	}

@@ -1,5 +1,5 @@
 // User
-export const SAVE_USER = "SAVE_USER";
+export const SAVE_SELECTED_SOURCES = "SAVE_SELECTED_SOURCES";
 
 // Auth
 export const GET_ERRORS = "GET_ERRORS";

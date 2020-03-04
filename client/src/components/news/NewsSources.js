@@ -44,7 +44,7 @@ class NewsSources extends Component {
 	}
 
 	renderSelectedNewsSources() {
-		if (!this.props.auth) {
+		if (this.props.auth.loading) {
 			return (
 				<div className="ui center aligned secondary segment">
 					<div className="line" />
@@ -55,11 +55,9 @@ class NewsSources extends Component {
 			);
 		}
 
-		/*const noSelectedSources =
-			this.props.auth.newsDigest.selectedSources.length === 0;
-		*/
-		const noSelectedSources = true;
-
+		const noSelectedSources =
+			this.props.auth.user.newsDigest.selectedSources.length === 0;
+		
 		if (noSelectedSources) {
 			return (
 				<div className="ui center aligned secondary segment">
@@ -72,7 +70,7 @@ class NewsSources extends Component {
 		}
 
 		const selectedSources = [];
-		this.props.auth.newsDigest.selectedSources.forEach(source => {
+		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
 			selectedSources.push(
 				<div
 					key={source}
@@ -98,11 +96,9 @@ class NewsSources extends Component {
 				</div>
 			);
 		}
-		/*
+
 		const noSelectedSources =
-			this.props.auth.newsDigest.selectedSources.length === 0;
-		*/
-		const noSelectedSources = true;
+			this.props.auth.user.newsDigest.selectedSources.length === 0;
 
 		if (noSelectedSources) {
 			return (

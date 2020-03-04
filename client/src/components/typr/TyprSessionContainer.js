@@ -30,7 +30,7 @@ class TyprSessionContainer extends Component {
 			return <div>Loading news headlines...</div>;
 		}
 		//TODO: implement bookmark in user model to track paragraph position instead of news[0]
-		const currentPosition = this.props.auth.newsDigest.currentPosition;
+		const currentPosition = this.props.auth.user.newsDigest.currentPosition;
 		const text = this.props.news[currentPosition].title;
 		const source = this.props.news[currentPosition].source;
 

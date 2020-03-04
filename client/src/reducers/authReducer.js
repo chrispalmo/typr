@@ -1,7 +1,7 @@
 import {
 	SET_CURRENT_USER,
 	USER_LOADING,
-	SAVE_USER,
+	SAVE_SELECTED_SOURCES,
 	TOGGLE_NEWS_SOURCE,
 	FIRST_PARAGRAPH,
 	PREV_PARAGRAPH,
@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
 			};
 		//
 		case TOGGLE_NEWS_SOURCE:
-			const selectedSources = state.newsDigest.selectedSources;
+			const selectedSources = state.user.newsDigest.selectedSources;
 			let new_selectedSources;
 			if (selectedSources.includes(action.payload)) {
 				new_selectedSources = selectedSources.filter(
@@ -44,18 +44,24 @@ export default function(state = initialState, action) {
 			}
 			return {
 				...state,
-				newsDigest: {
-					...state.newsDigest,
-					selectedSources: new_selectedSources
+				user: {
+					...state.user,
+					newsDigest: {
+						...state.user.newsDigest,
+						selectedSources: new_selectedSources
+					}
 				}
 			};
 		//
 		case FIRST_PARAGRAPH:
 			return {
 				...state,
-				newsDigest: {
-					...state.newsDigest,
-					currentPosition: 0
+				user: {
+					...state.user,		
+					newsDigest: {
+						...state.user.newsDigest,
+						currentPosition: 0
+					}
 				}
 			};
 		//
@@ -65,32 +71,47 @@ export default function(state = initialState, action) {
 			}
 			return {
 				...state,
-				newsDigest: {
-					...state.newsDigest,
-					currentPosition: state.newsDigest.currentPosition - 1
+				user: {
+					...state.user,	
+					newsDigest: {
+						...state.user.newsDigest,
+						currentPosition: state.user.newsDigest.currentPosition - 1
+					}
 				}
 			};
 		//
 		case NEXT_PARAGRAPH:
 			console.log(
 				"state.newsDigest.currentPosition === " +
-					state.newsDigest.currentPosition
+					state.user.newsDigest.currentPosition
 			);
-			if (state.newsDigest.currentPosition === action.payload - 1) {
+			if (state.user.newsDigest.currentPosition === action.payload - 1) {
 				//  TODO: Implement session summary stats overview
 				console.log("END OF CHAPTER!");
 				return state;
 			}
 			return {
 				...state,
-				newsDigest: {
-					...state.newsDigest,
-					currentPosition: state.newsDigest.currentPosition + 1
+				user: {
+					...state.user,
+					newsDigest: {
+						...state.user.newsDigest,
+						currentPosition: state.user.newsDigest.currentPosition + 1
+					}
 				}
 			};
 		//
-		case SAVE_USER:
-			return action.payload;
+		case SAVE_SELECTED_SOURCES:
+			return {
+				...state,
+				user: {
+					...state.user,
+					newsDigest: {
+						...state.user.newsDigest,
+						selectedSources: action.payload
+					}
+				}
+			};
 		//
 		default:
 			return state;

@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import history from "../history";
 
 import {
-	SAVE_USER,
+	SAVE_SELECTED_SOURCES,
 	GET_ERRORS,
 	USER_LOADING,
 	SET_CURRENT_USER,
@@ -138,12 +138,9 @@ export const fetchUser = () => async dispatch => {
   }	 
 };
 
-export const saveUser = user => async dispatch => {
-	const res = await axios.post("/api/current_user/", user);
-
-	dispatch({ type: SAVE_USER, payload: res.data });
-
-	//programmatically navigate back to root route "/" page after successfully saving the user
+export const saveSelectedSources = selected_sources => async dispatch => {
+	const res = await axios.post("/api/current_user/news_digest/selected_sources", selected_sources);
+	dispatch({ type: SAVE_SELECTED_SOURCES, payload: res.data });
 	history.push("/");
 };
 

@@ -15,7 +15,6 @@ module.exports = app => {
   // @desc Register user
   // @access Public
   app.post("/api/user/register", (req, res) => {
-    console.log(req.body)
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
       // Check validation
@@ -95,13 +94,22 @@ module.exports = app => {
       });
   });
   // @route GET api/user/current_user
-  // @desc Check header for JWT token and return current user
+  // @desc Return current user
   // @access Private
   app.get("/api/user/current_user", requireLogin, async (req, res) => {
     const user = await User.findOne({ _id: req.decoded.id });
     user.password = null
     res.send(user)
- 
+  });
+  // @route POST /api/current_user/news_digest/selected_sources
+  // @desc Update current user's selected sources and return (sorted) selected sources
+  // @access Private
+  app.post("/api/current_user/news_digest/selected_sources", requireLogin, async (req, res) => {
+     user = await User.findOne({ _id: req.decoded.id })
+     user.newsDigest.selectedSources = req.body.sort()
+     updatedUser = await user.save()
+     console.log(updatedUser)
+     res.send(updatedUser.newsDigest.selectedSources)
   });
   //
 };

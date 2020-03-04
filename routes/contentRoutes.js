@@ -7,11 +7,8 @@ const NewsAPI = require("newsapi");
 const key = require("../config/keys").newsApiKey;
 const newsApi = new NewsAPI(key).v2;
 
-//TODO -- IMPLEMENT ERROR HANDLING MIDDLEWARE
-
 module.exports = app => {
-	//TODO -- ADD requireLogin MIDDLEWARE !!! !!! !!!
-	app.get("/api/content/news", async (req, res) => {
+	app.get("/api/content/news", requireLogin, async (req, res) => {
 		const user = await User.findOne({ _id: req.user._id });
 		const news = await newsApi.topHeadlines({
 			sources: user.newsDigest.selectedSources,
@@ -24,7 +21,7 @@ module.exports = app => {
 		res.send(headlines);
 	});
 	//
-	app.post("/api/content/news/sources", async (req, res) => {
+	app.post("/api/content/news/sources", requireLogin, async (req, res) => {
 		const sources = await newsApi.sources(req.body);
 		res.send(sources);
 	});

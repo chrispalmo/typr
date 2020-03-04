@@ -116,7 +116,7 @@ class NewsSources extends Component {
 		}
 
 		const noSelectedSources =
-			this.props.auth.newsDigest.selectedSources.length === 0;
+			this.props.auth.user.newsDigest.selectedSources.length === 0;
 
 		if (noSelectedSources) {
 			return (
@@ -130,7 +130,7 @@ class NewsSources extends Component {
 		}
 
 		const selectedSources = [];
-		this.props.auth.newsDigest.selectedSources.forEach(source => {
+		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
 			selectedSources.push(
 				<div
 					key={source}
