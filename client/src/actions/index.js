@@ -35,16 +35,14 @@ export const registerUser = (userData, history) => dispatch => {
     .then(res => {
     	dispatch(setFlashMessage({
 				type: "success",
-      	header: "Registraion of "+userData.email+" successful.",
-      	text: "You may now log in using your email and password."
+      	text: "Registraion of "+userData.email+" successful. You may now log in using your email and password."
       }));
     	history.push("/login")
     })
     .catch(err => {
     	dispatch(setFlashMessage({
 				type: "negative",
-      	header: "Oops, there were some issues with the information provided.",
-      	text: ""
+      	text: "Oops, there were some issues with the information provided."
       }));
       dispatch({
         type: GET_ERRORS,
@@ -70,16 +68,14 @@ export const loginUser = userData => dispatch => {
       dispatch(setCurrentUser(decoded));
       dispatch(setFlashMessage({
 				type: "success",
-      	header: "Hi "+decoded.name+"!",
-      	text: "You are now logged in."
+      	text: "Logged in as "+decoded.name+"."
       }));
       history.push("/dashboard")
     })
     .catch(err => {
     	dispatch(setFlashMessage({
 				type: "negative",
-      	header: "Oops, there were some issues with the information provided.",
-      	text: ""
+      	text: "Oops, there were some issues with the information provided."
       }));
       dispatch({
         type: GET_ERRORS,
@@ -112,8 +108,7 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser(null));
 	  dispatch(setFlashMessage({
 		type: "success", // "success" or "negative"
-		header: "You have successfully logged out.",
-		text: ""
+		text: "You have successfully logged out."
 	}));
 	  history.push("/login")
 };

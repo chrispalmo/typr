@@ -5,7 +5,6 @@ import {
 
 const initialState = {
 	type: "", // "success" or "negative"
-  header: "",
   text: "",
 	hidden: true // omit from action arguments
 };

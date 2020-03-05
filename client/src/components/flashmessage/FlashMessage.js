@@ -1,25 +1,22 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { setFlashMessage, clearFlashMessage } from "../../actions";
+import "./FlashMessage.css";
 
 class FlashMessage extends Component {
   
   render() {
     let className
     if (!this.props.flashMessage.hidden) {
-      className="ui message "+this.props.flashMessage.type;    
+      className="ui message floatabove "+this.props.flashMessage.type;    
     } else {
-      className="ui message hidden";
+      className="ui message floatabove hidden";
     }
     return (
     <div 
       className={className}
       onClick={ this.props.clearFlashMessage }
     >
-        <i className="close icon"></i>
-        <div className="header">
-          {this.props.flashMessage.header}
-      </div>
       <p>
         {this.props.flashMessage.text}
       </p>
