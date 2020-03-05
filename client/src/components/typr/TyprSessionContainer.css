@@ -73,3 +73,8 @@
   /* NAME | TIME | ITERATION */
   animation: blinking 1s infinite;
 }
+
+.notched.loading.circle.icon {
+  margin: 10px !important;
+}
+

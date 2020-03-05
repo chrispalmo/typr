@@ -27,7 +27,17 @@ class TyprSessionContainer extends Component {
 
 	render() {
 		if (!this.props.news) {
-			return <div>Loading news headlines...</div>;
+			return (
+				<div className="ui icon message">
+				  <i className="notched circle loading icon"></i>
+				  <div className="content">
+				    <div className="header">
+				      Loading News Headlines
+				    </div>
+				    <p>Just one second...</p>
+				  </div>
+				</div>
+			)
 		}
 		//TODO: implement bookmark in user model to track paragraph position instead of news[0]
 		const currentPosition = this.props.auth.user.newsDigest.currentPosition;
