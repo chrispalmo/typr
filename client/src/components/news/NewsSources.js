@@ -62,8 +62,9 @@ class NewsSources extends Component {
 				<div className="ui center aligned secondary segment">
 					<div className="ui icon header grey">
 						<i className="newspaper outline icon" />
-						No news sources selected
+						<p>No news sources selected</p>
 					</div>
+					<p>Select some news sources to start typing</p>
 				</div>
 			);
 		}
