@@ -7,20 +7,26 @@ import "semantic-ui-css/semantic.min.css";
 
 import App from "./components/App";
 import reducers from "./reducers";
-
-// Development only axios helpers!
-// Allows us to send test API requests to the backend (a third-party app such as Postman would be too difficult because we need to include cookies with requests)
 import axios from "axios";
-window.axios = axios;
 
-//redux dev tools helper
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 }) || compose;
+let store
+if (process.env.NODE_ENV === 'production') {
+	store = createStore(
+		reducers, 
+		{},
+		applyMiddleware(reduxThunk))
+} else {
+	window.axios = axios;
+	
+	//redux dev tools helper
+	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+	  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 }) || compose;
 
-const store = createStore(
-	reducers,
-	composeEnhancers(applyMiddleware(reduxThunk))
-);
+	store = createStore(
+		reducers,
+		composeEnhancers(applyMiddleware(reduxThunk))
+	);
+}
 
 ReactDOM.render(
 	<Provider store={store}>
