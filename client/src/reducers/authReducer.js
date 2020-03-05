@@ -9,18 +9,18 @@ import {
 } from "../actions/types";
 
 const isEmpty = require("is-empty");
-
+const initialNewsDigestState = {
+	selectedSources: [],
+	numberOfArticles: null,
+	currentPosition: 0
+};
 const initialState = {
 	isAuthenticated: false,
 	user: {
 		name: "",
 		email: "",
 		date: "",
-		newsDigest: {
-			selectedSources: [],
-			numberOfArticles: null,
-			currentPosition: 0
-		}
+		newsDigest: initialNewsDigestState
 	},
 	loading: false
 };
@@ -29,9 +29,7 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		//
 		case SET_CURRENT_USER:
-			if (!action.payload) {
-				return {...state, isAuthenticated: false}
-			}
+			if (!action.payload) return {...state, isAuthenticated: false}
 			return {
 				...state,
 				isAuthenticated: !isEmpty(action.payload),

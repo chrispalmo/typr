@@ -70,7 +70,7 @@ export const loginUser = userData => dispatch => {
 				type: "success",
       	text: "Logged in as "+decoded.name+"."
       }));
-      history.push("/dashboard")
+			history.push("/dashboard")
     })
     .catch(err => {
     	dispatch(setFlashMessage({
@@ -81,8 +81,7 @@ export const loginUser = userData => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    }
-    );
+    });
 };
 
 export const setCurrentUser = decoded => {
