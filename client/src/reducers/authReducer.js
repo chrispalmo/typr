@@ -39,8 +39,9 @@ export default function(state = initialState, action) {
 					...state.user,
 					name: action.payload.name,
 					email: action.payload.email,
-					date: action.payload.date
-				}
+					date: action.payload.date,	
+					newsDigest: action.payload.newsDigest
+				}			
 			};
 		//
 		case USER_LOADING:
