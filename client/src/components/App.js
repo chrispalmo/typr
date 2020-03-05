@@ -16,16 +16,13 @@ import history from "../history";
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
-  }
-
-  componentDidMount() {
-      document.addEventListener("keydown", this.props.clearFlashMessage);
-      document.addEventListener("mousedown", this.props.clearFlashMessage);
+    document.addEventListener("keydown", this.props.clearFlashMessage);
+    document.addEventListener("mousedown", this.props.clearFlashMessage);
   }
 
   componentWillUnmount() {
-      document.removeEventListener("keydown", this.props.clearFlashMessage);
-      document.removeEventListener("mousedown", this.props.clearFlashMessage);
+    document.removeEventListener("keydown", this.props.clearFlashMessage);
+    document.removeEventListener("mousedown", this.props.clearFlashMessage);
   }
 
   render() {
