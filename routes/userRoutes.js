@@ -27,7 +27,7 @@ module.exports = app => {
         } else {
           const newUser = new User({
             name: req.body.name,
-            email: req.body.email,
+            email: req.body.email.toLowerCase(),
             password: req.body.password
           });
           // Hash password before saving in database
@@ -54,7 +54,7 @@ module.exports = app => {
       if (!isValid) {
         return res.status(400).json(errors);
       }
-      const email = req.body.email;
+      const email = req.body.email.toLowerCase();
       const password = req.body.password;
     	// Find user by email
       User.findOne({ email }).then(user => {
