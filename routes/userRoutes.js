@@ -111,7 +111,6 @@ module.exports = app => {
      user = await User.findOne({ _id: req.decoded.id })
      user.newsDigest.selectedSources = req.body.sort()
      updatedUser = await user.save()
-     console.log(updatedUser)
      res.send(updatedUser.newsDigest.selectedSources)
   });
   //
