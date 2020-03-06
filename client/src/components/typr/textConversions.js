@@ -2,9 +2,15 @@ export function textToArrayOfWords(text) {
     //input string, outputs a list of "words",
     //each of which comprises a list of characters.
     //text="makeshift test text in textToArrayOfWords function"
-    return text.split(" ").map(word => {
+    var arrayOfWords = text.split(" ").map(word => {
         return wordToArrayOfChars(word);
     });
+    console.log(arrayOfWords)
+    //remove trailing space on last word
+    console.log(arrayOfWords[arrayOfWords.length-1])
+    arrayOfWords[arrayOfWords.length-1].pop(arrayOfWords[arrayOfWords.length-1].length-1)
+    console.log(arrayOfWords)
+    return arrayOfWords
 }
 
 export function wordToArrayOfChars(word) {
