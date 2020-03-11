@@ -5,11 +5,8 @@ export function textToArrayOfWords(text) {
     var arrayOfWords = text.split(" ").map(word => {
         return wordToArrayOfChars(word);
     });
-    console.log(arrayOfWords)
     //remove trailing space on last word
-    console.log(arrayOfWords[arrayOfWords.length-1])
     arrayOfWords[arrayOfWords.length-1].pop(arrayOfWords[arrayOfWords.length-1].length-1)
-    console.log(arrayOfWords)
     return arrayOfWords
 }
 
