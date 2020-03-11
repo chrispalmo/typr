@@ -120,7 +120,7 @@ export const fetchUser = () => async dispatch => {
 		  // Set token to Auth header
 		  setAuthToken(token);
 			const res = await axios.get("/api/user/current_user");
-			if (res.message) {
+			if (res.data.message) {
 				// An error will occur if the token is invalid.
 	      // If this happens, you may want to remove the invalid token.
 	      localStorage.removeItem("token")
