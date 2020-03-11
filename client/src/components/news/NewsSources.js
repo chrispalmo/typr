@@ -83,7 +83,7 @@ class NewsSources extends Component {
 		});
 		return (
 			<div className="ui center aligned secondary segment">
-				<div className="ui yellow labels">{selectedSources}</div>
+				<div className="ui grey labels">{selectedSources}</div>
 			</div>
 		);
 	}
@@ -102,8 +102,8 @@ class NewsSources extends Component {
 		if (noSelectedSources) {
 			return (
 				<div className="ui center aligned secondary segment">
-					<button className="ui button">
-						<Link to="/content/news-select" style={{ color: "#5A5A5A" }}>
+					<button className="ui button yellow">
+						<Link to="/content/news-select" style={{ color: "white" }}>
 							Select news sources
 						</Link>
 					</button>
@@ -113,8 +113,8 @@ class NewsSources extends Component {
 
 		return (
 			<div className="ui center aligned secondary segment">
-				<button className="ui button">
-					<Link to="/app" style={{ color: "#5A5A5A" }}>
+				<button className="ui button yellow">
+					<Link to="/app" style={{ color: "white" }}>
 						<i className="keyboard icon large" /> Start Typing
 					</Link>
 				</button>

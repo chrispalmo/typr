@@ -73,7 +73,7 @@ class NewsSelect extends Component {
 		});
 		return (
 			<div className="ui block header">
-				<div className="ui yellow labels">{selectedSources}</div>
+				<div className="ui grey labels">{selectedSources}</div>
 			</div>
 		);
 	}
