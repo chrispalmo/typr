@@ -6,7 +6,6 @@ import {
 export default function(state = [], action) {
 
 	switch (action.type) {
-			return state;
 		case SAVE_KEYLOG:
 			return state;
 		case ADD_LOCAL_EVENT_KEYLOG:
