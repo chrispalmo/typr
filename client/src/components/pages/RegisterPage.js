@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import RegisterForm from "./RegisterForm";
 import TyprCore from "../typr/TyprCore";
-import TyprLiveWPM from "../typr/TyprLiveWPM";
 
 const demoText = "Welcome to typr.";
 
@@ -22,7 +21,6 @@ class Landing extends Component {
 							{<RegisterForm />}
 						</div>
 					</div>
-					<div className="column">{<TyprLiveWPM />}</div>
 				</div>
 			</div>
 		)

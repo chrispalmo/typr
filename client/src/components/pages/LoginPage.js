@@ -1,7 +1,6 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import TyprCore from "../typr/TyprCore";
-import TyprLiveWPM from "../typr/TyprLiveWPM";
 
 const demoText = "Welcome to typr.";
 
@@ -20,7 +19,6 @@ const Landing = () => {
 						{<LoginForm />}
 					</div>
 				</div>
-				<div className="column">{<TyprLiveWPM />}</div>
 			</div>
 		</div>
 	);
