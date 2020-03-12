@@ -17,7 +17,6 @@ import {
 	FIRST_PARAGRAPH,
 	NEXT_PARAGRAPH,
 	PREV_PARAGRAPH,
-	FETCH_KEYLOG,
 	SAVE_KEYLOG,
 	ADD_LOCAL_EVENT_KEYLOG,
 	FETCH_STATS_ALLTIME
@@ -191,12 +190,6 @@ export const saveKeylog = keylog => async dispatch => {
 	dispatch({ type: SAVE_KEYLOG });
 };
 
-//TODO: delete fetchKeyLog and associated actions
-export const fetchKeylog = () => async dispatch => {
-	const res = await axios.GET("/api/keylog");
-
-	dispatch({ type: FETCH_KEYLOG, payload: res.data });
-};
 
 //Statistics Actions
 export const fetchStatsAlltime = () => async dispatch => {
