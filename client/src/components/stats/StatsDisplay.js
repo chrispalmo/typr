@@ -9,8 +9,6 @@ import {
 import history from "../../history";
 import timeBreakdown from "../../helpers/timeBreakdown";
 
-//TODO: ONLY UPDATE WHEN REPRESH BUTTON PRESSED
-//TODO: ADD "LAST UPDATED XXXXXXXX AGO" LABEL
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
