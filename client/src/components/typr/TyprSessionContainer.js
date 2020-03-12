@@ -6,13 +6,6 @@ import TyprCore from "./TyprCore";
 import TyprLiveWPM from "./TyprLiveWPM";
 import "./TyprSessionContainer.css";
 
-// const welcomeText =
-
-// TODO: WpmContainer/WpmLiveBar
-// TODO: WpmContainer/WpmLiveChart
-// https://gionkunz.github.io/chartist-js/examples.html
-// https://stackoverflow.com/questions/29523678/chartist-js-remove-labels
-
 class TyprSessionContainer extends Component {
 	componentDidMount() {
 		this.props.clearNews();
@@ -43,12 +36,21 @@ class TyprSessionContainer extends Component {
 		const currentPosition = this.props.auth.user.newsDigest.currentPosition;
 		const text = this.props.news[currentPosition].title;
 		const source = this.props.news[currentPosition].source;
+		const url = this.props.news[currentPosition].url
 
 		// When a key changes, React will create a new component instance rather than update the current one
 		return (
 			<div>
 				<TyprCore key={currentPosition} text={text} source={source} />
-				<TyprLiveWPM showBar={true} showGraph={true} />
+				<div className="">
+					<TyprLiveWPM showBar={true} showGraph={true} />
+				</div>
+				<div style={{textAlign: "center"}}>
+					<br/>
+					Headline {currentPosition+1} of {this.props.news.length}
+					<br/>
+					Source: <a href={url}>{source}</a>
+				</div>
 			</div>
 		);
 	}
