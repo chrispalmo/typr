@@ -28,8 +28,9 @@ class TyprLiveWPM extends Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className="ui segment">
 				{this.renderWPMBar()}
+				<br/>
 				{this.renderWPMGraph()}
 			</div>
 		);
@@ -37,16 +38,16 @@ class TyprLiveWPM extends Component {
 
 	renderWPMBar() {
 		if (this.props.showBar) {
+			// state.windowWidth is used as key to enforce component remount on window resize. This is because the child component can only access the width of the parent component in the componentDidMount lifecycle function, and this function is only called once when a component mounts. 
 			return (
 				<div>
 					<TyprProgressBar
+						key={this.state.windowWidth}
 						ref={this.WPMMeter}
 						percent={this.state.wpm / 150}
-						width={this.state.windowWidth - 20}
 						height={17}
 						rounded={true}
 					/>
-					<div className="wpmText">WPM: {this.state.wpm}</div>
 				</div>
 			);
 		}
@@ -82,6 +83,7 @@ class TyprLiveWPM extends Component {
 						options={graphOptions}
 						type={"Line"}
 					/>
+					<div className="wpmText">WPM: {this.state.wpm}</div>
 				</div>
 			);
 		}
