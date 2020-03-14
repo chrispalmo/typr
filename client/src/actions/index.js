@@ -156,6 +156,7 @@ export const fetchNewsSources = queryObject => async dispatch => {
 
 export const clearNews = () => dispatch => {
 	dispatch({ type: CLEAR_NEWS });
+	fetchNews()
 };
 
 export const fetchNews = queryObject => async dispatch => {

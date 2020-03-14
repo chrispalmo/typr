@@ -12,7 +12,6 @@ import timeBreakdown from "../../helpers/timeBreakdown";
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
-		this.props.fetchUser();
 		this.props.fetchStatsAlltime();
 	}
 
