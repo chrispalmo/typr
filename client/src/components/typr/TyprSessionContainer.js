@@ -32,13 +32,11 @@ class TyprSessionContainer extends Component {
 				</div>
 			)
 		}
-		//TODO: implement bookmark in user model to track paragraph position instead of news[0]
 		const currentPosition = this.props.auth.user.newsDigest.currentPosition;
 		const text = this.props.news[currentPosition].title;
 		const source = this.props.news[currentPosition].source;
 		const url = this.props.news[currentPosition].url
 
-		// When a key changes, React will create a new component instance rather than update the current one
 		return (
 			<div>
 				<TyprCore key={currentPosition} text={text} source={source} />
