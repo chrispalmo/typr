@@ -10,14 +10,23 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
 import TyprSessionContainer from "./typr/TyprSessionContainer";
+import Debrief from "./news/Debrief"
 
 import history from "../history";
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
-    document.addEventListener("keydown", this.props.clearFlashMessage);
+    document.addEventListener("keydown", (e)=> {
+      this.props.clearFlashMessage
+      // prevent space bar scrolling
+      if (e.keyCode === 32 && e.target === document.body) {
+        e.preventDefault();
+      }
+    });
     document.addEventListener("mousedown", this.props.clearFlashMessage);
+
+
   }
 
   componentWillUnmount() {
@@ -55,6 +64,7 @@ class App extends Component {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/content/news-select" component={NewsSelect} />
           <Route path="/app" component={TyprSessionContainer} />
+          <Route path="/debrief" component={Debrief} />
           <Route component={Dashboard} />;
         </Switch>
       );
@@ -66,7 +76,6 @@ class App extends Component {
       <Route component={RegisterPage} />
     </Switch>
     )
-
   }
 }
 

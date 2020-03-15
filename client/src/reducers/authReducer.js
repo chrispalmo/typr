@@ -1,3 +1,5 @@
+import history from "../history";
+
 import {
 	SET_CURRENT_USER,
 	USER_LOADING,
@@ -102,8 +104,7 @@ export default function(state = initialState, action) {
 					state.user.newsDigest.currentPosition
 			);
 			if (state.user.newsDigest.currentPosition === action.payload - 1) {
-				//  TODO: Implement session summary stats overview
-				console.log("END OF CHAPTER!");
+				history.push("/debrief")
 				return state;
 			}
 			return {

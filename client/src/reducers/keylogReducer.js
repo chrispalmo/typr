@@ -1,6 +1,7 @@
 import {
 	SAVE_KEYLOG,
-	ADD_LOCAL_EVENT_KEYLOG
+	ADD_LOCAL_EVENT_KEYLOG,
+	CLEAR_KEYLOG
 } from "../actions/types";
 
 export default function(state = [], action) {
@@ -10,6 +11,8 @@ export default function(state = [], action) {
 			return state;
 		case ADD_LOCAL_EVENT_KEYLOG:
 			return [...state, action.payload];
+		case CLEAR_KEYLOG:
+			return [];
 		default:
 			return state;
 	}

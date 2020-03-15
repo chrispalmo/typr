@@ -19,6 +19,7 @@ import {
 	PREV_PARAGRAPH,
 	SAVE_KEYLOG,
 	ADD_LOCAL_EVENT_KEYLOG,
+	CLEAR_KEYLOG,
 	FETCH_STATS_ALLTIME
 } from "./types";
 
@@ -191,6 +192,9 @@ export const saveKeylog = keylog => async dispatch => {
 	dispatch({ type: SAVE_KEYLOG });
 };
 
+export const clearKeylog = keylog => dispatch => {
+	dispatch({ type: CLEAR_KEYLOG });
+};
 
 //Statistics Actions
 export const fetchStatsAlltime = () => async dispatch => {

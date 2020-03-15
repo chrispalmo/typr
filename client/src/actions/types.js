@@ -24,6 +24,7 @@ export const PREV_PARAGRAPH = "PREV_PARAGRAPH";
 // Keylog
 export const SAVE_KEYLOG = "SAVE_KEYLOG";
 export const ADD_LOCAL_EVENT_KEYLOG = "ADD_LOCAL_EVENT_KEYLOG";
+export const CLEAR_KEYLOG = "CLEAR_KEYLOG";
 
 // Statistics
 export const FETCH_STATS_ALLTIME = "FETCH_STATS_ALLTIME";
