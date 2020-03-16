@@ -15,8 +15,8 @@ const analyze = (keyEvents, auto_pause_delay) => {
 
 	var wordsTyped = 0;
 	correctEvents.forEach(event => {
-		if (lastEvent != null) {
-			if (lastEvent.word != event.word) {
+		if (lastEvent !== null) {
+			if (lastEvent.word !== event.word) {
 				wordsTyped += 1;
 			}
 		}
