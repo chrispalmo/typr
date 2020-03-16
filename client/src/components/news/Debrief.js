@@ -9,19 +9,17 @@ import { connect } from "react-redux";
 
 class Debrief extends Component {
 	render() {
-		let wordsTyped = "..." 
 		let charsTyped = "..."
 		let accuracy = "..."
 		let totalTime = "..."
 		let wpm = "..."
 		let stats
 		if (this.props.keylog) {
-			if(this.props.keylog.length!=0) {
+			if(this.props.keylog.length!==0) {
 				stats=analyze(
 					this.props.keylog,
 					auto_pause_delay
 				)
-				wordsTyped = stats.wordsTyped 
 				charsTyped = stats.charsTyped 
 				accuracy = Math.round(1000*stats.accuracy)/10 //convert to %, 1 decimal 
 				totalTime = timeBreakdownToString(stats.totalTime,2)			
