@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchNewsSources, fetchNews } from "../../actions";
-import history from "../../history";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
