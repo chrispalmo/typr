@@ -18,20 +18,13 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
     document.addEventListener("keydown", (e)=> {
-      this.props.clearFlashMessage
+      this.props.clearFlashMessage()
       // prevent space bar scrolling
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
       }
     });
     document.addEventListener("mousedown", this.props.clearFlashMessage);
-
-
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.props.clearFlashMessage);
-    document.removeEventListener("mousedown", this.props.clearFlashMessage);
   }
 
   render() {
