@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchNewsSources, fetchNews } from "../../actions";
-import history from "../../history";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
@@ -72,13 +71,16 @@ class NewsSources extends Component {
 		const selectedSources = [];
 		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
 			selectedSources.push(
-				<div
-					key={source}
-					className="ui label"
-					onClick={() => history.push("/content/news-select")}
-				>
-					{source} <i className="icon" />
-				</div>
+				<span>
+					<Link 
+						to="/content/news-select"
+						key={source}
+						className="ui label"
+						>
+						{source} <i className="icon" />
+					</Link>
+				{"   "}
+				</span>
 			);
 		});
 		return (

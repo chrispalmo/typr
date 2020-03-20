@@ -1,4 +1,17 @@
 const timeBreakdown = ms => {
+	/*
+	Converts an integer representing number of milliseconds into a dictionary representing days, hours, minutes, seconds and milliseconds. Output numbers are rounded down to the nearest whole number.
+
+	Parameters:
+		ms (integer): number of milliseconds.
+
+	Returns:
+		(dictionary): breakdown of total days, hours, minutes, seconds and milliseconds.
+
+	Example usage:
+		>>> time_breakdown = time_breakdown(123456789)
+		{'day': 1, 'hr': 10, 'min': 17, 'sec': 36, 'ms': 789} 
+	*/
 	const ms_out = ms % 1000;
 	const sec = Math.floor((ms % (1000 * 60)) / 1000);
 	const min = Math.floor((ms % (1000 * 60 * 60)) / 1000 / 60);
@@ -16,7 +29,28 @@ const timeBreakdown = ms => {
 	};
 };
 
-const timeBreakdownToString = ms => {
+const timeBreakdownToString = (ms, granularity) => {
+	/*
+	Converts an integer representing number of milliseconds into a string that uses natural language to represent the time quantity.
+
+	Parameters:
+		ms (integer): number of milliseconds.
+		granularity (integer): the level of detail required.
+
+	Returns:
+		(string): string that uses natural language to represent the time quantity.
+
+	Example usage:
+		>>> time_breakdown_string(123456789)
+		
+		'1 day 10 hours 17 minutes 36 seconds 789 milliseconds'
+
+		>>>time_breakdown_string(
+		123456789,
+		granularity=3)
+		
+		'1 day 10 hours 17 minutes'
+		*/
 	const time = timeBreakdown(ms);
 	var timeString = "";
 	if (!!time.day) {
@@ -40,82 +74,22 @@ const timeBreakdownToString = ms => {
 			timeString += time.min + " mins ";
 		}
 	}
+	if (!!time.sec) {
+		if (time.sec === 1) {
+			timeString += time.sec + " sec ";
+		} else {
+			timeString += time.sec + " secs ";
+		}
+	}
 	if (!timeString.length) {
 		timeString = "0 min";
 	}
 
-	return timeString;
+	//filter to specified granularity
+	timeString = timeString.trim().split(" ").splice(0,2*granularity)
+
+	return timeString.join(" ");
 };
 
 exports.timeBreakdown = timeBreakdown;
 exports.timeBreakdownToString = timeBreakdownToString;
-
-/*
-//Tests
-
-const testA1 = timeBreakdown(999);
-const testA2 = timeBreakdown(999 + 1);
-const testA3 = timeBreakdown(999 + 59000);
-const testA4 = timeBreakdown(999 + 59000 + 1);
-const testA5 = timeBreakdown(999 + 59000 + 59000 * 60);
-const testA6 = timeBreakdown(999 + 59000 + 59000 * 60 + 1);
-const testA7 = timeBreakdown(999 + 59000 + 59000 * 60 + 23 * 60 * 60000);
-const testA8 = timeBreakdown(999 + 59000 + 59000 * 60 + 23 * 60 * 60000 + 1);
-const testA9 = timeBreakdown(
-	999 + 59000 + 59000 * 60 + 23 * 60 * 60000 + 364 * 24 * 60 * 60000
-);
-
-const testB1 = timeBreakdownToString(999);
-const testB2 = timeBreakdownToString(999 + 1);
-const testB3 = timeBreakdownToString(999 + 59000);
-const testB4 = timeBreakdownToString(999 + 59000 + 1);
-const testB5 = timeBreakdownToString(999 + 59000 + 59000 * 60);
-const testB6 = timeBreakdownToString(999 + 59000 + 59000 * 60 + 1);
-const testB7 = timeBreakdownToString(
-	999 + 59000 + 59000 * 60 + 23 * 60 * 60000
-);
-const testB8 = timeBreakdownToString(
-	999 + 59000 + 59000 * 60 + 23 * 60 * 60000 + 1
-);
-const testB9 = timeBreakdownToString(
-	999 + 59000 + 59000 * 60 + 23 * 60 * 60000 + 364 * 24 * 60 * 60000
-);
-
-console.log("testA1 === ");
-console.log(testA1);
-console.log("testA2 === ");
-console.log(testA2);
-console.log("testA3 === ");
-console.log(testA3);
-console.log("testA4 === ");
-console.log(testA4);
-console.log("testA5 === ");
-console.log(testA5);
-console.log("testA6 === ");
-console.log(testA6);
-console.log("testA7 === ");
-console.log(testA7);
-console.log("testA8 === ");
-console.log(testA8);
-console.log("testA9 === ");
-console.log(testA9);
-
-console.log("testB1 === ");
-console.log(testB1);
-console.log("testB2 === ");
-console.log(testB2);
-console.log("testB3 === ");
-console.log(testB3);
-console.log("testB4 === ");
-console.log(testB4);
-console.log("testB5 === ");
-console.log(testB5);
-console.log("testB6 === ");
-console.log(testB6);
-console.log("testB7 === ");
-console.log(testB7);
-console.log("testB8 === ");
-console.log(testB8);
-console.log("testB9 === ");
-console.log(testB9);
-*/

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import NewsSources from "../news/NewsSources";
 import StatsDisplay from "../stats/StatsDisplay";
-import history from "../../history";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {

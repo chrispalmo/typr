@@ -5,11 +5,15 @@ const passport = require("passport");
 const keys = require("./config/keys");
 
 require("./models/User");
+require("./models/SessionStats");
 
 // const userRoutes = require("./routes/userRoutes");
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, { 
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const app = express();
 
@@ -36,7 +40,7 @@ require("./services/passport")(passport);
 
 // Routes
 require("./routes/contentRoutes")(app);
-require("./routes/keylogRoutes")(app);
+require("./routes/statsRoutes")(app);
 require("./routes/userRoutes")(app);
 
 

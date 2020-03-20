@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import {
     prevParagraph,
     nextParagraph,
-    addLocalEventKeylog,
-    saveKeylog
+    addLocalEventKeylog
 } from "../../actions";
 
 import { TyprTextDisplay } from "./TyprTextDisplay";
@@ -83,7 +82,6 @@ class TyprCore extends React.Component {
         }
 
         if (!this.props.demoMode && e.key === "ArrowRight") {
-            this.props.saveKeylog(this.props.keylog);
             this.props.nextParagraph(this.props.news.length);
             return;
         }
@@ -131,7 +129,6 @@ class TyprCore extends React.Component {
             this.state.wordPos + 1 === wordCount
         ) {
             if (!this.props.demoMode) {
-                this.props.saveKeylog(this.props.keylog);
                 this.props.nextParagraph(this.props.news.length);
             }
             return;
@@ -302,7 +299,6 @@ export default connect(
     {
         prevParagraph,
         nextParagraph,
-        addLocalEventKeylog,
-        saveKeylog
+        addLocalEventKeylog
     }
 )(TyprCore);

@@ -15,7 +15,6 @@ import "./NewsSelect.css";
 class NewsSelect extends Component {
 	componentDidMount() {
 		this.props.fetchNewsSources({ language: "en" });
-		this.props.fetchUser();
 	}
 
 	render() {
@@ -36,7 +35,6 @@ class NewsSelect extends Component {
 					onClick={() => {
 						this.props.saveSelectedSources(this.props.auth.user.newsDigest.selectedSources);
 						this.props.clearNews();
-						this.props.fetchNews();
 					}}
 				>
 					<i className="chevron circle left icon" />

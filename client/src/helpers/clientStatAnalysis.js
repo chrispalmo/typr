@@ -5,7 +5,7 @@ const analyze = (keyEvents, auto_pause_delay) => {
 	var lastEvent = null;
 	keyEvents.forEach(event => {
 		if (lastEvent != null) {
-			time_gap = event.timestamp - lastEvent.timestamp;
+			const time_gap = event.timestamp - lastEvent.timestamp;
 			if (time_gap > auto_pause_delay) {
 				accumulated_pause_time += time_gap;
 			}
@@ -15,8 +15,8 @@ const analyze = (keyEvents, auto_pause_delay) => {
 
 	var wordsTyped = 0;
 	correctEvents.forEach(event => {
-		if (lastEvent != null) {
-			if (lastEvent.word != event.word) {
+		if (lastEvent !== null) {
+			if (lastEvent.word !== event.word) {
 				wordsTyped += 1;
 			}
 		}
@@ -29,15 +29,17 @@ const analyze = (keyEvents, auto_pause_delay) => {
 
 	const total_time_minus_gaps = total_time - accumulated_pause_time;
 
-	charsTyped = correctEvents.length;
-	accuracy = correctEvents.length / keyEvents.length;
+	const charsTyped = correctEvents.length;
+	const accuracy = correctEvents.length / keyEvents.length;
 
-	return {
+	const stats = {
 		wordsTyped: wordsTyped,
 		charsTyped: charsTyped,
 		accuracy: accuracy,
-		totalTime: total_time_minus_gaps
+		totalTime: total_time_minus_gaps,
+		wpm: Math.round(charsTyped/(total_time_minus_gaps/1000/60)/5),
 	};
+	return stats
 };
 
 exports.auto_pause_delay = 1000;
