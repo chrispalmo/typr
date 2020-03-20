@@ -17,16 +17,13 @@ import {
 	FIRST_PARAGRAPH,
 	NEXT_PARAGRAPH,
 	PREV_PARAGRAPH,
-	SAVE_KEYLOG,
 	ADD_LOCAL_EVENT_KEYLOG,
 	CLEAR_KEYLOG,
-	FETCH_STATS_ALLTIME
+	FETCH_SESSION_STATS,
 } from "./types";
 
 /*
-Ensure for all paths below, client/package.json is updated to include a proxy that forwards the requests to the backend server so the app still works in development when there are actually 2x different servers running at different domains.
-
-more info in OneNote under "udemy-node-react-fullstack: 05 Dev vs Prod Environments"
+Ensure for all paths below, client/package.json is updated to include a proxy that forwards the requests to the backend server so the app still works in development when there are 2x different servers running at different domains.
 */
 
 export const registerUser = (userData, history) => dispatch => {
@@ -187,17 +184,20 @@ export const addLocalEventKeylog = keyDataEntry => dispatch => {
 	dispatch({ type: ADD_LOCAL_EVENT_KEYLOG, payload: keyDataEntry });
 };
 
-export const saveKeylog = keylog => async dispatch => {
-	await axios.post("/api/keylog", keylog);
-	dispatch({ type: SAVE_KEYLOG });
-};
-
 export const clearKeylog = keylog => dispatch => {
 	dispatch({ type: CLEAR_KEYLOG });
 };
 
 //Statistics Actions
-export const fetchStatsAlltime = () => async dispatch => {
-	const res = await axios.get("/api/keylog/stats/alltime");
-	dispatch({ type: FETCH_STATS_ALLTIME, payload: res.data });
+export const fetchSessionStats = () => async dispatch => {
+	const res = await axios.get("/api/stats/sessions");
+	dispatch({ type: FETCH_SESSION_STATS, payload: res.data });
+};
+
+export const saveSessionStats = stats => async dispatch => {
+	const res = await axios.post(
+		"/api/stats/sessions",
+		stats
+	);
+	dispatch({ type: FETCH_SESSION_STATS, payload: res.data });
 };

@@ -4,38 +4,50 @@ import * as actions from "../../actions";
 import { analyze, auto_pause_delay } from "../../helpers/clientStatAnalysis";
 import { timeBreakdownToString } from "../../helpers/timeBreakdown"
 
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Debrief extends Component {
-	render() {
-		let charsTyped = "..."
-		let accuracy = "..."
-		let totalTime = "..."
-		let wpm = "..."
-		let stats
+	constructor(props) {
+		super(props)
+		this.state = {
+			charsTyped: "",
+			accuracy: "",
+			totalTime: "",
+			wpm: ""
+		}
+	}
+
+	componentDidMount() {
 		if (this.props.keylog) {
 			if(this.props.keylog.length!==0) {
-				stats=analyze(
+				const rawStats=analyze(
 					this.props.keylog,
 					auto_pause_delay
 				)
-				charsTyped = stats.charsTyped 
-				accuracy = Math.round(1000*stats.accuracy)/10 //convert to %, 1 decimal 
-				totalTime = timeBreakdownToString(stats.totalTime,2)			
-				wpm = Math.round(charsTyped/(stats.totalTime/1000/60)/5)
+				this.props.saveSessionStats(rawStats)
+				// rather than reading state from redux store-connected props (which would require wating for server response), directly set component state
+				this.setState({
+					charsTyped: rawStats.charsTyped,
+					accuracy: Math.round(1000*rawStats.accuracy)/10,
+					totalTime: timeBreakdownToString(rawStats.totalTime,2),
+					wpm: rawStats.wpm
+				})
 			}
 		}
+	}
+	render() {
 		return (
 			<div>
 				<div className="ui centre aligned secondary segment" textalign="center">
 					<div className="ui center aligned">
 						<h2 className="ui center aligned header">Good Job!</h2>
 						<h4 className="ui center aligned header">
-							You typed <div className="ui label green">{charsTyped}</div> characters in <div className="ui label green">{totalTime}</div> at an average 
+							You typed<div className="ui label green">{this.state.charsTyped}</div> characters in<div className="ui label green">{this.state.totalTime}</div> at an average 
 							<br/>
 							<br/>
-							speed of <div className="ui label green">{wpm} WPM</div><sup>*</sup> at <div className="ui label green">{accuracy}%</div> accuracy.</h4>
+							speed of<div className="ui label green">{this.state.wpm} WPM</div><sup>*</sup> with<div className="ui label green">{this.state.accuracy}%</div> accuracy.</h4>
 						<div style={{textAlign: "center"}}>
 							<small><sup>*</sup>WPM = "Words Per Minute". <Link to="">Read more</Link> about how this is calculated.</small>
 						<br/>
@@ -102,7 +114,8 @@ class Debrief extends Component {
 						className="ui secondary segment"
 						onClick={() => {alert("You just discovered an 'in-development' feature. Check back later for full-text article support.")}}
 					>
-						<a href="#">
+						<a href={article.url} target="_blank" style={{color: "black"}}>
+							<h4 className="ui center aligned header">{article.title} [{article.source}]</h4>
 							{article.content}
 						</a>
 					</div>
@@ -114,8 +127,8 @@ class Debrief extends Component {
 
 }
 
-function mapStateToProps({ auth, news, keylog }) {
-  return { auth, news, keylog };
+function mapStateToProps({ news, keylog }) {
+  return { news, keylog };
 }
 
 export default connect(

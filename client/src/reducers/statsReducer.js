@@ -1,14 +1,9 @@
-import { FETCH_STATS_ALLTIME } from "../actions/types";
+import { FETCH_SESSION_STATS } from "../actions/types";
 
-const defaultState = {
-	allTime: null,
-	daily: null
-};
-
-export default function(state = defaultState, action) {
+export default function(state = null, action) {
 	switch (action.type) {
-		case FETCH_STATS_ALLTIME:
-			return { ...state, allTime: action.payload };
+		case FETCH_SESSION_STATS:
+			return action.payload;
 		default:
 			return state;
 	}

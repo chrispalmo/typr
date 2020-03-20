@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-	fetchUser,
-	fetchNewsSources,
-	fetchNews,
-	fetchStatsAlltime
-} from "../../actions";
-import history from "../../history";
+import { fetchSessionStats } from "../../actions";
+import getWeekdayString from "../../helpers/getWeekdayString";
+import getMonthString from "../../helpers/getMonthString";
 import timeBreakdown from "../../helpers/timeBreakdown";
 
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
-		this.props.fetchStatsAlltime();
+		this.props.fetchSessionStats();
 	}
 
 	render() {
@@ -25,137 +21,97 @@ class NewsSources extends Component {
 						</div>
 					</span>
 					<button
-						onClick={() => this.props.fetchStatsAllTime}
+						onClick={() => this.props.fetchSessionStats}
 						className="ui right floated icon button huge"
 					>
 						<i className="refresh icon" />
 					</button>
 				</div>
-				{this.renderStatOverview()}
+				<tr>
+					{this.renderStatOverview()}
+				</tr>
 			</div>
 		);
 	}
 
 	renderStatOverview() {
-		if (!this.props.stats.allTime) {
-			return (
-				<div className="ui center aligned secondary segment">
-					<p>Loading Typing Statistics...</p>
-				</div>
-			);
+		const noStats = (
+			<div className="ui center aligned secondary segment">
+				<p>You have no recorded typing sessions.</p>
+			</div>
+		);
+
+		if (!this.props.stats) {
+			return noStats
 		}
 
-		const wordsTyped = this.props.stats.allTime.wordsTyped;
-		const charsTyped = this.props.stats.allTime.charsTyped;
-		const wpm = Math.round(
-			1000 *
-				60 *
-				(this.props.stats.allTime.wordsTyped /
-					this.props.stats.allTime.totalTime)
-		);
-		const accuracy = Math.round(100 * this.props.stats.allTime.accuracy);
-		const typingTime = timeBreakdown.timeBreakdownToString(
-			this.props.stats.allTime.totalTime
-		);
+		if (this.props.stats.length == 0) {
+			return noStats
+		}
 
 		return (
 			<div>
-				<table className="ui very basic table" style={{ padding: "1em" }}>
+				<table className="ui very basic table unstackable" style={{ padding: "1em" }}>
 					<thead>
 						<tr>
-							<th />
-							<th className="center aligned">Today</th>
-							<th className="center aligned">All Time</th>
+							<th className="center aligned">Date</th>
+							<th className="center aligned">Characters</th>
+							<th className="center aligned">WPM</th>
+							<th className="center aligned">Accuracy</th>
+							<th className="center aligned">Total Time</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Words:</td>
-							<td className="center aligned">TBC</td>
-							<td className="center aligned">{wordsTyped}</td>
-						</tr>
-						<tr>
-							<td>Characters:</td>
-							<td className="center aligned">TBC</td>
-							<td className="center aligned">{charsTyped}</td>
-						</tr>
-						<tr>
-							<td>WPM:</td>
-							<td className="center aligned">TBC</td>
-							<td className="center aligned">{wpm}</td>
-						</tr>
-						<tr>
-							<td>Accuracy:</td>
-							<td className="center aligned">TBC</td>
-							<td className="center aligned">{accuracy}%</td>
-						</tr>
-						<tr>
-							<td>Typing Time:</td>
-							<td className="center aligned">TBC</td>
-							<td className="center aligned">{typingTime}</td>
-						</tr>
+						{this.renderStatTableRows()}
 					</tbody>
 				</table>
 			</div>
 		);
 	}
 
-	renderSelectedNewsSources() {
-		if (!this.props.auth) {
-			return (
-				<div className="ui center aligned secondary segment">
-					<div className="line" />
-					<div className="line" />
-					<div className="line" />
-					<div className="line" />
-				</div>
-			);
-		}
-
-		const noSelectedSources =
-			this.props.auth.user.newsDigest.selectedSources.length === 0;
-
-		if (noSelectedSources) {
-			return (
-				<div className="ui centre aligned secondary segment">
-					<div className="ui icon header grey">
-						<i className="newspaper outline icon" />
-						No news sources selected
-					</div>
-				</div>
-			);
-		}
-
-		const selectedSources = [];
-		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
-			selectedSources.push(
-				<div
-					key={source}
-					className="ui label"
-					onClick={() => history.push("/content/news-select")}
-				>
-					{source} <i className="icon" />
-				</div>
-			);
-		});
-		return (
-			<div className="ui center aligned secondary segment">
-				<div className="ui yellow labels">{selectedSources}</div>
-			</div>
-		);
+	renderStatTableRows() {
+		let rows = []	
+		const statsReverseChronOrder = this.props.stats.sort((a,b)=>(parseInt(a.timestamp) < parseInt(b.timestamp) ? 1 : -1))	
+		statsReverseChronOrder.forEach(session => {
+			const date = new Date(parseInt(session.timestamp))
+			const dayName = getWeekdayString(date).slice(0,3)
+			const dayNum = date.toISOString().slice(0,10).split("-")[2]
+			const monthName = getMonthString(date).slice(0,3)
+			const year = date.toISOString().slice(0,10).split("-")[0]
+			const time = [
+				("00"+date.getHours()).slice(-2),
+				":",
+				("00"+date.getMinutes()).slice(-2)
+			].join("")
+			const formattedStats = {
+				date: [dayName,dayNum,monthName,year,time].join(" "),
+				charsTyped: session.charsTyped,
+				wpm: session.wpm,
+				accuracy: (Math.round(100 * session.accuracy)).toString()+"%",
+				typingTime: timeBreakdown.timeBreakdownToString(
+					session.totalTime,2)
+			}
+			const row = []
+			Object.values(formattedStats).forEach(stat => {
+			  row.push(
+			  	<td className="center aligned">{stat}</td>
+				)
+			})
+			rows.push(
+				<tr>{row}</tr>
+			)
+		}) 
+		return rows
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		newsSources: state.newsSources,
-		auth: state.auth,
-		news: state.news,
 		stats: state.stats
 	};
 };
 
 export default connect(
 	mapStateToProps,
-	{ fetchUser, fetchNewsSources, fetchNews, fetchStatsAlltime }
+	{ fetchSessionStats }
 )(NewsSources);

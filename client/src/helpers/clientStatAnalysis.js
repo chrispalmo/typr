@@ -36,7 +36,8 @@ const analyze = (keyEvents, auto_pause_delay) => {
 		wordsTyped: wordsTyped,
 		charsTyped: charsTyped,
 		accuracy: accuracy,
-		totalTime: total_time_minus_gaps
+		totalTime: total_time_minus_gaps,
+		wpm: Math.round(charsTyped/(total_time_minus_gaps/1000/60)/5),
 	};
 	return stats
 };
