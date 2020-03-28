@@ -8,6 +8,9 @@ const key = require("../config/keys").newsApiKey;
 const newsApi = new NewsAPI(key).v2;
 
 module.exports = app => {
+	// @route GET /api/content/news
+	// @desc Return list of news articles based on user's selected new sources
+	// @access Private
 	app.get("/api/content/news", requireLogin, async (req, res) => {
 		const user = await User.findOne({ _id: req.decoded.id });
 		const news = await newsApi.topHeadlines({
@@ -19,7 +22,9 @@ module.exports = app => {
 		});
 		res.send(headlines);
 	});
-	//
+	// @route POST /api/content/news/sources
+	// @desc Return list of news outlets based on selection criteria i.e { language: "en" }
+	// @access Private
 	app.post("/api/content/news/sources", requireLogin, async (req, res) => {
 		const sources = await newsApi.sources(req.body);
 		res.send(sources);
