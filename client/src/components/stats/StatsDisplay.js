@@ -45,7 +45,7 @@ class NewsSources extends Component {
 			return noStats
 		}
 
-		if (this.props.stats.length == 0) {
+		if (this.props.stats.length === 0) {
 			return noStats
 		}
 
@@ -71,9 +71,11 @@ class NewsSources extends Component {
 
 	renderStatTableRows() {
 		let rows = []	
-		const statsReverseChronOrder = this.props.stats.sort((a,b)=>(parseInt(a.timestamp) < parseInt(b.timestamp) ? 1 : -1))	
+		const statsReverseChronOrder = this.props.stats.sort((a,b)=>(
+			parseInt(a.timestamp,10) < parseInt(b.timestamp,10) ? 1 : -1)
+		)
 		statsReverseChronOrder.forEach(session => {
-			const date = new Date(parseInt(session.timestamp))
+			const date = new Date(parseInt(session.timestamp,10))
 			const dayName = getWeekdayString(date).slice(0,3)
 			const dayNum = date.toISOString().slice(0,10).split("-")[2]
 			const monthName = getMonthString(date).slice(0,3)
