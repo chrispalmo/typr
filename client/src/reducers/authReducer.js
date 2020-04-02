@@ -100,10 +100,6 @@ export default function (state = initialState, action) {
 			};
 		//
 		case NEXT_PARAGRAPH:
-			console.log(
-				"state.newsDigest.currentPosition === " +
-					state.user.newsDigest.currentPosition
-			);
 			if (state.user.newsDigest.currentPosition === action.payload - 1) {
 				history.push("/debrief");
 				return state;

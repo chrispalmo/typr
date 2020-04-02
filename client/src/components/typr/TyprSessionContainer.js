@@ -14,10 +14,6 @@ class TyprSessionContainer extends Component {
 		this.props.firstParagraph();
 	}
 
-	componentWillUnmount() {
-		console.log("UNMOUNTING TyprSessionContainer...");
-	}
-
 	render() {
 		if (!this.props.news) {
 			return (

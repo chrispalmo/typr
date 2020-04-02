@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import {
     prevParagraph,
     nextParagraph,
-    addLocalEventKeylog
+    addLocalEventKeylog,
 } from "../../actions";
 
 import { TyprTextDisplay } from "./TyprTextDisplay";
@@ -13,13 +13,6 @@ import { textToArrayOfWords } from "./textConversions";
 import charKeys from "./charKeys";
 
 const debug = false;
-
-//TODO: add warning when Caps Lock is engaged
-
-//TODO: create list of subsitute keys for non-standard characters that appear in english language, i.e european accent characters, non-standard commas etc.
-//i.e in "Einstein’s general relativity" -- key: "Quote" should work for "’"
-//i.e "-" should register as correct for "—",
-//i.e standard non-directional double-quote should work for "“" and "”"
 
 class TyprCore extends React.Component {
     constructor(props) {
@@ -35,7 +28,7 @@ class TyprCore extends React.Component {
             charKeys: charKeys,
             shouldComponentUpdate: true,
             windowWidth: 500,
-            windowHeight: 0
+            windowHeight: 0,
         };
 
         //Arrow functions cannot be passed to event listeners, otherwise a new function is created which cannot be referred to when the event listener needs to be removed. Using a normal function instead of an arrow function afects the context within the funciton (.this) is affected, so the context needs to be bound to the class instance:
@@ -53,10 +46,6 @@ class TyprCore extends React.Component {
             </div>
         );
     }
-    // <TyprSessionStats
-    //     ref={this.statsDisplay}
-    //     keyPressLog={this.props.keylog}
-    // />
 
     componentDidMount() {
         //Initialize cursor
@@ -69,10 +58,12 @@ class TyprCore extends React.Component {
     }
 
     handleKeyPressWrapper(e) {
-        if (debug) {console.log("KEYPRESS: e.key===" + e.key)};
+        if (debug) {
+            console.log("KEYPRESS: e.key===" + e.key);
+        }
         this.handleKeyPress(e);
         this.forceUpdate();
-        this.setState(prevState => ({ shouldComponentUpdate: true }));
+        this.setState((prevState) => ({ shouldComponentUpdate: true }));
     }
 
     handleKeyPress(e) {
@@ -97,9 +88,7 @@ class TyprCore extends React.Component {
 
         //Key actions handled above here will not be logged
 
-        const timestamp = moment()
-            .utc()
-            .valueOf();
+        const timestamp = moment().utc().valueOf();
         this.logKey(e, timestamp);
 
         if (e.key === "Backspace") {
@@ -146,8 +135,8 @@ class TyprCore extends React.Component {
 
     correct(e) {
         this.renderCurrentChar("charCorrect");
-        this.setState(prevState => ({
-            mistakeBefore: false
+        this.setState((prevState) => ({
+            mistakeBefore: false,
         }));
         this.moveRight(e);
         this.renderCurrentChar("charActive");
@@ -160,8 +149,8 @@ class TyprCore extends React.Component {
             this.moveRight(e);
             this.renderCurrentChar("charActive");
         }
-        this.setState(prevState => ({
-            mistakeBefore: true
+        this.setState((prevState) => ({
+            mistakeBefore: true,
         }));
         //TODO: add red flash -> fade out simlar to being shot in a FPS game. Or maybe animate the incorrect character.
         return;
@@ -171,36 +160,36 @@ class TyprCore extends React.Component {
         let currentWordLength = this.state.textArray[this.state.wordPos].length;
         if (this.state.charPos + 1 < currentWordLength) {
             let newCharPos = this.state.charPos + 1;
-            this.setState(prevState => ({
-                charPos: newCharPos
+            this.setState((prevState) => ({
+                charPos: newCharPos,
             }));
         } else {
             let newWordPos = this.state.wordPos + 1;
-            this.setState(prevState => ({
+            this.setState((prevState) => ({
                 charPos: 0,
-                wordPos: newWordPos
+                wordPos: newWordPos,
             }));
         }
         return;
     }
 
     moveLeft(e) {
-        this.setState(prevState => ({
-            mistakeBefore: false
+        this.setState((prevState) => ({
+            mistakeBefore: false,
         }));
         this.renderCurrentChar("char");
         if (this.state.charPos === 0 && this.state.wordPos > 0) {
             let newWordPos = this.state.wordPos - 1;
             let newWordLength = this.state.textArray[this.state.wordPos - 1]
                 .length;
-            this.setState(prevState => ({
+            this.setState((prevState) => ({
                 wordPos: newWordPos,
-                charPos: newWordLength - 1
+                charPos: newWordLength - 1,
             }));
         } else if (this.state.charPos !== 0) {
             let newCharPos = this.state.charPos - 1;
-            this.setState(prevState => ({
-                charPos: newCharPos
+            this.setState((prevState) => ({
+                charPos: newCharPos,
             }));
         }
         this.renderCurrentChar("charActive");
@@ -210,8 +199,8 @@ class TyprCore extends React.Component {
     renderCurrentChar(className) {
         let newText = [...this.state.textArray];
         newText[this.state.wordPos][this.state.charPos].className = className;
-        this.setState(prevState => ({
-            text: newText
+        this.setState((prevState) => ({
+            text: newText,
         }));
     }
 
@@ -231,7 +220,7 @@ class TyprCore extends React.Component {
             this.state.charPos
         ].char;
         const word = this.state.textArray[this.state.wordPos]
-            .map(i => {
+            .map((i) => {
                 return i.char;
             })
             .join("")
@@ -274,15 +263,14 @@ class TyprCore extends React.Component {
                 key: e.key,
                 keyCode: e.keyCode,
                 shiftKey: e.shiftKey,
-                which: e.which
+                which: e.which,
             },
             char: char,
             word: word,
             className: className,
-            wpmCounter: wpmCounter
+            wpmCounter: wpmCounter,
         };
         this.props.addLocalEventKeylog(keyDataEntry);
-        // console.log(keyDataEntry);
     }
 
     shouldComponentUpdate() {
@@ -290,15 +278,12 @@ class TyprCore extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return { news: state.news, auth: state.auth, keylog: state.keylog };
 };
 
-export default connect(
-    mapStateToProps,
-    {
-        prevParagraph,
-        nextParagraph,
-        addLocalEventKeylog
-    }
-)(TyprCore);
+export default connect(mapStateToProps, {
+    prevParagraph,
+    nextParagraph,
+    addLocalEventKeylog,
+})(TyprCore);
