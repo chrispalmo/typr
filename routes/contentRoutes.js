@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
 const _ = require("lodash");
+const createError = require('http-errors')
+const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 const User = require("../models/User");
 
@@ -20,14 +21,14 @@ module.exports = app => {
 		const headlines = _.toPairs(news)[2][1].map(article => {
 			return { source: article.source.name, title: article.title, url: article.url, content: article.content };
 		});
-		res.send(headlines);
+		res.status(200).send(headlines);
 	});
 	// @route POST /api/content/news/sources
 	// @desc Return list of news outlets based on selection criteria i.e { language: "en" }
 	// @access Private
 	app.post("/api/content/news/sources", requireLogin, async (req, res) => {
 		const sources = await newsApi.sources(req.body);
-		res.send(sources);
+		res.status(200).send(sources);
 	});
 	//
 };

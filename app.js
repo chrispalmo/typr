@@ -33,7 +33,6 @@ if (process.env.NODE_ENV === "production") {
 
 // Passport middleware
 app.use(passport.initialize());
-// app.use(passport.session());
 
 // Passport config
 require("./services/passport")(passport);
@@ -43,6 +42,16 @@ require("./routes/contentRoutes")(app);
 require("./routes/statsRoutes")(app);
 require("./routes/userRoutes")(app);
 
+// Error handler
+app.use((error, req, res, next) => {
+  // If the error did not originate from `createError`, it will not have a status property
+  res.status(error.status || 500)
+  res.json({
+    status: error.status,
+    message: error.message,
+    stack: error.stack
+  })
+})
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets
