@@ -30,7 +30,10 @@ class NewsSources extends Component {
 						</div>
 					</span>
 					<button className="ui right floated icon button huge">
-						<Link to="/content/news-select" style={{ color: "#5A5A5A" }}>
+						<Link
+							to="/content/news-select"
+							style={{ color: "#5A5A5A" }}
+						>
 							<i className="cog icon" />
 						</Link>
 					</button>
@@ -55,7 +58,7 @@ class NewsSources extends Component {
 
 		const noSelectedSources =
 			this.props.auth.user.newsDigest.selectedSources.length === 0;
-		
+
 		if (noSelectedSources) {
 			return (
 				<div className="ui center aligned secondary segment">
@@ -69,17 +72,17 @@ class NewsSources extends Component {
 		}
 
 		const selectedSources = [];
-		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
+		this.props.auth.user.newsDigest.selectedSources.forEach((source) => {
 			selectedSources.push(
 				<span>
-					<Link 
+					<Link
 						to="/content/news-select"
 						key={source}
 						className="ui label"
-						>
+					>
 						{source} <i className="icon" />
 					</Link>
-				{"   "}
+					{"   "}
 				</span>
 			);
 		});
@@ -105,7 +108,10 @@ class NewsSources extends Component {
 			return (
 				<div className="ui center aligned secondary segment">
 					<button className="ui button yellow">
-						<Link to="/content/news-select" style={{ color: "white" }}>
+						<Link
+							to="/content/news-select"
+							style={{ color: "white" }}
+						>
 							Select news sources
 						</Link>
 					</button>
@@ -125,11 +131,14 @@ class NewsSources extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return { newsSources: state.newsSources, auth: state.auth, news: state.news };
+const mapStateToProps = (state) => {
+	return {
+		newsSources: state.newsSources,
+		auth: state.auth,
+		news: state.news,
+	};
 };
 
-export default connect(
-	mapStateToProps,
-	{ fetchNewsSources, fetchNews }
-)(NewsSources);
+export default connect(mapStateToProps, { fetchNewsSources, fetchNews })(
+	NewsSources
+);

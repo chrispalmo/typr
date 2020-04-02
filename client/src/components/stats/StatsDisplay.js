@@ -27,9 +27,7 @@ class NewsSources extends Component {
 						<i className="refresh icon" />
 					</button>
 				</div>
-				<tr>
-					{this.renderStatOverview()}
-				</tr>
+				<tr>{this.renderStatOverview()}</tr>
 			</div>
 		);
 	}
@@ -42,16 +40,19 @@ class NewsSources extends Component {
 		);
 
 		if (!this.props.stats) {
-			return noStats
+			return noStats;
 		}
 
 		if (this.props.stats.length === 0) {
-			return noStats
+			return noStats;
 		}
 
 		return (
 			<div>
-				<table className="ui very basic table unstackable" style={{ padding: "1em" }}>
+				<table
+					className="ui very basic table unstackable"
+					style={{ padding: "1em" }}
+				>
 					<thead>
 						<tr>
 							<th className="center aligned">Date</th>
@@ -61,59 +62,52 @@ class NewsSources extends Component {
 							<th className="center aligned">Total Time</th>
 						</tr>
 					</thead>
-					<tbody>
-						{this.renderStatTableRows()}
-					</tbody>
+					<tbody>{this.renderStatTableRows()}</tbody>
 				</table>
 			</div>
 		);
 	}
 
 	renderStatTableRows() {
-		let rows = []	
-		const statsReverseChronOrder = this.props.stats.sort((a,b)=>(
-			parseInt(a.timestamp,10) < parseInt(b.timestamp,10) ? 1 : -1)
-		)
-		statsReverseChronOrder.forEach(session => {
-			const date = new Date(parseInt(session.timestamp,10))
-			const dayName = getWeekdayString(date).slice(0,3)
-			const dayNum = date.toISOString().slice(0,10).split("-")[2]
-			const monthName = getMonthString(date).slice(0,3)
-			const year = date.toISOString().slice(0,10).split("-")[0]
+		let rows = [];
+		const statsReverseChronOrder = this.props.stats.sort((a, b) =>
+			parseInt(a.timestamp, 10) < parseInt(b.timestamp, 10) ? 1 : -1
+		);
+		statsReverseChronOrder.forEach((session) => {
+			const date = new Date(parseInt(session.timestamp, 10));
+			const dayName = getWeekdayString(date).slice(0, 3);
+			const dayNum = date.toISOString().slice(0, 10).split("-")[2];
+			const monthName = getMonthString(date).slice(0, 3);
+			const year = date.toISOString().slice(0, 10).split("-")[0];
 			const time = [
-				("00"+date.getHours()).slice(-2),
+				("00" + date.getHours()).slice(-2),
 				":",
-				("00"+date.getMinutes()).slice(-2)
-			].join("")
+				("00" + date.getMinutes()).slice(-2),
+			].join("");
 			const formattedStats = {
-				date: [dayName,dayNum,monthName,year,time].join(" "),
+				date: [dayName, dayNum, monthName, year, time].join(" "),
 				charsTyped: session.charsTyped,
 				wpm: session.wpm,
-				accuracy: (Math.round(100 * session.accuracy)).toString()+"%",
+				accuracy: Math.round(100 * session.accuracy).toString() + "%",
 				typingTime: timeBreakdown.timeBreakdownToString(
-					session.totalTime,2)
-			}
-			const row = []
-			Object.values(formattedStats).forEach(stat => {
-			  row.push(
-			  	<td className="center aligned">{stat}</td>
-				)
-			})
-			rows.push(
-				<tr>{row}</tr>
-			)
-		}) 
-		return rows
+					session.totalTime,
+					2
+				),
+			};
+			const row = [];
+			Object.values(formattedStats).forEach((stat) => {
+				row.push(<td className="center aligned">{stat}</td>);
+			});
+			rows.push(<tr>{row}</tr>);
+		});
+		return rows;
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
-		stats: state.stats
+		stats: state.stats,
 	};
 };
 
-export default connect(
-	mapStateToProps,
-	{ fetchSessionStats }
-)(NewsSources);
+export default connect(mapStateToProps, { fetchSessionStats })(NewsSources);

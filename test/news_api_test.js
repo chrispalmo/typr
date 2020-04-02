@@ -5,12 +5,12 @@ const app = require("../app");
 
 describe("NewsApi tests", () => {
 	//
-	it("post to /api/content/news returns an array of strings", done => {
+	it("post to /api/content/news returns an array of strings", (done) => {
 		request(app)
 			.post("/api/content/news")
 			.send({
 				sources: "hacker-news,national-geographic,time",
-				pageSize: 30
+				pageSize: 30,
 			})
 			.end(async (err, res) => {
 				// res.body.articles.map(i => console.log(i));
@@ -21,7 +21,7 @@ describe("NewsApi tests", () => {
 			});
 	});
 	//
-	it("post to /api/content/news/sources returns an object containing all english news sources", done => {
+	it("post to /api/content/news/sources returns an object containing all english news sources", (done) => {
 		request(app)
 			.post("/api/content/news/sources")
 			.send({ language: "en" })

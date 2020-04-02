@@ -8,15 +8,15 @@ require("./models/User");
 require("./models/SessionStats");
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { 
+mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 const app = express();
 
 // Bodyparser middleware
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //HTTP --> HTTPS redirect for Heroku
@@ -43,13 +43,13 @@ require("./routes/userRoutes")(app);
 // Error handler
 app.use((error, req, res, next) => {
   // If the error did not originate from `createError`, it will not have a status property
-  res.status(error.status || 500)
+  res.status(error.status || 500);
   res.json({
     status: error.status,
     message: error.message,
-    stack: error.stack
-  })
-})
+    stack: error.stack,
+  });
+});
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets

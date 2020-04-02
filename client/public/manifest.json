@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "typr",
+  "name": "A modern typing tutor with customizable and engaging content.",
   "icons": [
     {
       "src": "favicon.ico",

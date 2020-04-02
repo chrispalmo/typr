@@ -3,16 +3,18 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.set("useFindAndModify", false);
 
-before(done => {
-	mongoose.connect("mongodb://localhost/typr_test", { useNewUrlParser: true });
+before((done) => {
+	mongoose.connect("mongodb://localhost/typr_test", {
+		useNewUrlParser: true,
+	});
 	mongoose.connection
 		.once("open", () => done())
-		.on("error", error => {
+		.on("error", (error) => {
 			console.warn("Warning, error");
 		});
 });
 
-beforeEach(done => {
+beforeEach((done) => {
 	//BE CAREFUL:
 	//mongoose normalizes each collection name by lower-casing the entire collection name
 	//ensure new models are

@@ -1,4 +1,4 @@
-const timeBreakdown = ms => {
+const timeBreakdown = (ms) => {
 	/*
 	Converts an integer representing number of milliseconds into a dictionary representing days, hours, minutes, seconds and milliseconds. Output numbers are rounded down to the nearest whole number.
 
@@ -25,7 +25,7 @@ const timeBreakdown = ms => {
 		hr: hr,
 		min: min,
 		sec: sec,
-		ms: ms_out
+		ms: ms_out,
 	};
 };
 
@@ -86,7 +86,10 @@ const timeBreakdownToString = (ms, granularity) => {
 	}
 
 	//filter to specified granularity
-	timeString = timeString.trim().split(" ").splice(0,2*granularity)
+	timeString = timeString
+		.trim()
+		.split(" ")
+		.splice(0, 2 * granularity);
 
 	return timeString.join(" ");
 };

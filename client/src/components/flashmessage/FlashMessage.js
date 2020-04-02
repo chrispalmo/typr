@@ -4,38 +4,28 @@ import { setFlashMessage, clearFlashMessage } from "../../actions";
 import "./FlashMessage.css";
 
 class FlashMessage extends Component {
-  
   render() {
-    let className
+    let className;
     if (!this.props.flashMessage.hidden) {
-      className="ui message floatabove "+this.props.flashMessage.type;    
+      className = "ui message floatabove " + this.props.flashMessage.type;
     } else {
-      className="ui message floatabove hidden";
+      className = "ui message floatabove hidden";
     }
     return (
-    <div 
-      className={className}
-      onClick={ this.props.clearFlashMessage }
-    >
-      <p>
-        {this.props.flashMessage.text}
-      </p>
-    </div>
+      <div className={className} onClick={this.props.clearFlashMessage}>
+        <p>{this.props.flashMessage.text}</p>
+      </div>
     );
   }
-
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    flashMessage: state.flashMessage
+    flashMessage: state.flashMessage,
   };
-}
+};
 
-export default connect(
-  mapStateToProps,
-  {
-    setFlashMessage,
-    clearFlashMessage
-  }
-)(FlashMessage);
+export default connect(mapStateToProps, {
+  setFlashMessage,
+  clearFlashMessage,
+})(FlashMessage);

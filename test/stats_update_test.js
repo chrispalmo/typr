@@ -6,35 +6,40 @@ const statistics = require("../helpers/statistics.js");
 
 describe("Statistics tests", () => {
 	//
-	beforeEach(done => {
+	beforeEach((done) => {
 		//create and save a test user
 		this.testUser0 = new User({
-			googleId: "test_google_id_0"
+			googleId: "test_google_id_0",
 		});
-		this.testUser0.save().then(res => {
+		this.testUser0.save().then((res) => {
 			assert(!this.testUser0.isNew);
 			done();
 		});
 	});
 	//
-	beforeEach(done => {
+	beforeEach((done) => {
 		const new_keyEvents_to_add = testKeyEvents.test4;
 		new_keyEvents_to_add.forEach(
-			keyEvent => (keyEvent._user = this.testUser0._id)
+			(keyEvent) => (keyEvent._user = this.testUser0._id)
 		);
 		//save new keyEvents
-		KeyEvent.insertMany(new_keyEvents_to_add).then(keyEvents => {
+		KeyEvent.insertMany(new_keyEvents_to_add).then((keyEvents) => {
 			assert(keyEvents.length === 2313);
 			done();
 		});
 	});
 	//
 	it("produces typing statistics based on keyEvent user's keyPress data", async () => {
-		const keyEvents = await KeyEvent.find({ _user: this.testUser0._id }).sort({
-			timestamp: 1
+		const keyEvents = await KeyEvent.find({
+			_user: this.testUser0._id,
+		}).sort({
+			timestamp: 1,
 		});
 
-		const stats = statistics.analyze(keyEvents, statistics.auto_pause_delay);
+		const stats = statistics.analyze(
+			keyEvents,
+			statistics.auto_pause_delay
+		);
 
 		assert(stats.wordsTyped === 137);
 		assert(stats.charsTyped === 2172);

@@ -1,9 +1,9 @@
 const analyze = (keyEvents, auto_pause_delay) => {
-	const correctEvents = keyEvents.filter(event => event.wpmCounter === 1);
+	const correctEvents = keyEvents.filter((event) => event.wpmCounter === 1);
 
 	var accumulated_pause_time = 0;
 	var lastEvent = null;
-	keyEvents.forEach(event => {
+	keyEvents.forEach((event) => {
 		if (lastEvent != null) {
 			const time_gap = event.timestamp - lastEvent.timestamp;
 			if (time_gap > auto_pause_delay) {
@@ -14,7 +14,7 @@ const analyze = (keyEvents, auto_pause_delay) => {
 	});
 
 	var wordsTyped = 0;
-	correctEvents.forEach(event => {
+	correctEvents.forEach((event) => {
 		if (lastEvent !== null) {
 			if (lastEvent.word !== event.word) {
 				wordsTyped += 1;
@@ -37,9 +37,9 @@ const analyze = (keyEvents, auto_pause_delay) => {
 		charsTyped: charsTyped,
 		accuracy: accuracy,
 		totalTime: total_time_minus_gaps,
-		wpm: Math.round(charsTyped/(total_time_minus_gaps/1000/60)/5),
+		wpm: Math.round(charsTyped / (total_time_minus_gaps / 1000 / 60) / 5),
 	};
-	return stats
+	return stats;
 };
 
 exports.auto_pause_delay = 1000;

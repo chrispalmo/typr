@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const createError = require('http-errors')
+const createError = require("http-errors");
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 const User = require("../models/User");
@@ -8,7 +8,7 @@ const NewsAPI = require("newsapi");
 const key = require("../config/keys").newsApiKey;
 const newsApi = new NewsAPI(key).v2;
 
-module.exports = app => {
+module.exports = (app) => {
 	// @route GET /api/content/news
 	// @desc Return list of news articles based on user's selected new sources
 	// @access Private
@@ -16,10 +16,15 @@ module.exports = app => {
 		const user = await User.findOne({ _id: req.decoded.id });
 		const news = await newsApi.topHeadlines({
 			sources: user.newsDigest.selectedSources,
-			pageSize: user.newsDigest.numberOfArticles
+			pageSize: user.newsDigest.numberOfArticles,
 		});
-		const headlines = _.toPairs(news)[2][1].map(article => {
-			return { source: article.source.name, title: article.title, url: article.url, content: article.content };
+		const headlines = _.toPairs(news)[2][1].map((article) => {
+			return {
+				source: article.source.name,
+				title: article.title,
+				url: article.url,
+				content: article.content,
+			};
 		});
 		res.status(200).send(headlines);
 	});

@@ -1,7 +1,8 @@
 html {
 }
 
-body,html {
+body,
+html {
 }
 
 .headerBox {
@@ -17,33 +18,32 @@ body,html {
 }
 
 .sessionContainer {
-    font-size: 25px;
-    padding-right: 25px;
-    padding-left: 25px;
-  
+  font-size: 25px;
+  padding-right: 25px;
+  padding-left: 25px;
 }
 
 .wpmText {
 }
 
 .statsDisplay {
-    font-size: 10px;
-    background-color: rgb(200, 200, 200);
-    width:auto;
-    float: bottom;
+  font-size: 10px;
+  background-color: rgb(200, 200, 200);
+  width: auto;
+  float: bottom;
 }
 
 .textDisplay {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-    line-height: 50px;
-    white-space: pre; /*prevents spaces from disappearing*/
-    
-    padding-top: 30px;
-    padding-bottom: 30px;
+  line-height: 50px;
+  white-space: pre; /*prevents spaces from disappearing*/
+
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .word {
@@ -54,7 +54,7 @@ body,html {
 .charActive {
   background-color: LightSeaGreen;
   border-radius: 3px 3px 3px 3px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .charCorrect {
@@ -64,7 +64,7 @@ body,html {
 .charIncorrect {
   background-color: FireBrick;
   border-radius: 3px 3px 3px 3px;
-  color: #FFFFFF
+  color: #ffffff;
 }
 
 .endFill {
