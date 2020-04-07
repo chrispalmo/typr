@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 import {
     prevParagraph,
@@ -8,7 +7,6 @@ import {
 } from "../../actions";
 
 import { TyprTextDisplay } from "./TyprTextDisplay";
-// import { TyprSessionStats } from "./TyprSessionStats";
 import { textToArrayOfWords } from "./textConversions";
 import charKeys from "./charKeys";
 
@@ -88,7 +86,7 @@ class TyprCore extends React.Component {
 
         //Key actions handled above here will not be logged
 
-        const timestamp = moment().utc().valueOf();
+        const timestamp = new Date().getTime();
         this.logKey(e, timestamp);
 
         if (e.key === "Backspace") {
@@ -152,7 +150,6 @@ class TyprCore extends React.Component {
         this.setState((prevState) => ({
             mistakeBefore: true,
         }));
-        //TODO: add red flash -> fade out simlar to being shot in a FPS game. Or maybe animate the incorrect character.
         return;
     }
 
