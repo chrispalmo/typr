@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import TyprProgressBar from "./TyprProgressBar";
 import ChartistGraph from "react-chartist";
-// import TyprLiveChart from "./TyprLiveChart";
 
 const debug = false;
 

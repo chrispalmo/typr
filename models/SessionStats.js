@@ -5,28 +5,28 @@ const SessionStatsSchema = new Schema({
 	_user: { type: Schema.Types.ObjectId, ref: "User" },
 	timestamp: {
 		type: String,
-		default: Date.now
+		default: Date.now,
 	},
 	wordsTyped: {
 		type: Number,
-		required: true
+		required: true,
 	},
 	charsTyped: {
 		type: Number,
-		required: true
+		required: true,
 	},
 	accuracy: {
 		type: Number,
-		required: true
-	},	
+		required: true,
+	},
 	wpm: {
 		type: Number,
-		required: true
+		required: true,
 	},
 	totalTime: {
 		type: Number,
-		required: true
-	}
+		required: true,
+	},
 });
 
 //If we weren't using Mocha for testing, below line registering the schema with mongoose would suffice:

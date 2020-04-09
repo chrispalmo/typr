@@ -1,9 +1,7 @@
 import React from "react";
-//import {textToArrayOfWords} from '../actions/text_conversions';
 
 export class TyprTextDisplay extends React.Component {
 	constructor(props) {
-		//console.log("TyprTextDisplay constructor() called");
 		super(props);
 		this.textArray = this.props.textArray;
 	}

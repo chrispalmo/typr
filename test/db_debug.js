@@ -8,14 +8,13 @@ require("./models/SessionStats");
 // const userRoutes = require("./routes/userRoutes");
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+mongoose.connect(keys.mongoURI, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 });
 
 const SessionStats = require("./models/SessionStats");
 
-SessionStats.find().then(res => {
-	console.log(res)
-})
-
+SessionStats.find().then((res) => {
+	console.log(res);
+});

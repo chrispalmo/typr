@@ -23,13 +23,12 @@ class Landing extends Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
-};
-
-const mapStateToProps = state => {
-  return { state }
 }
 
-export default connect(
-  mapStateToProps)(Landing);
+const mapStateToProps = (state) => {
+	return { state };
+};
+
+export default connect(mapStateToProps)(Landing);

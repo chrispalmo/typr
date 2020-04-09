@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import _ from "lodash";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
 	fetchUser,
@@ -7,7 +7,7 @@ import {
 	toggleNewsSource,
 	saveSelectedSources,
 	fetchNews,
-	clearNews
+	clearNews,
 } from "../../actions";
 
 import "./NewsSelect.css";
@@ -21,7 +21,9 @@ class NewsSelect extends Component {
 		return (
 			<div className="newsSelect">
 				{this.renderHeader()}
-				<div className="newsSelectListWrapper">{this.renderSourceList()}</div>
+				<div className="newsSelectListWrapper">
+					{this.renderSourceList()}
+				</div>
 			</div>
 		);
 	}
@@ -33,7 +35,9 @@ class NewsSelect extends Component {
 					className="ui button"
 					style={{ marginLeft: "0px!important" }}
 					onClick={() => {
-						this.props.saveSelectedSources(this.props.auth.user.newsDigest.selectedSources);
+						this.props.saveSelectedSources(
+							this.props.auth.user.newsDigest.selectedSources
+						);
 						this.props.clearNews();
 					}}
 				>
@@ -54,11 +58,13 @@ class NewsSelect extends Component {
 			this.props.auth.user.newsDigest.selectedSources.length === 0;
 
 		if (noSelectedSources) {
-			return <div className="ui block header">Select news sources below</div>;
+			return (
+				<div className="ui block header">Select news sources below</div>
+			);
 		}
 
 		const selectedSources = [];
-		this.props.auth.user.newsDigest.selectedSources.forEach(source => {
+		this.props.auth.user.newsDigest.selectedSources.forEach((source) => {
 			selectedSources.push(
 				<div
 					key={source}
@@ -95,11 +101,13 @@ class NewsSelect extends Component {
 			return <div>{loadingLines}</div>;
 		}
 		const sources = [];
-		_.toPairs(this.props.newsSources.sources).forEach(source => {
+		_.toPairs(this.props.newsSources.sources).forEach((source) => {
 			sources.push(
 				<div
 					className={
-						this.props.auth.user.newsDigest.selectedSources.includes(source[1].id)
+						this.props.auth.user.newsDigest.selectedSources.includes(
+							source[1].id
+						)
 							? "source checked"
 							: "source"
 					}
@@ -130,18 +138,15 @@ class NewsSelect extends Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return { newsSources: state.newsSources, auth: state.auth };
 };
 
-export default connect(
-	mapStateToProps,
-	{
-		fetchUser,
-		fetchNewsSources,
-		toggleNewsSource,
-		saveSelectedSources,
-		fetchNews,
-		clearNews
-	}
-)(NewsSelect);
+export default connect(mapStateToProps, {
+	fetchUser,
+	fetchNewsSources,
+	toggleNewsSource,
+	saveSelectedSources,
+	fetchNews,
+	clearNews,
+})(NewsSelect);

@@ -3,53 +3,49 @@ import { Link } from "react-router-dom";
 
 import "./Header.css";
 import logo from "./typr-logo-white-200x200.png";
-import { fetchUser, logoutUser } from "../../actions"
+import { fetchUser, logoutUser } from "../../actions";
 
 import React, { Component } from "react";
 
 class Header extends Component {
-
   componentDidMount() {
     this.props.fetchUser();
   }
-  
-  onLogoutClick = event => {
+
+  onLogoutClick = (event) => {
     event.preventDefault();
-    this.props.logoutUser()
-  }
+    this.props.logoutUser();
+  };
 
   renderLoginButton() {
     return (
       <Link to="/login">
-        <button className="ui button basic inverted"
-        onClick={this.removeFocus}>
+        <button className="ui button basic inverted" onClick={this.removeFocus}>
           Log In
         </button>
       </Link>
-    )
+    );
   }
-  
+
   renderRegisterButton() {
     return (
       <Link to="/register">
-        <button className="ui button basic inverted">
-          Register
-        </button>
+        <button className="ui button basic inverted">Register</button>
       </Link>
-    )
+    );
   }
 
   renderLogoutButton() {
     return (
-      <button 
+      <button
         className="ui button basic inverted"
         onClick={this.props.logoutUser}
       >
         Log Out
       </button>
-    )
+    );
   }
-  
+
   renderContent() {
     switch (this.props.auth.isAuthenticated) {
       case null:
@@ -67,19 +63,18 @@ class Header extends Component {
             <div
               style={{
                 display: "table-cell",
-                verticalAlign: "middle"
+                verticalAlign: "middle",
               }}
             >
               <span>Logged in as {this.props.auth.user.name} </span>
-                {this.renderLogoutButton()}
+              {this.renderLogoutButton()}
             </div>
           </div>
         );
     }
   }
-  
-  render() {
 
+  render() {
     return (
       <div className="headerBox">
         <Link to={"/"}>
@@ -89,16 +84,12 @@ class Header extends Component {
       </div>
     );
   }
-
 }
 function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(
-  mapStateToProps,
-  {
-     logoutUser,
-     fetchUser
-  }
-)(Header);
+export default connect(mapStateToProps, {
+  logoutUser,
+  fetchUser,
+})(Header);

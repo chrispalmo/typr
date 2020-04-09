@@ -16,5 +16,5 @@ module.exports = {
 	cookieKey: process.env.COOKIE_KEY,
 	secretOrKey: process.env.JWT_SECRET,
 	newsApiKey: process.env.NEWS_API_KEY,
-	redirectDomain: process.env.REDIRECT_DOMAIN
+	redirectDomain: process.env.REDIRECT_DOMAIN,
 };

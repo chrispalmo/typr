@@ -3,22 +3,22 @@ import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
-import FlashMessage from "./flashmessage/FlashMessage"
+import FlashMessage from "./flashmessage/FlashMessage";
 import Header from "./header/Header";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./dashboard/Dashboard";
 import NewsSelect from "./news/NewsSelect";
 import TyprSessionContainer from "./typr/TyprSessionContainer";
-import Debrief from "./news/Debrief"
+import Debrief from "./news/Debrief";
 
 import history from "../history";
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
-    document.addEventListener("keydown", (e)=> {
-      this.props.clearFlashMessage()
+    document.addEventListener("keydown", (e) => {
+      this.props.clearFlashMessage();
       // prevent space bar scrolling
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
@@ -33,7 +33,7 @@ class App extends Component {
         <Router history={history}>
           <div
             style={{
-              paddingTop: "4em"
+              paddingTop: "4em",
             }}
           >
             <Header />
@@ -48,8 +48,8 @@ class App extends Component {
   }
 
   renderProtectedRoutes() {
-    if(this.props.auth.loading) {
-      return null
+    if (this.props.auth.loading) {
+      return null;
     }
     if (this.props.auth.isAuthenticated) {
       return (
@@ -63,12 +63,12 @@ class App extends Component {
       );
     }
     return (
-    <Switch>
-      <Route path="/register" component={RegisterPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route component={RegisterPage} />
-    </Switch>
-    )
+      <Switch>
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route component={RegisterPage} />
+      </Switch>
+    );
   }
 }
 
@@ -76,7 +76,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(App);
+export default connect(mapStateToProps, actions)(App);

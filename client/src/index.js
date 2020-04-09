@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
@@ -9,18 +9,20 @@ import App from "./components/App";
 import reducers from "./reducers";
 import axios from "axios";
 
-let store
-if (process.env.NODE_ENV === 'production') {
-	store = createStore(
-		reducers, 
-		{},
-		applyMiddleware(reduxThunk))
+let store;
+if (process.env.NODE_ENV === "production") {
+	store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 } else {
 	window.axios = axios;
-	
+
 	//redux dev tools helper
-	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-	  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 }) || compose;
+	const composeEnhancers =
+		(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+			window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+				trace: true,
+				traceLimit: 25,
+			})) ||
+		compose;
 
 	store = createStore(
 		reducers,
