@@ -6,6 +6,7 @@ import keylogReducer from "./keylogReducer";
 import newsReducer from "./newsReducer";
 import newsSourcesReducer from "./newsSourcesReducer";
 import statsReducer from "./statsReducer";
+import flashMessageReducer from "./flashMessageReducer"
 
 export default combineReducers({
 	auth: authReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
 	form: reduxForm,
 	keylog: keylogReducer,
 	stats: statsReducer,
-	errors: errorsReducer
+	errors: errorsReducer,
+	flashMessage: flashMessageReducer
 });

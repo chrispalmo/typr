@@ -6,6 +6,10 @@ export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
+// Flash Mesages
+export const SET_FLASH_MESSAGE = "SET_FLASH_MESSAGE";
+export const CLEAR_FLASH_MESSAGE = "CLEAR_FLASH_MESSAGE";
+
 // News Sources
 export const CLEAR_NEWS = "CLEAR_NEWS";
 export const FETCH_NEWS = "FETCH_NEWS";

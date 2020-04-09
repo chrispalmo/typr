@@ -20,8 +20,6 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		//
 		case SET_CURRENT_USER:
-			console.log("SET_CURRENT_USER")
-			console.log(action.payload)
 			return {
 				...state,
 				isAuthenticated: !isEmpty(action.payload),
