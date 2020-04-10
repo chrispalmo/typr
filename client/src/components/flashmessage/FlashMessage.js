@@ -12,7 +12,7 @@ class FlashMessage extends Component {
       className = "ui message floatabove hidden";
     }
     return (
-      <div className={className} onClick={this.props.clearFlashMessage}>
+      <div slidein="true" className={className} onClick={this.props.clearFlashMessage}>
         <p>{this.props.flashMessage.text}</p>
       </div>
     );

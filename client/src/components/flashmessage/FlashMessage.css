@@ -1,4 +1,4 @@
-.ui.message.floatabove {
+[slidein="true"] {
   position: fixed !important;
   z-index: 2400 !important;
   opacity: 0% !important;

@@ -20,6 +20,7 @@ import {
 	ADD_LOCAL_EVENT_KEYLOG,
 	CLEAR_KEYLOG,
 	FETCH_SESSION_STATS,
+	SET_CAPS_LOCK_STATUS,
 } from "./types";
 
 /*
@@ -214,4 +215,9 @@ export const fetchSessionStats = () => async (dispatch) => {
 export const saveSessionStats = (stats) => async (dispatch) => {
 	const res = await axios.post("/api/stats/sessions", stats);
 	dispatch({ type: FETCH_SESSION_STATS, payload: res.data });
+};
+
+//Misc Actions
+export const setCapsLockStatus = (capsLockStatus) => (dispatch) => {
+	dispatch({ type: SET_CAPS_LOCK_STATUS, payload: capsLockStatus });
 };

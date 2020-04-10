@@ -29,3 +29,5 @@ export const CLEAR_KEYLOG = "CLEAR_KEYLOG";
 // Statistics
 export const FETCH_SESSION_STATS = "FETCH_SESSION_STATS";
 
+//Misc
+export const SET_CAPS_LOCK_STATUS = "SET_CAPS_LOCK_STATUS";

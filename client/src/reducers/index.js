@@ -6,6 +6,7 @@ import newsReducer from "./newsReducer";
 import newsSourcesReducer from "./newsSourcesReducer";
 import statsReducer from "./statsReducer";
 import flashMessageReducer from "./flashMessageReducer";
+import gameStateReducer from "./gameStateReducer";
 
 export default combineReducers({
 	auth: authReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
 	stats: statsReducer,
 	errors: errorsReducer,
 	flashMessage: flashMessageReducer,
+	gameState: gameStateReducer,
 });

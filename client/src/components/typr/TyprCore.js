@@ -4,13 +4,14 @@ import {
     prevParagraph,
     nextParagraph,
     addLocalEventKeylog,
+    setCapsLockStatus,
 } from "../../actions";
 
 import { TyprTextDisplay } from "./TyprTextDisplay";
 import { textToArrayOfWords } from "./textConversions";
 import charKeys from "./charKeys";
 
-const debug = false;
+const debug = true;
 
 class TyprCore extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class TyprCore extends React.Component {
 
         //Arrow functions cannot be passed to event listeners, otherwise a new function is created which cannot be referred to when the event listener needs to be removed. Using a normal function instead of an arrow function afects the context within the funciton (.this) is affected, so the context needs to be bound to the class instance:
         this.handleKeyPressWrapper = this.handleKeyPressWrapper.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
 
     render() {
@@ -49,10 +51,20 @@ class TyprCore extends React.Component {
         //Initialize cursor
         this.renderCurrentChar("charActive");
         document.addEventListener("keydown", this.handleKeyPressWrapper);
+        document.addEventListener("keyup", this.handleKeyUp);
     }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyPressWrapper);
+        document.removeEventListener("keyup", this.handleKeyUp);
+    }
+
+    handleKeyUp(e) {
+        if (e.getModifierState("CapsLock")) {
+            this.props.setCapsLockStatus(true)
+        } else {
+            this.props.setCapsLockStatus(false)
+        }
     }
 
     handleKeyPressWrapper(e) {
@@ -283,4 +295,5 @@ export default connect(mapStateToProps, {
     prevParagraph,
     nextParagraph,
     addLocalEventKeylog,
+    setCapsLockStatus,
 })(TyprCore);
