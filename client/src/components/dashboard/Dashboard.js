@@ -3,21 +3,21 @@ import NewsSources from "../news/NewsSources";
 import StatsDisplay from "../stats/StatsDisplay";
 import { connect } from "react-redux";
 
+import "./Dashboard.css";
+
 class Dashboard extends Component {
 	render() {
 		if (this.props.auth.loading) {
 			return null;
 		}
 		return (
-			<div
-				className="ui one column centered grid middle aligned"
-				style={{ height: "70vh" }}
+			<div 
+				id="centeredComponentGrid"
+				className="ui container"
 			>
-				<div>
-					<NewsSources />
-					<div> </div>
-					<StatsDisplay />
-				</div>
+				<NewsSources />
+				<div> </div>
+				<StatsDisplay />
 			</div>
 		);
 	}

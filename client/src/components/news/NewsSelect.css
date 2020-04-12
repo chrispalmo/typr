@@ -1,30 +1,22 @@
-.newsSelectButtonHeader {
-	background: white;
-	width: 100%;
-	position: fixed;
-	top: 0px;
-	z-index: 8888;
-	padding-bottom: 0px;
-	padding-top: 50px;
-}
-
-.newsSelectButtonHeader .label:hover {
+.clickable:hover {
 	cursor: pointer;
 }
 
-.newsSelect .source:hover {
+#sourceList {
+  max-height: 55vh;
+  overflow: auto;
+}
+
+#sourceList .source:hover {
 	cursor: pointer;
 	background: #e3e3e3e3;
 }
 
-.newsSelect .source {
+#sourceList .source {
 	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
 }
 
-.newsSelect .checked {
+#sourceList .checked {
 	background: #f1f1f1f1;
-}
-
-.newsSelectListWrapper {
-	padding-top: 7em;
 }

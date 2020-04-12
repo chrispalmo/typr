@@ -7,6 +7,8 @@ import { timeBreakdownToString } from "../../helpers/timeBreakdown";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import "./Debrief.css";
+
 class Debrief extends Component {
 	constructor(props) {
 		super(props);
@@ -35,7 +37,7 @@ class Debrief extends Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className = "ui container">
 				<div
 					className="ui centre aligned secondary segment"
 					textalign="center"
@@ -44,22 +46,22 @@ class Debrief extends Component {
 						<h2 className="ui center aligned header">Good Job!</h2>
 						<h4 className="ui center aligned header">
 							You typed
-							<div className="ui label green">
+							<div className="ui label SeaGreen">
 								{this.state.charsTyped}
 							</div>{" "}
 							characters in
-							<div className="ui label green">
+							<div className="ui label SeaGreen">
 								{this.state.totalTime}
 							</div>{" "}
 							at an average
 							<br />
 							<br />
 							speed of
-							<div className="ui label green">
+							<div className="ui label SeaGreen">
 								{this.state.wpm} WPM
 							</div>
 							<sup>*</sup> with
-							<div className="ui label green">
+							<div className="ui label SeaGreen">
 								{this.state.accuracy}%
 							</div>{" "}
 							accuracy.
@@ -78,16 +80,19 @@ class Debrief extends Component {
 						</div>
 					</div>
 				</div>
-				<h3 className="ui center aligned header">
-					Did any of the headlines catch your interest?
-				</h3>
-				<div style={{ textAlign: "center" }}>
-					Select an article to continue practicing with the full text:
+				<div className="ui compact segments">
+					<div className="ui centre aligned secondary segment">
+						<h3 className="ui center aligned header">
+							Did any of the headlines catch your interest?
+						</h3>
+						<div style={{ textAlign: "center" }}>
+							Select an article to continue practicing with the full text:
+						</div>
+					</div>
+					<div id="sourceList" className="ui centre aligned segment">
+						{this.renderArticles()}
+					</div>
 				</div>
-				<br />
-				{this.renderArticles()}
-				<br />
-				<br />
 			</div>
 		);
 	}
@@ -96,7 +101,7 @@ class Debrief extends Component {
 		return (
 			<Link to="/dashboard">
 				<button
-					className="ui button"
+					className="ui button orange"
 					onClick={() => {
 						this.props.clearKeylog();
 					}}
@@ -112,7 +117,7 @@ class Debrief extends Component {
 		return (
 			<Link to="/content/news-select">
 				<button
-					className="ui button"
+					className="ui button orange"
 					onClick={() => {
 						this.props.clearKeylog();
 					}}
@@ -131,7 +136,7 @@ class Debrief extends Component {
 				articles.push(
 					<div
 						key={articles.length + 1}
-						className="ui secondary segment"
+						className="source"
 						onClick={() => {
 							alert(
 								"You just discovered an 'in-development' feature. Check back later for full-text article support."
@@ -143,7 +148,7 @@ class Debrief extends Component {
 							target="_blank"
 							style={{ color: "black" }}
 						>
-							<h4 className="ui center aligned header">
+							<h4>
 								{article.title} [{article.source}]
 							</h4>
 							{article.content}
