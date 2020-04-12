@@ -102,14 +102,12 @@ class TyprLiveWPM extends Component {
 
 	componentDidMount() {
 		window.addEventListener("resize", this.updateWindowDimensions);
-		//TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
 		//Trigger regular renders to keep WPM bar moving
 		this.interval = setInterval(() => this.updateWPM(), 100);
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.updateWindowDimensions);
-		//TODO: REACTIVATE INTERVAL BEFORE DEPLOYMENT
 		//Clear regular renders required to keep WPM bar moving
 		clearInterval(this.interval);
 	}

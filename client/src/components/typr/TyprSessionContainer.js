@@ -17,14 +17,16 @@ class TyprSessionContainer extends Component {
 	render() {
 		if (!this.props.news) {
 			return (
-				<div className="ui icon message">
-				  <i className="notched circle loading icon"></i>
-				  <div className="content">
-				    <div className="header">
-				      Loading News Headlines
-				    </div>
-				    <p>Just one second...</p>
-				  </div>
+				<div className="ui container">
+					<div className="ui icon message">
+					  <i className="notched circle loading icon"></i>
+					  <div className="content">
+					    <div className="header">
+					      Loading News Headlines
+					    </div>
+					    <p>Just one second...</p>
+					  </div>
+					</div>
 				</div>
 			)
 		}
@@ -32,7 +34,7 @@ class TyprSessionContainer extends Component {
 		const source = this.props.news[currentPosition].source;
 		const text = this.props.news[currentPosition].title;
 		return (
-			<div>
+			<div className="ui container">
 				<TyprCore key={currentPosition} text={text} source={source} />
 				<div>
 					<TyprLiveWPM showBar={true} showGraph={true} />

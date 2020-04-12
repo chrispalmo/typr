@@ -5,6 +5,8 @@ import getWeekdayString from "../../helpers/getWeekdayString";
 import getMonthString from "../../helpers/getMonthString";
 import timeBreakdown from "../../helpers/timeBreakdown";
 
+import "./StatsDisplay.css";
+
 class NewsSources extends Component {
 	//pre-load before user navigates to news sources
 	componentDidMount() {
@@ -20,21 +22,17 @@ class NewsSources extends Component {
 							Typing Statistics Overview
 						</div>
 					</span>
-					<button
-						onClick={() => this.props.fetchSessionStats}
-						className="ui right floated icon button huge"
-					>
-						<i className="refresh icon" />
-					</button>
 				</div>
-				<tr>{this.renderStatOverview()}</tr>
+				<div id="statsTableScrollingContent">
+					<tr>{this.renderStatOverview()}</tr>
+				</div>
 			</div>
 		);
 	}
 
 	renderStatOverview() {
 		const noStats = (
-			<div className="ui center aligned secondary segment">
+			<div className="ui center aligned segment">
 				<p>You have no recorded typing sessions.</p>
 			</div>
 		);

@@ -104,7 +104,7 @@ class LoginForm extends Component {
 					>
 						<ul>{this.renderErrors()}</ul>
 					</div>
-					<button className="ui yellow button" type="submit">
+					<button className="ui orange button" type="submit">
 						Log In
 					</button>
 				</form>

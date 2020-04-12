@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
 	fetchUser,
 	fetchNewsSources,
@@ -19,21 +20,27 @@ class NewsSelect extends Component {
 
 	render() {
 		return (
-			<div className="newsSelect">
-				{this.renderHeader()}
-				<div className="newsSelectListWrapper">
+			<div className="ui container">
+			<div className="ui stacked segments">
+				<div className="ui segment secondary center aligned">
+					{this.renderHeader()}
+				</div>
+				<div className="ui segment secondary center aligned">
+					{this.renderSelectedNewsSources()}
+				</div>
+				<div id="sourceList" className="ui segment left aligned">
 					{this.renderSourceList()}
 				</div>
+			</div>
 			</div>
 		);
 	}
 
 	renderHeader() {
 		return (
-			<div className="newsSelectButtonHeader">
-				<button
-					className="ui button"
-					style={{ marginLeft: "0px!important" }}
+			<div>
+				<button 
+					className="ui button orange"
 					onClick={() => {
 						this.props.saveSelectedSources(
 							this.props.auth.user.newsDigest.selectedSources
@@ -41,25 +48,22 @@ class NewsSelect extends Component {
 						this.props.clearNews();
 					}}
 				>
-					<i className="chevron circle left icon" />
-					{"	 "}Save and return
+					<Link to="/content/news-select" style={{ color: "white" }}>
+						<i className="chevron circle left icon" />
+						{"	 "}Save and return
+					</Link>
 				</button>
-				{this.renderSelectedNewsSources()}
 			</div>
 		);
 	}
 
 	renderSelectedNewsSources() {
-		if (!this.props.auth.user) {
-			return <div> Loading user settings...</div>;
-		}
-
 		const noSelectedSources =
 			this.props.auth.user.newsDigest.selectedSources.length === 0;
 
 		if (noSelectedSources) {
 			return (
-				<div className="ui block header">Select news sources below</div>
+				<div>Select news sources below</div>
 			);
 		}
 
@@ -68,7 +72,7 @@ class NewsSelect extends Component {
 			selectedSources.push(
 				<div
 					key={source}
-					className="ui label"
+					className="ui label clickable"
 					onClick={() => this.props.toggleNewsSource(source)}
 				>
 					{source} <i className="icon close" />
@@ -76,9 +80,7 @@ class NewsSelect extends Component {
 			);
 		});
 		return (
-			<div className="ui block header">
-				<div className="ui grey labels">{selectedSources}</div>
-			</div>
+			<div className="ui grey labels">{selectedSources}</div>
 		);
 	}
 
