@@ -1,3 +1,3 @@
-# Typr-1
+# typr
 
-A Typing tutor.
+A typing tutor with custom content feed and historic user stats.
