@@ -19,6 +19,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+/*
+Below redirect made redundant by current Cloudflare configuration
+
 //HTTP --> HTTPS redirect for Heroku
 //thanks https://jaketrent.com/post/https-redirect-node-heroku/
 if (process.env.NODE_ENV === "production") {
@@ -28,6 +31,7 @@ if (process.env.NODE_ENV === "production") {
     else next();
   });
 }
+*/
 
 // Passport middleware
 app.use(passport.initialize());
