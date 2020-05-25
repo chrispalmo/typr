@@ -2,7 +2,7 @@
 
 ## About
 
-Typr is a simple typing tutor that lets you practice typing using  material you actually want to read while providing instantaneous feedback and recording statistics. It is designed for people who already know the basics of touch typping but want to significantly increase their Words per Minute (WPM).
+Typr is a simple typing tutor that lets you practice typing using  material you actually want to read while providing instantaneous feedback and recording statistics. It is designed for people who already know the basics of touch typing but want to significantly increase their Words per Minute (WPM).
 
 Few people use typing tutors (beyond the "which fingers do I use" stage) because:
 1. the content is boring and irrelevant
