@@ -2,11 +2,11 @@
 
 ## About
 
-Typr is a simple typing tutor that lets you practice typing using  material you actually want to read while providing instantaneous feedback and recording statistics. It is designed for people who already know the basics of touch typing but want to significantly increase their Words per Minute (WPM).
+Typr is a simple typing tutor that lets you practice typing using material you actually want to read while providing instantaneous feedback and recording statistics. It is designed for people who already know the basics of touch typing but want to significantly increase their Words per Minute (WPM).
 
 Few people use typing tutors (beyond the "which fingers do I use" stage) because:
-1. the content is boring and irrelevant
-2. exercises are too generic
+1. the content is boring and irrelevant, and 
+2. exercises are too generic.
 
 Typr addresses the first point providing live-updated news headlines as typing material. The second point will be addressed in a future version.
 
@@ -14,15 +14,14 @@ Typr addresses the first point providing live-updated news headlines as typing m
 
 The backend runs on a `NodeJS/Express` server using `Mongoose` to connect to a `MongoDB` database. Authentication is handled by `PassportJS` using `JSON Web Tokens`. The frontend is built with `React` and `Redux`, with CSS styling borrowed from `Semantic UI`. Live news headlines are provided by [NewsAPI](https://newsapi.org/). 
 
-## Demo [[Link](#)]
+## Demo
 
-Try it out [here](#). 
-
+- [GIF screenshots](https://palmo.xyz/post/20200823-typr-typing-tutor-web-app/) demonstrating the user interface in action.
+- [Try it out here](https://touchtypr.xyz). 
 *The demo is currently hosted on a Heroku free-tier server which treats itself to a nap when there is no traffic and can take up to 30 seconds to wake up, so please be patient!*
 
-## Read more [[Link](#)]
-
-View GIF screenshots demonstrating the user interface in action and read more about the motivation behind the project [here](#). 
+## Read More
+- [Read more](https://palmo.xyz/post/20200823-typr-typing-tutor-web-app/) about the motivation behind the project and how (an earlier version of) the app was built. 
 
 # Features
 
@@ -40,7 +39,7 @@ View GIF screenshots demonstrating the user interface in action and read more ab
 
 1. `npm install`
 2. Create `./config/dev.js` to store dev credentials:
-```
+```js
 module.exports = {
 	mongoURI:
 		"YOUR_DATABASE_CONNECTION_URI",
