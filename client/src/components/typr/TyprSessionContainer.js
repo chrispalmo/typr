@@ -66,7 +66,7 @@ class TyprSessionContainer extends Component {
 				<br/>
 				Headline {currentPosition+1} of {this.props.news.length}
 				<br/>
-				Source: <a href={url}>{source}</a>
+				Source: <a href={url} target="_blank">{source}</a>
 			</div>
 		)
 	}

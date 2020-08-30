@@ -36,6 +36,7 @@ class Debrief extends Component {
 		}
 	}
 	render() {
+		const wpmExplanation = `WPM = Total number of characters divided by 5 (the average word length), divided by minutes.`
 		return (
 			<div className = "ui container">
 				<div
@@ -53,27 +54,20 @@ class Debrief extends Component {
 							<div className="ui label SeaGreen">
 								{this.state.totalTime}
 							</div>{" "}
-							at an average
+							{" "}at an average
 							<br />
 							<br />
 							speed of
-							<div className="ui label SeaGreen">
+							<div className="ui label SeaGreen" data-tooltip={wpmExplanation} data-position="bottom center">
 								{this.state.wpm} WPM
 							</div>
-							<sup>*</sup> with
+							{" "}with
 							<div className="ui label SeaGreen">
 								{this.state.accuracy}%
 							</div>{" "}
-							accuracy.
+							{" "}accuracy.
 						</h4>
 						<div style={{ textAlign: "center" }}>
-							<small>
-								<sup>*</sup>WPM = "Words Per Minute".{" "}
-								<Link to="">Read more</Link> about how this is
-								calculated.
-							</small>
-							<br />
-							<br />
 							{this.renderReturnButton()}
 							{this.renderSelectButton()}
 							<br />
